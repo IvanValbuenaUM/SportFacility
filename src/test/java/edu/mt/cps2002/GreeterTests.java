@@ -11,4 +11,10 @@ public class GreeterTests {
         Assertions.assertEquals("Hello World!!", greeter.greetMe());
     }
 
+    @Test
+    public void testGreetByName() {
+        Greeter greeter = new Greeter();
+        Assertions.assertEquals("Hello Mark!!", greeter.greetMe("Mark"));
+    }
+
 }
