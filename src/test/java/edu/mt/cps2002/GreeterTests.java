@@ -18,9 +18,9 @@ public class GreeterTests {
     }
 
     @Test
-    public void testGreetByName() {
+    public void testGreetByNameWithNull() {
         Greeter greeter = new Greeter();
-        Assertions.assertEquals("Hello World!!", greeter.greetMe(null));
+        Assertions.assertEquals("Hello World!", greeter.greetMe(null));
     }
 
 
