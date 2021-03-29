@@ -20,7 +20,17 @@ public class GreeterTests {
     @Test
     public void testGreetByNameWithNull() {
         Greeter greeter = new Greeter();
-        Assertions.assertEquals("Hello World!", greeter.greetMe(null));
+        Assertions.assertEquals("Hello World!!", greeter.greetMe(null));
+    }
+
+    public void testGreetByNameWithEmptyString() {
+        Greeter greeter = new Greeter();
+        Assertions.assertEquals("Hello World!!", greeter.greetMe(""));
+    }
+
+    public void testGreetByNameWithWhitespace() {
+        Greeter greeter = new Greeter();
+        Assertions.assertEquals("Hello World!!", greeter.greetMe("    \t  "));
     }
 
 
