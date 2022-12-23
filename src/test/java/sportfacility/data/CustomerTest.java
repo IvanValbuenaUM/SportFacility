@@ -9,7 +9,7 @@ class CustomerTest {
 	@Test
 	void constructorTest() 
 	{
-		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		new Customer("Albert", "Omen", 20, "123456V", 1234);
 	}
 	
 	@Test
