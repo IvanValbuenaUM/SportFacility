@@ -69,7 +69,7 @@ public class Facility {
 		
 		if (facilityCode.length() != 4)
 		{
-			throw new IllegalArgumentException("Incorrect format for the facilityCode (incorrect lenght)");
+			throw new IllegalArgumentException("Incorrect format for the facilityCode (incorrect length)");
 		}
 		
 		for (int i = 0; i < facilityCode.length()/2; i++)

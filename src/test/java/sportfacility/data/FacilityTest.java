@@ -43,7 +43,7 @@ public class FacilityTest {
 		           () -> new Facility("B12", 10, 50, closedDays, 3, 20, 13)
 		    );
 
-		assertTrue(thrown.getMessage().contentEquals("Incorrect format for the facilityCode (incorrect lenght)"));
+		assertTrue(thrown.getMessage().contentEquals("Incorrect format for the facilityCode (incorrect length)"));
 	}
 	
 	@Test
@@ -56,7 +56,7 @@ public class FacilityTest {
 		           () -> new Facility("AB123", 10, 50, closedDays, 3, 20, 13)
 		    );
 
-		assertTrue(thrown.getMessage().contentEquals("Incorrect format for the facilityCode (incorrect lenght)"));
+		assertTrue(thrown.getMessage().contentEquals("Incorrect format for the facilityCode (incorrect length)"));
 	}
 	
 	@Test
