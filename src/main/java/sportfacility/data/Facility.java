@@ -64,6 +64,9 @@ public class Facility {
 	
 	private void setFacilityCode(String facilityCode) 
 	{
+		if (facilityCode == null || facilityCode.trim().isEmpty())
+			throw new IllegalArgumentException("The facility code is incorrect");
+		
 		if (facilityCode.length() != 4)
 		{
 			throw new IllegalArgumentException("Incorrect format for the facilityCode (incorrect lenght)");
@@ -107,6 +110,8 @@ public class Facility {
 
 	private void setClosedDays(HashMap<Days, Integer> closedDays) 
 	{
+		if (closedDays == null)
+			throw new IllegalArgumentException("The closed days hash map is null");
 		this.closedDays = closedDays;
 	}
 

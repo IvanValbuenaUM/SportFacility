@@ -162,4 +162,43 @@ public class FacilityTest {
 
 		assertTrue(thrown.getMessage().contentEquals("The extra price for flood light use can't be lower than 0"));
 	}
+	
+	@Test
+	void nullFacilityCodeTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Facility(null, 10, 50, closedDays, 3, 20, 13)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("The facility code is incorrect"));
+	}
+	
+	@Test
+	void blankFacilityCodeTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Facility("   ", 10, 50, closedDays, 3, 20, 13)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("The facility code is incorrect"));
+	}
+	
+	@Test
+	void nullClosedDaysTest() 
+	{
+		HashMap<Days,Integer> closedDays = null;
+		
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Facility("AB12", 10, 50, closedDays, 3, 20, 13)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("The closed days hash map is null"));
+	}
 }

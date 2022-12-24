@@ -150,5 +150,71 @@ class CustomerTest {
 		
 		assertEquals(1234, a.getMembershipNumber());
 	}
+	
+	@Test
+	void nullNameTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Customer(null, "Omen", 20, "123456V", 12345)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("The Customer큦 name is incorrect"));
+	}
+	
+	@Test
+	void blankNameTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Customer("   ", "Omen", 20, "123456V", 12345)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("The Customer큦 name is incorrect"));
+	}
+	
+	@Test
+	void nullSurnameTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Customer("Albert", null, 20, "123456V", 12345)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("The Customer큦 surname is incorrect"));
+	}
+	
+	@Test
+	void blankSurnameTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Customer("Albert", "   ", 20, "123456V", 12345)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("The Customer큦 surname is incorrect"));
+	}
+	
+	@Test
+	void nullIdTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Customer("Albert", "Omen", 20, null, 12345)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("The Customer큦 id null"));
+	}
+	
+	@Test
+	void blankIdTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> new Customer("Albert", "Omen", 20, "   ", 12345)
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("Incorrect format for the id (incorrect lenght)"));
+	}
 
 }

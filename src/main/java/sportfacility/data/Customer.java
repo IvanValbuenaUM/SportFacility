@@ -26,6 +26,8 @@ public class Customer {
 	
 	private void setName(String name) 
 	{
+		if (name == null || name.trim().isEmpty())
+			throw new IllegalArgumentException("The Customer´s name is incorrect");
 		this.name = name;
 	}
 	
@@ -36,6 +38,8 @@ public class Customer {
 	
 	private void setSurname(String surname) 
 	{
+		if (surname == null || surname.trim().isEmpty())
+			throw new IllegalArgumentException("The Customer´s surname is incorrect");
 		this.surname = surname;
 	}
 	
@@ -46,7 +50,6 @@ public class Customer {
 	
 	private void setAge(int age) 
 	{
-		
 		if (age < 18)
 		{
 			throw new IllegalArgumentException("The Customer must have at least 18 years");
@@ -61,6 +64,9 @@ public class Customer {
 	
 	private void setId(String id) 
 	{
+		if (id == null)
+			throw new IllegalArgumentException("The Customer´s id null");
+		
 		if (id.length() != 7)
 		{
 			throw new IllegalArgumentException("Incorrect format for the id (incorrect lenght)");
@@ -95,6 +101,31 @@ public class Customer {
 		}
 		
 		this.membershipNumber = membershipNumber;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Customer [name=" + name + ", surname=" + surname + ", age=" + age + ", id=" + id + ", membershipNumber="
+				+ membershipNumber + "]";
+	}
+
+
+	@SuppressWarnings("unused")
+	private String serialization() {
+		return getMembershipNumber() + "/" + getSurname() + "/" + getName() + "/" + getAge() + "/" + getId();
+	}
+	
+	@SuppressWarnings("unused")
+	private void parse(String lineText) {
+		String[] parts = lineText.split("/");
+		if (parts.length != 5)
+			throw new IllegalArgumentException("Incorrect customer information in database");
+		setMembershipNumber(Integer.valueOf(parts[0]));
+		setSurname(parts[1]);
+		setName(parts[2]);
+		setAge(Integer.valueOf(parts[3]));
+		setId(parts[4]);
 	}
 
 }
