@@ -1,13 +1,19 @@
 package sportfacility.data.entities.facilities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+import sportfacility.data.entities.Customer;
 import sportfacility.data.entities.Days;
-import sportfacility.data.entities.facilities.Facility;
+import sportfacility.data.entities.Timetable;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class FacilityTest {
 	
@@ -200,5 +206,359 @@ public class FacilityTest {
 		    );
 
 		assertTrue(thrown.getMessage().contentEquals("The closed days hash map is null"));
+	}
+	
+	@Test
+	void addReservationTest() 
+	{
+		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		Calendar s = Calendar.getInstance();
+		s.set(2022, 12, 20, 12, 0);
+		
+		Calendar e = Calendar.getInstance();
+		e.set(2022, 12, 20, 13, 0);
+		
+		Timetable t = new Timetable(s,e,a,f,3);
+		
+		f.addReservation(t);
+
+		assertEquals(t, f.getReservations().get(0));
+	}
+	
+	@Test
+	void addReservationNullTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> {
+		        	   HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+			       		closedDays.put(Days.MONDAY, 0);
+			       		closedDays.put(Days.MONDAY, 6);
+			       		closedDays.put(Days.TUESDAY, 0);
+			       		closedDays.put(Days.TUESDAY, 6);
+			       		closedDays.put(Days.WEDNESDAY, 0);
+			       		closedDays.put(Days.WEDNESDAY, 6);
+			       		closedDays.put(Days.THURSDAY, 0);
+			       		closedDays.put(Days.THURSDAY, 6);
+			       		closedDays.put(Days.FRIDAY, 0);
+			       		closedDays.put(Days.FRIDAY, 6);
+			       		closedDays.put(Days.SATURDAY, 0);
+			       		closedDays.put(Days.SATURDAY, 6);
+			       		closedDays.put(Days.SUNDAY, -1);
+		        	   Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		        	   f.addReservation(null);
+		           		 }
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("Can't add a null reservation"));
+
+	}
+	
+	@Test
+	void removeReservationNullTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> {
+		        	   HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+			       		closedDays.put(Days.MONDAY, 0);
+			       		closedDays.put(Days.MONDAY, 6);
+			       		closedDays.put(Days.TUESDAY, 0);
+			       		closedDays.put(Days.TUESDAY, 6);
+			       		closedDays.put(Days.WEDNESDAY, 0);
+			       		closedDays.put(Days.WEDNESDAY, 6);
+			       		closedDays.put(Days.THURSDAY, 0);
+			       		closedDays.put(Days.THURSDAY, 6);
+			       		closedDays.put(Days.FRIDAY, 0);
+			       		closedDays.put(Days.FRIDAY, 6);
+			       		closedDays.put(Days.SATURDAY, 0);
+			       		closedDays.put(Days.SATURDAY, 6);
+			       		closedDays.put(Days.SUNDAY, -1);
+		        	   Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		        	   f.removeReservation(null);
+		           		 }
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("Can't remove a null reservation"));
+	}
+	
+	@Test
+	void removeReservationTest() 
+	{
+		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		Calendar s = Calendar.getInstance();
+		s.set(2022, 12, 20, 12, 0);
+		
+		Calendar e = Calendar.getInstance();
+		e.set(2022, 12, 20, 13, 0);
+		
+		Timetable t = new Timetable(s,e,a,f,3);
+		
+		f.addReservation(t);
+
+		assertTrue(f.removeReservation(t));
+		assertTrue(f.getReservations().size() == 0);
+	}
+	
+	@Test
+	void removeReservationNotFoundTest() 
+	{
+		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		Calendar s = Calendar.getInstance();
+		s.set(2022, 12, 20, 12, 0);
+		
+		Calendar e = Calendar.getInstance();
+		e.set(2022, 12, 20, 13, 0);
+		
+		Timetable t = new Timetable(s,e,a,f,3);
+		
+		Timetable t2 = new Timetable(s,e,a,f,4);
+		
+		f.addReservation(t);
+
+		assertFalse(f.removeReservation(t2));
+		assertTrue(f.getReservations().size() == 1);
+	}
+	
+	@Test
+	void getReservationTest() 
+	{
+		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		Calendar s = Calendar.getInstance();
+		s.set(2022, 12, 20, 12, 0);
+		
+		Calendar e = Calendar.getInstance();
+		e.set(2022, 12, 20, 13, 0);
+		
+		Timetable t = new Timetable(s,e,a,f,3);
+		
+		List<Timetable> reservations = new ArrayList<>();
+		reservations.add(t);
+		
+		f.addReservation(t);
+
+		assertEquals(reservations, f.getReservations());
+	}
+	
+	@Test
+	void getFacilityCodeTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		assertEquals("AB12", f.getFacilityCode());
+	}
+	
+	@Test
+	void getMaxCapacityTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		assertEquals(10, f.getMaxCapacity());
+	}
+	
+	@Test
+	void getPricePerHourTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		assertEquals(50, f.getPricePerHour());
+	}
+	
+	@Test
+	void getClosedDaysTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		assertEquals(closedDays, f.getClosedDays());
+	}
+	
+	@Test
+	void getNumberOfChangingRoomsTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		assertEquals(3, f.getNumberOfChangingRooms());
+	}
+	
+	@Test
+	void getNumberOfFloodLightsTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		assertEquals(20, f.getNumberOfFloodLights());
+	}
+	
+	@Test
+	void getExtraPriceForLightUseTest() 
+	{
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		assertEquals(13, f.getExtraPriceForLightUse());
 	}
 }

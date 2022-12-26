@@ -324,6 +324,43 @@ class CustomerTest {
 	}
 	
 	@Test
+	void removeReservationNotFoundTest() 
+	{
+		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		Calendar s = Calendar.getInstance();
+		s.set(2022, 12, 20, 12, 0);
+		
+		Calendar e = Calendar.getInstance();
+		e.set(2022, 12, 20, 13, 0);
+		
+		Timetable t = new Timetable(s,e,a,f,3);
+		
+		Timetable t2 = new Timetable(s,e,a,f,4);
+		
+		a.addReservation(t);
+
+		assertFalse(a.removeReservation(t2));
+		assertTrue(a.getReservations().size() == 1);
+	}
+	
+	@Test
 	void getReservationTest() 
 	{
 		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);

@@ -177,5 +177,9 @@ public class Facility {
 		}
 		return false;
 	}
+	
+	public List<Timetable> getReservations() {
+		return reservations;
+	}
 
 }
