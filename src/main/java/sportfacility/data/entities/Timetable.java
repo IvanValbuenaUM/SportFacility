@@ -32,6 +32,7 @@ public class Timetable {
 		this.setCustomer(customer);
 		this.setFacility(facility);
 		this.setNumberOfPeople(numberOfPeople);
+		this.totalPrice = (this.getEndReservation().get(Calendar.HOUR_OF_DAY) - this.getStartReservation().get(Calendar.HOUR_OF_DAY)) * this.getFacility().getPricePerHour();
 	}
 	
 	public Calendar getStartReservation() 
@@ -93,8 +94,8 @@ public class Timetable {
 
 	private void setNumberOfPeople(int numberOfPeople) 
 	{
-		if (numberOfPeople < 0)
-			throw new IllegalArgumentException("The number of people can't be lower than 0");
+		if (numberOfPeople <= 0)
+			throw new IllegalArgumentException("The number of people can't be lower or equal to 0");
 		
 		this.numberOfPeople = numberOfPeople;
 	}
@@ -102,11 +103,6 @@ public class Timetable {
 	public int getTotalPrice() 
 	{
 		return totalPrice;
-	}
-
-	public void setTotalPrice(int totalPrice) 
-	{
-		this.totalPrice = (this.getEndReservation().get(Calendar.HOUR_OF_DAY) - this.getStartReservation().get(Calendar.HOUR_OF_DAY)) * this.getFacility().getPricePerHour();
 	}
 	
 }
