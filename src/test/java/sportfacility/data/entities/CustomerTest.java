@@ -2,7 +2,14 @@ package sportfacility.data.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
+import sportfacility.data.entities.facilities.Facility;
 
 class CustomerTest {
 
@@ -215,6 +222,142 @@ class CustomerTest {
 		    );
 
 		assertTrue(thrown.getMessage().contentEquals("Incorrect format for the id (incorrect lenght)"));
+	}
+	
+	@Test
+	void addReservationTest() 
+	{
+		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		Calendar s = Calendar.getInstance();
+		s.set(2022, 12, 20, 12, 0);
+		
+		Calendar e = Calendar.getInstance();
+		e.set(2022, 12, 20, 13, 0);
+		
+		Timetable t = new Timetable(s,e,a,f,3);
+		
+		a.addReservation(t);
+
+		assertEquals(t, a.getReservations().get(0));
+	}
+	
+	@Test
+	void addReservationNullTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> {
+		        	   Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		        	   a.addReservation(null);
+		           		 }
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("Can't add a null reservation"));
+
+	}
+	
+	@Test
+	void removeReservationNullTest() 
+	{
+		IllegalArgumentException thrown = assertThrows(
+				IllegalArgumentException.class,
+		           () -> {
+		        	   Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		        	   a.removeReservation(null);
+		           		 }
+		    );
+
+		assertTrue(thrown.getMessage().contentEquals("Can't remove a null reservation"));
+
+	}
+	
+	@Test
+	void removeReservationTest() 
+	{
+		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		Calendar s = Calendar.getInstance();
+		s.set(2022, 12, 20, 12, 0);
+		
+		Calendar e = Calendar.getInstance();
+		e.set(2022, 12, 20, 13, 0);
+		
+		Timetable t = new Timetable(s,e,a,f,3);
+		
+		a.addReservation(t);
+
+		assertTrue(a.removeReservation(t));
+		assertTrue(a.getReservations().size() == 0);
+	}
+	
+	@Test
+	void getReservationTest() 
+	{
+		Customer a = new Customer("Albert", "Omen", 20, "123456V", 1234);
+		
+		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+		closedDays.put(Days.MONDAY, 0);
+		closedDays.put(Days.MONDAY, 6);
+		closedDays.put(Days.TUESDAY, 0);
+		closedDays.put(Days.TUESDAY, 6);
+		closedDays.put(Days.WEDNESDAY, 0);
+		closedDays.put(Days.WEDNESDAY, 6);
+		closedDays.put(Days.THURSDAY, 0);
+		closedDays.put(Days.THURSDAY, 6);
+		closedDays.put(Days.FRIDAY, 0);
+		closedDays.put(Days.FRIDAY, 6);
+		closedDays.put(Days.SATURDAY, 0);
+		closedDays.put(Days.SATURDAY, 6);
+		closedDays.put(Days.SUNDAY, -1);
+		Facility f = new Facility("AB12", 10, 50, closedDays, 3, 20, 13);
+		
+		Calendar s = Calendar.getInstance();
+		s.set(2022, 12, 20, 12, 0);
+		
+		Calendar e = Calendar.getInstance();
+		e.set(2022, 12, 20, 13, 0);
+		
+		Timetable t = new Timetable(s,e,a,f,3);
+		
+		List<Timetable> reservations = new ArrayList<>();
+		reservations.add(t);
+		
+		a.addReservation(t);
+
+		assertEquals(reservations, a.getReservations());
 	}
 
 }

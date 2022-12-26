@@ -141,4 +141,8 @@ public class Customer {
 		return false;
 	}
 
+	public List<Timetable> getReservations() {
+		return reservations;
+	}
+
 }
