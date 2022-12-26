@@ -1,4 +1,4 @@
-package sportfacility.data;
+package sportfacility.data.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +9,11 @@ import javax.persistence.*;
 public class Customer {
 	
 	@Id
-	@Column(name="cust_id")
-	private String id;
-	
-	@Id
 	@Column(name="cust_membershipnumber")
 	private int membershipNumber;
+	
+	@Column(name="cust_id")
+	private String id;
 	
 	@Column(name="cust_name")
 	private String name;
@@ -25,10 +24,8 @@ public class Customer {
 	@Column(name="cust_age")
 	private int age;
 	
-	
-	@OneToMany
+	@OneToMany(mappedBy = "customer")
 	private List<Timetable> reservations = new ArrayList<>();
-	
 	
 	public Customer(String name, String surname, int age, String id, int membershipNumber) 
 	{
@@ -49,6 +46,7 @@ public class Customer {
 	{
 		if (name == null || name.trim().isEmpty())
 			throw new IllegalArgumentException("The Customer´s name is incorrect");
+		
 		this.name = name;
 	}
 	
@@ -61,6 +59,7 @@ public class Customer {
 	{
 		if (surname == null || surname.trim().isEmpty())
 			throw new IllegalArgumentException("The Customer´s surname is incorrect");
+		
 		this.surname = surname;
 	}
 	
@@ -72,9 +71,7 @@ public class Customer {
 	private void setAge(int age) 
 	{
 		if (age < 18)
-		{
 			throw new IllegalArgumentException("The Customer must have at least 18 years");
-		}
 		
 		this.age = age;
 	}
@@ -89,9 +86,7 @@ public class Customer {
 			throw new IllegalArgumentException("The Customer´s id null");
 		
 		if (id.length() != 7)
-		{
 			throw new IllegalArgumentException("Incorrect format for the id (incorrect lenght)");
-		}
 		
 		for (int i = 0; i < id.length() - 1; i++)
 		{
@@ -117,36 +112,33 @@ public class Customer {
 	private void setMembershipNumber(int membershipNumber) 
 	{
 		if (Integer.toString(membershipNumber).length() != 4)
-		{
 			throw new IllegalArgumentException("Incorrect format for the membership number (incorrect lenght)");
-		}
 		
 		this.membershipNumber = membershipNumber;
 	}
 	
-	
-	@Override
-	public String toString() {
-		return "Customer [name=" + name + ", surname=" + surname + ", age=" + age + ", id=" + id + ", membershipNumber="
-				+ membershipNumber + "]";
-	}
-
-
-	@SuppressWarnings("unused")
-	private String serialization() {
-		return getMembershipNumber() + "/" + getSurname() + "/" + getName() + "/" + getAge() + "/" + getId();
+	public void addReservation(Timetable t)
+	{
+		if (t == null)
+			throw new IllegalArgumentException("Can't add a null reservation");
+		
+		reservations.add(t);
 	}
 	
-	@SuppressWarnings("unused")
-	private void parse(String lineText) {
-		String[] parts = lineText.split("/");
-		if (parts.length != 5)
-			throw new IllegalArgumentException("Incorrect customer information in database");
-		setMembershipNumber(Integer.valueOf(parts[0]));
-		setSurname(parts[1]);
-		setName(parts[2]);
-		setAge(Integer.valueOf(parts[3]));
-		setId(parts[4]);
+	public boolean removeReservation(Timetable t)
+	{
+		if (t == null)
+			throw new IllegalArgumentException("Can't remove a null reservation");
+		
+		for(int i = 0; i < reservations.size(); i++)
+		{
+			if (t.equals(reservations.get(i)))
+			{
+				reservations.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

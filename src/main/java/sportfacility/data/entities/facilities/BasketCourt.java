@@ -1,6 +1,6 @@
-package sportfacility.data.facilities;
+package sportfacility.data.entities.facilities;
 
-import sportfacility.data.Days;
+import sportfacility.data.entities.Days;
 
 import java.util.HashMap;
 

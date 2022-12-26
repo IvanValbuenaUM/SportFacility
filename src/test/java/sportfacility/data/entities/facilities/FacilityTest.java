@@ -1,9 +1,12 @@
-package sportfacility.data.facilities;
+package sportfacility.data.entities.facilities;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
-import sportfacility.data.Days;
+
+import sportfacility.data.entities.Days;
+import sportfacility.data.entities.facilities.Facility;
+
 import java.util.HashMap;
 
 public class FacilityTest {

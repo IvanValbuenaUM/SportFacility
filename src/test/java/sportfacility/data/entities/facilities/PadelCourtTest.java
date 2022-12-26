@@ -1,13 +1,16 @@
-package sportfacility.data.facilities;
+package sportfacility.data.entities.facilities;
 
 import org.junit.jupiter.api.Test;
-import sportfacility.data.Days;
+
+import sportfacility.data.entities.Days;
+import sportfacility.data.entities.facilities.PadelCourt;
 
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TennisCourtTest {
+class PadelCourtTest {
+
     @Test
     void constructorTest()
     {
@@ -27,54 +30,54 @@ class TennisCourtTest {
         closedDays.put(Days.SATURDAY, 6);
         closedDays.put(Days.SUNDAY, -1);
 
-        new TennisCourt("AB12", 10, 50, closedDays, 3, 20, 13, 3, 8);
+        new PadelCourt("AB12", 10, 50, closedDays, 3, 20, 13, 3, 8);
     }
     @Test
-    void nTennisBallsMoreTest()
+    void nPadelBallsMoreTest()
     {
         HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
 
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
-                () -> new TennisCourt("AB12", 10, 50, closedDays, 3, 20, 13, 3, 11)
+                () -> new PadelCourt("AB12", 10, 50, closedDays, 3, 20, 13, 3, 11)
         );
 
-        assertTrue(thrown.getMessage().contentEquals("The number of rented tennis balls cannot be over 10 or under 0"));
+        assertTrue(thrown.getMessage().contentEquals("The number of rented padel balls cannot be over 4 or under 10"));
     }
     @Test
-    void nTennisBallsLessTest()
+    void nPadelBallsLessTest()
     {
         HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
 
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
-                () -> new TennisCourt("AB12", 10, 50, closedDays, 3, 20, 13, 3, -1)
+                () -> new PadelCourt("AB12", 10, 50, closedDays, 3, 20, 13, 3, -1)
         );
 
-        assertTrue(thrown.getMessage().contentEquals("The number of rented tennis balls cannot be over 10 or under 0"));
+        assertTrue(thrown.getMessage().contentEquals("The number of rented padel balls cannot be over 4 or under 10"));
     }
     @Test
-    void nTennisRacquetsMoreTest()
+    void nPadelRacquetsMoreTest()
     {
         HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
 
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
-                () -> new TennisCourt("AB12", 10, 50, closedDays, 3, 20, 13, 5, 8)
+                () -> new PadelCourt("AB12", 10, 50, closedDays, 3, 20, 13, 5, 8)
         );
 
-        assertTrue(thrown.getMessage().contentEquals("The number of rented racquets cannot be over 4 or under 0"));
+        assertTrue(thrown.getMessage().contentEquals("The number of rented padel racquets cannot be over 4 or under 0"));
     }
     @Test
-    void nTennisRacquetsLessTest()
+    void nPadelRacquetsLessTest()
     {
         HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
 
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
-                () -> new TennisCourt("AB12", 10, 50, closedDays, 3, 20, 13, -1, 8)
+                () -> new PadelCourt("AB12", 10, 50, closedDays, 3, 20, 13, -1, 8)
         );
 
-        assertTrue(thrown.getMessage().contentEquals("The number of rented racquets cannot be over 4 or under 0"));
+        assertTrue(thrown.getMessage().contentEquals("The number of rented padel racquets cannot be over 4 or under 0"));
     }
 }

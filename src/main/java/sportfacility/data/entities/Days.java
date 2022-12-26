@@ -1,4 +1,4 @@
-package sportfacility.data;
+package sportfacility.data.entities;
 
 public enum Days {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY

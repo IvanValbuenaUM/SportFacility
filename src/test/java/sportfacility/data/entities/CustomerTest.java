@@ -1,4 +1,4 @@
-package sportfacility.data;
+package sportfacility.data.entities;
 
 import static org.junit.jupiter.api.Assertions.*;
 
