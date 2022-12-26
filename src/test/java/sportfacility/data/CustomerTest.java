@@ -3,7 +3,6 @@ package sportfacility.data;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import sportfacility.data.customer.Customer;
 
 class CustomerTest {
 

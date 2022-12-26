@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import sportfacility.data.Days;
-import sportfacility.data.facilities.Facility;
 import java.util.HashMap;
 
 public class FacilityTest {

@@ -1,18 +1,42 @@
 package sportfacility.data.facilities;
 
 import sportfacility.data.Days;
+import sportfacility.data.Timetable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 public class Facility {
 
+	@Id
+	@Column(name="facility_code")
 	private String facilityCode;
+	
+	@Column(name="facility_maxcapacity")
 	private int maxCapacity;
+	
+	@Column(name="facility_priceperhour")
 	private int pricePerHour;
+	
+	@Column(name="facility_closeddays")
 	private HashMap<Days, Integer> closedDays;
+	
+	@Column(name="facility_nchangingrooms")
 	private int numberOfChangingRooms;
+	
+	@Column(name="facility_nfloodlights")
 	private int numberOfFloodLights;
+	
+	@Column(name="facility_lightprice")
 	private int extraPriceForLightUse;
+	
+	@OneToMany
+	private List<Timetable> reservations = new ArrayList<>();
 	
 	public Facility(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays,
 			int numberOfChangingRooms, int numberOfFloodLights, int extraPriceForLightUse) 

@@ -1,12 +1,33 @@
-package sportfacility.data.customer;
+package sportfacility.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
+
+@Entity
 public class Customer {
 	
-	private String name;
-	private String surname;
-	private int age;
+	@Id
+	@Column(name="cust_id")
 	private String id;
+	
+	@Id
+	@Column(name="cust_membershipnumber")
 	private int membershipNumber;
+	
+	@Column(name="cust_name")
+	private String name;
+	
+	@Column(name="cust_surname")
+	private String surname;
+	
+	@Column(name="cust_age")
+	private int age;
+	
+	
+	@OneToMany
+	private List<Timetable> reservations = new ArrayList<>();
 	
 	
 	public Customer(String name, String surname, int age, String id, int membershipNumber) 
