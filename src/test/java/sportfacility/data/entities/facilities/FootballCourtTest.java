@@ -3,7 +3,6 @@ package sportfacility.data.entities.facilities;
 import org.junit.jupiter.api.Test;
 
 import sportfacility.data.entities.Days;
-import sportfacility.data.entities.facilities.FootballCourt;
 
 import java.util.HashMap;
 
@@ -55,5 +54,29 @@ class FootballCourtTest {
         );
 
         assertTrue(thrown.getMessage().contentEquals("The number of rented footballs cannot be over 1 or under 0"));
+    }
+    
+    @Test
+    void getNFootballsRentedTest()
+    {
+    	HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
+
+        closedDays.put(Days.MONDAY, 0);
+        closedDays.put(Days.MONDAY, 6);
+        closedDays.put(Days.TUESDAY, 0);
+        closedDays.put(Days.TUESDAY, 6);
+        closedDays.put(Days.WEDNESDAY, 0);
+        closedDays.put(Days.WEDNESDAY, 6);
+        closedDays.put(Days.THURSDAY, 0);
+        closedDays.put(Days.THURSDAY, 6);
+        closedDays.put(Days.FRIDAY, 0);
+        closedDays.put(Days.FRIDAY, 6);
+        closedDays.put(Days.SATURDAY, 0);
+        closedDays.put(Days.SATURDAY, 6);
+        closedDays.put(Days.SUNDAY, -1);
+
+        FootballCourt fc = new FootballCourt("AB12", 10, 50, closedDays, 3, 20, 13, 1);
+
+        assertEquals(1, fc.getNFootballsRented());
     }
 }
