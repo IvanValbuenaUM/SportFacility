@@ -4,6 +4,9 @@ import sportfacility.data.entities.Days;
 
 import java.util.HashMap;
 
+import javax.persistence.Entity;
+
+@Entity
 public class BasketCourt extends Facility{
     private int nBasketballsRented;
     public BasketCourt(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays, int numberOfChangingRooms, int numberOfFloodLights,

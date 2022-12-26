@@ -6,7 +6,12 @@ import javax.persistence.*;
 
 import sportfacility.data.entities.facilities.Facility;
 
+@Entity
 public class Timetable {
+	
+	@Id
+	@GeneratedValue
+	private int id;
 	
 	private Calendar startReservation;
 	

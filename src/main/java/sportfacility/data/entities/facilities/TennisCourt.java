@@ -4,6 +4,9 @@ import sportfacility.data.entities.Days;
 
 import java.util.HashMap;
 
+import javax.persistence.Entity;
+
+@Entity
 public class TennisCourt extends Facility{
     private int nTennisRacquetsRented;
     private int nTennisBallsRented;
