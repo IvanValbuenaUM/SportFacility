@@ -15,7 +15,6 @@ import sportfacility.logic.model.CustomerModel;
 
 @Service
 public class CustomerLogic {
-
 	@Autowired
     CustomerRepository repository;
 

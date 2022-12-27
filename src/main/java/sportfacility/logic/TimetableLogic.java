@@ -13,7 +13,6 @@ import sportfacility.data.repositories.TimetableRepository;
 import sportfacility.logic.model.TimetableModel;
 
 public class TimetableLogic {
-	
 	@Autowired
     TimetableRepository repository;
 

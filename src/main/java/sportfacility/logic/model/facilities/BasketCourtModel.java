@@ -5,6 +5,7 @@ import sportfacility.data.entities.Days;
 import java.util.HashMap;
 
 public class BasketCourtModel extends FacilityModel{
+	
     private int nBasketballsRented;
     
     public BasketCourtModel(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays, int numberOfChangingRooms, int numberOfFloodLights,
