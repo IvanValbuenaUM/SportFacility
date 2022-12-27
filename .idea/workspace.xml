@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06db478a-ba9e-4c9b-8ecc-57f21f9ff4a7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="06db478a-ba9e-4c9b-8ecc-57f21f9ff4a7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,9 +40,6 @@
         <option name="url" value="https://github.com/IvanValbuenaUM/SportFacility.git" />
       </UrlAndAccount>
     </option>
-  </component>
-  <component name="JpbToolWindowState">
-    <option name="isDesignerTabSelected" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -93,6 +85,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "spring.configuration.checksum": "ca079e6b97460b2e0d01366e53878043",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -159,6 +152,7 @@
       <workItem from="1671988286784" duration="691000" />
       <workItem from="1671989355296" duration="2792000" />
       <workItem from="1672085785708" duration="790000" />
+      <workItem from="1672105464577" duration="150000" />
     </task>
     <servers />
   </component>
