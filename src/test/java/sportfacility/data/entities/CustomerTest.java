@@ -166,7 +166,7 @@ class CustomerTest {
 		           () -> new Customer(null, "Omen", 20, "123456V", 12345)
 		    );
 
-		assertTrue(thrown.getMessage().contentEquals("The Customer큦 name is incorrect"));
+		assertTrue(thrown.getMessage().contentEquals("The Customer name is incorrect"));
 	}
 	
 	@Test
@@ -177,7 +177,7 @@ class CustomerTest {
 		           () -> new Customer("   ", "Omen", 20, "123456V", 12345)
 		    );
 
-		assertTrue(thrown.getMessage().contentEquals("The Customer큦 name is incorrect"));
+		assertTrue(thrown.getMessage().contentEquals("The Customer name is incorrect"));
 	}
 	
 	@Test
@@ -188,7 +188,7 @@ class CustomerTest {
 		           () -> new Customer("Albert", null, 20, "123456V", 12345)
 		    );
 
-		assertTrue(thrown.getMessage().contentEquals("The Customer큦 surname is incorrect"));
+		assertTrue(thrown.getMessage().contentEquals("The Customer surname is incorrect"));
 	}
 	
 	@Test
@@ -199,7 +199,7 @@ class CustomerTest {
 		           () -> new Customer("Albert", "   ", 20, "123456V", 12345)
 		    );
 
-		assertTrue(thrown.getMessage().contentEquals("The Customer큦 surname is incorrect"));
+		assertTrue(thrown.getMessage().contentEquals("The Customer surname is incorrect"));
 	}
 	
 	@Test
@@ -210,7 +210,7 @@ class CustomerTest {
 		           () -> new Customer("Albert", "Omen", 20, null, 12345)
 		    );
 
-		assertTrue(thrown.getMessage().contentEquals("The Customer큦 id null"));
+		assertTrue(thrown.getMessage().contentEquals("The Customer id null"));
 	}
 	
 	@Test
@@ -270,7 +270,6 @@ class CustomerTest {
 		    );
 
 		assertTrue(thrown.getMessage().contentEquals("Can't add a null reservation"));
-
 	}
 	
 	@Test

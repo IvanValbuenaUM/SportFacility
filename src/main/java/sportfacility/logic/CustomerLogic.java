@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import sportfacility.data.entities.Customer;
 import sportfacility.data.repositories.CustomerRepository;
 import sportfacility.logic.model.CustomerModel;
-import sportfacility.logic.model.TimetableModel;
 
 @Service
 public class CustomerLogic {
