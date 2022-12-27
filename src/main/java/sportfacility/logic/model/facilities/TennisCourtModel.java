@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class TennisCourtModel extends FacilityModel{
 	
+	
     private int nTennisRacquetsRented;
     private int nTennisBallsRented;
 

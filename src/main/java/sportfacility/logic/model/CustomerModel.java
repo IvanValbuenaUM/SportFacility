@@ -6,6 +6,7 @@ import java.util.List;
 import sportfacility.data.entities.Timetable;
 
 public class CustomerModel {
+	
 	private int membershipNumber;
 	private String id;
 	private String name;

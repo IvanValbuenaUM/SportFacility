@@ -6,6 +6,7 @@ import sportfacility.data.entities.Customer;
 import sportfacility.data.entities.facilities.Facility;
 
 public class TimetableModel {
+	
 	private String id;
 	private Calendar startReservation;
 	private Calendar endReservation;

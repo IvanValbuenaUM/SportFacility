@@ -9,7 +9,6 @@ import java.util.List;
 
 public class FacilityModel {
 	
-	
 	private String facilityCode;
 	private int maxCapacity;
 	private int pricePerHour;

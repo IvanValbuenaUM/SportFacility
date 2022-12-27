@@ -8,6 +8,7 @@ import sportfacility.data.entities.facilities.Facility;
 
 @Entity
 public class Timetable {
+	
 	@Id
 	@GeneratedValue
 	private String id;

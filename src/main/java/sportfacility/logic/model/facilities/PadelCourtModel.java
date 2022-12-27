@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class PadelCourtModel extends FacilityModel{
 	
+	
     private int nPadelRacquets;
     private int nPadelBallsRacquets;
     public PadelCourtModel(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays, int numberOfChangingRooms, int numberOfFloodLights,
