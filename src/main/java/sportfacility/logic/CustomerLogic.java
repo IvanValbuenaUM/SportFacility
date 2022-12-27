@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import sportfacility.data.entities.Customer;
 import sportfacility.data.repositories.CustomerRepository;
 import sportfacility.logic.model.CustomerModel;
+import sportfacility.logic.model.TimetableModel;
 
 @Service
 public class CustomerLogic {
@@ -29,17 +30,13 @@ public class CustomerLogic {
         return customerEntity.getId();
     }
     
-    public CustomerModel getCustomer(String customerMembershipNumber) 
+    public Optional<CustomerModel> getCustomer(String customerMembershipNumber) 
     {
-        Optional<Customer> customer =
-                repository.findById(customerMembershipNumber);
+        Optional<CustomerModel> customer = Optional.empty();
 
-        if (customer.isEmpty()) 
-        	return null;
+        customer = Optional.of(mapper.map(repository.findById(customerMembershipNumber), CustomerModel.class));
 
-        CustomerModel customerModel = mapper.map(customer.get(), CustomerModel.class);
-
-        return customerModel;
+        return customer;
     }
     
     public List<CustomerModel> getAllCustomers(String parameterToSort) 

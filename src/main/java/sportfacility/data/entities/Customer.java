@@ -45,7 +45,7 @@ public class Customer {
 	private void setName(String name) 
 	{
 		if (name == null || name.trim().isEmpty())
-			throw new IllegalArgumentException("The Customer´s name is incorrect");
+			throw new IllegalArgumentException("The Customer name is incorrect");
 		
 		this.name = name;
 	}
@@ -58,7 +58,7 @@ public class Customer {
 	private void setSurname(String surname) 
 	{
 		if (surname == null || surname.trim().isEmpty())
-			throw new IllegalArgumentException("The Customer´s surname is incorrect");
+			throw new IllegalArgumentException("The Customer surname is incorrect");
 		
 		this.surname = surname;
 	}
@@ -83,7 +83,7 @@ public class Customer {
 	private void setId(String id) 
 	{
 		if (id == null)
-			throw new IllegalArgumentException("The Customer´s id null");
+			throw new IllegalArgumentException("The Customer id null");
 		
 		if (id.length() != 7)
 			throw new IllegalArgumentException("Incorrect format for the id (incorrect lenght)");

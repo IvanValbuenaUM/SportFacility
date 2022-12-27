@@ -27,17 +27,13 @@ public class TimetableLogic {
         return timetableEntity.getId();
     }
     
-    public TimetableModel getTimetable(String timetableId) 
+    public Optional<TimetableModel> getTimetable(String timetableId) 
     {
-        Optional<Timetable> timetable =
-                repository.findById(timetableId);
+        Optional<TimetableModel> timetable = Optional.empty();
 
-        if (timetable.isEmpty()) 
-        	return null;
+        timetable = Optional.of(mapper.map(repository.findById(timetableId), TimetableModel.class));
 
-        TimetableModel timetableModel = mapper.map(timetable.get(), TimetableModel.class);
-
-        return timetableModel;
+        return timetable;
     }
     
     public List<TimetableModel> getAllTimetables(String parameterToSort) 
