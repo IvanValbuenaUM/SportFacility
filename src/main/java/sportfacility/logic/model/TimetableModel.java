@@ -1,36 +1,24 @@
-package sportfacility.data.entities;
+package sportfacility.logic.model;
 
 import java.util.Calendar;
 
-import javax.persistence.*;
-
+import sportfacility.data.entities.Customer;
 import sportfacility.data.entities.facilities.Facility;
 
-@Entity
-public class Timetable {
-	
-	@Id
-	@GeneratedValue
+public class TimetableModel {
+
 	private String id;
-	
 	private Calendar startReservation;
-	
 	private Calendar endReservation;
-	
 	private int numberOfPeople;
-	
 	private int totalPrice;
 	
-	
-	@ManyToOne
-	@JoinColumn(name="cust_membershipnumbe", nullable=false)
+
 	private Customer customer;
 
-	@ManyToOne
-	@JoinColumn(name="facility_code", nullable=false)
 	private Facility facility;
 	
-	public Timetable(Calendar startReservation, Calendar endReservation, Customer customer, Facility facility, int numberOfPeople) {
+	public TimetableModel(Calendar startReservation, Calendar endReservation, Customer customer, Facility facility, int numberOfPeople) {
 		super();
 		this.setStartReservation(startReservation);
 		this.setEndReservation(endReservation);
@@ -105,13 +93,16 @@ public class Timetable {
 		this.numberOfPeople = numberOfPeople;
 	}
 
-	public String getId() {
-		return id;
-	}
-
 	public int getTotalPrice() 
 	{
 		return totalPrice;
 	}
+
+	public String getId() {
+		return this.id;
+	}
 	
+	public void setId(String id) {
+		this.id = id;
+	}
 }
