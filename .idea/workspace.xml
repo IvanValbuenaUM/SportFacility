@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06db478a-ba9e-4c9b-8ecc-57f21f9ff4a7" name="Changes" comment="" />
+    <list default="true" id="06db478a-ba9e-4c9b-8ecc-57f21f9ff4a7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +105,7 @@
       <recent name="sportfacility.data.facilities" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.CustomerTest and 1 more">
     <configuration name="CustomerTest and 1 more" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="sportfacility" />
       <option name="TEST_OBJECT" value="pattern" />
@@ -150,6 +152,7 @@
       <workItem from="1672105464577" duration="150000" />
       <workItem from="1672165564008" duration="597000" />
       <workItem from="1672245395122" duration="154000" />
+      <workItem from="1672245584496" duration="289000" />
     </task>
     <servers />
   </component>
