@@ -39,9 +39,9 @@ public class CustomerController {
     {
         CustomerModel customerSubmission = mapper.map(request, CustomerModel.class);
         
-        String orderId = customerLogic.addCustomer(customerSubmission);
+        String customerId = customerLogic.addCustomer(customerSubmission);
 
-        return ResponseEntity.ok(new SubmitCustomerResponse(orderId));
+        return ResponseEntity.ok(new SubmitCustomerResponse(customerId));
     }
     
     @GetMapping(value = "get", produces = MediaType.APPLICATION_JSON_VALUE)
