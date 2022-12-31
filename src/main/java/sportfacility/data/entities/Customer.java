@@ -26,7 +26,9 @@ public class Customer {
 	
 	@OneToMany(mappedBy = "customer")
 	private List<Timetable> reservations = new ArrayList<>();
-	
+	public  Customer() {
+
+	}
 	public Customer(String name, String surname, int age, String id, int membershipNumber) 
 	{
 		super();
