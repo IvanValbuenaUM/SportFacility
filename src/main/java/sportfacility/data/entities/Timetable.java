@@ -39,7 +39,11 @@ public class Timetable {
 		this.setNumberOfPeople(numberOfPeople);
 		this.totalPrice = (this.getEndReservation().get(Calendar.HOUR_OF_DAY) - this.getStartReservation().get(Calendar.HOUR_OF_DAY)) * this.getFacility().getPricePerHour();
 	}
-	
+
+	public Timetable() {
+
+	}
+
 	public Calendar getStartReservation() 
 	{
 		return startReservation;

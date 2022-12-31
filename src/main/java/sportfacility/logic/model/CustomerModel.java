@@ -51,7 +51,7 @@ public class CustomerModel {
 		this.surname = surname;
 	}
 	
-	public int getAge() 
+	public int getAge()
 	{
 		return age;
 	}
@@ -74,7 +74,7 @@ public class CustomerModel {
 			throw new IllegalArgumentException("The Customer�s id null");
 		
 		if (id.length() != 7)
-			throw new IllegalArgumentException("Incorrect format for the id (incorrect lenght)");
+			throw new IllegalArgumentException("Incorrect format for the id (incorrect length)");
 		
 		for (int i = 0; i < id.length() - 1; i++)
 		{

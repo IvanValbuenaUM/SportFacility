@@ -111,7 +111,7 @@ public class Customer {
 	
 	private void setMembershipNumber(int membershipNumber) 
 	{
-		if (Integer.toString(membershipNumber).length() != 4)
+		if (membershipNumber < 0 || membershipNumber > 9999)
 			throw new IllegalArgumentException("Incorrect format for the membership number (incorrect lenght)");
 		
 		this.membershipNumber = membershipNumber;
@@ -145,4 +145,15 @@ public class Customer {
 		return reservations;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"membershipNumber=" + membershipNumber +
+				", id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", surname='" + surname + '\'' +
+				", age=" + age +
+				", reservations=" + reservations +
+				'}';
+	}
 }
