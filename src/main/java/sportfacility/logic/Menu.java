@@ -61,9 +61,12 @@ public class Menu {
         System.out.println("NEW ACCOUNT CREATED!!");
         System.out.println("THANK YOU " + cus.getName() + " YOUR MEMBERSHIP NUMBER IS " + cus.getMembershipNumber());
         //See if the new customer was added
+        /*
         for (Customer c : customerLinkedList) {
             System.out.println(c.toString());
         }
+        */
+
         System.out.println();
     }
 
@@ -123,6 +126,28 @@ public class Menu {
         }
         return age;
     }
+    private int AskForValidMembershipNumber() {
+        int mem;
+        while (true) {
+            Scanner u = new Scanner(System.in);
+            try {
+                mem = u.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please try to enter a valid membership number");
+                System.out.print("Membership nº: ");
+                continue;
+            }
+            try {
+                Customer c = new Customer("A", "A", 18, "111111A", mem);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Please try to enter a membership number (number between 0 and 9999)");
+                System.out.print("Membership nº: ");
+                continue;
+            }
+            break;
+        }
+        return mem;
+    }
 
     private int GetNonExistingMembershipNumber() {
         boolean found = false;
@@ -140,7 +165,31 @@ public class Menu {
     }
 
     private void SignUp() {
-        System.out.println("s");
+        System.out.println();
+        System.out.println("PLEASE ENTER YOUR CUSTOMER INFORMATION");
+        System.out.print("ID: ");
+        String id = AskForValidID();
+        System.out.print("Membership nº: ");
+        int mem = AskForValidMembershipNumber();
+        boolean existed = false;
+        Customer found = null;
+        for (Customer c: customerLinkedList) {
+            if (c.getId().equals(id) && c.getMembershipNumber() == mem) {
+                found = c;
+                existed = true;
+            }
+        }
+        if (existed)
+            MemberMenu(found);
+        else
+            System.out.println("NO CUSTOMER WITH THAT INFORMATION FOUND!");
+    }
+
+    private void MemberMenu(Customer c) {
+        System.out.println();
+        System.out.println("WELCOME BACK " + c.getName() + "!");
+        System.out.print("How was your day?");
+        String id = reader.next();
     }
 
     private void LoadCustomers() throws FileNotFoundException {
