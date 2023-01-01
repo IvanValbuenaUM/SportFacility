@@ -2,8 +2,7 @@ package sportfacility.logic.model;
 
 import java.util.Calendar;
 
-import sportfacility.data.entities.Customer;
-import sportfacility.data.entities.facilities.Facility;
+import sportfacility.logic.model.facilities.FacilityModel;
 
 public class TimetableModel {
 	
@@ -14,16 +13,16 @@ public class TimetableModel {
 	private int totalPrice;
 	
 
-	private Customer customer;
+	private CustomerModel customer;
 
-	private Facility facility;
+	private FacilityModel facility;
 	
-	public TimetableModel(Calendar startReservation, Calendar endReservation, Customer customer, Facility facility, int numberOfPeople) {
+	public TimetableModel(Calendar startReservation, Calendar endReservation, CustomerModel a, FacilityModel f, int numberOfPeople) {
 		super();
 		this.setStartReservation(startReservation);
 		this.setEndReservation(endReservation);
-		this.setCustomer(customer);
-		this.setFacility(facility);
+		this.setCustomer(a);
+		this.setFacility(f);
 		this.setNumberOfPeople(numberOfPeople);
 		this.totalPrice = (this.getEndReservation().get(Calendar.HOUR_OF_DAY) - this.getStartReservation().get(Calendar.HOUR_OF_DAY)) * this.getFacility().getPricePerHour();
 	}
@@ -38,12 +37,12 @@ public class TimetableModel {
 		return endReservation;
 	}
 
-	public Customer getCustomer() 
+	public CustomerModel getCustomer() 
 	{
 		return customer;
 	}
 
-	public Facility getFacility() 
+	public FacilityModel getFacility() 
 	{
 		return facility;
 	}
@@ -64,15 +63,15 @@ public class TimetableModel {
 		this.endReservation = endReservation;
 	}
 
-	private void setCustomer(Customer customer) 
+	private void setCustomer(CustomerModel a) 
 	{
-		if (customer == null)
+		if (a == null)
 			throw new IllegalArgumentException("Can't set a null customer");
 		
-		this.customer = customer;
+		this.customer = a;
 	}
 
-	private void setFacility(Facility facility) 
+	private void setFacility(FacilityModel facility) 
 	{
 		if (facility == null)
 			throw new IllegalArgumentException("Can't set a null facility");

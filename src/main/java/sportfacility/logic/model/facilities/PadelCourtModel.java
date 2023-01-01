@@ -1,6 +1,6 @@
 package sportfacility.logic.model.facilities;
 
-import sportfacility.data.entities.Days;
+import sportfacility.logic.model.Days;
 
 import java.util.HashMap;
 

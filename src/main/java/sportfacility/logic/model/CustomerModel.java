@@ -3,8 +3,6 @@ package sportfacility.logic.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import sportfacility.data.entities.Timetable;
-
 public class CustomerModel {
 	
 	private int membershipNumber;
@@ -13,7 +11,7 @@ public class CustomerModel {
 	private String surname;
 	private int age;
 	
-	private List<Timetable> reservations = new ArrayList<>();
+	private List<TimetableModel> reservations = new ArrayList<>();
 	
 	public CustomerModel(String name, String surname, int age, String id, int membershipNumber) 
 	{
@@ -33,7 +31,7 @@ public class CustomerModel {
 	private void setName(String name) 
 	{
 		if (name == null || name.trim().isEmpty())
-			throw new IllegalArgumentException("The Customer�s name is incorrect");
+			throw new IllegalArgumentException("The Customer name is incorrect");
 		
 		this.name = name;
 	}
@@ -46,7 +44,7 @@ public class CustomerModel {
 	private void setSurname(String surname) 
 	{
 		if (surname == null || surname.trim().isEmpty())
-			throw new IllegalArgumentException("The Customer�s surname is incorrect");
+			throw new IllegalArgumentException("The Customer surname is incorrect");
 		
 		this.surname = surname;
 	}
@@ -71,7 +69,7 @@ public class CustomerModel {
 	private void setId(String id) 
 	{
 		if (id == null)
-			throw new IllegalArgumentException("The Customer�s id null");
+			throw new IllegalArgumentException("The Customer id is null");
 		
 		if (id.length() != 7)
 			throw new IllegalArgumentException("Incorrect format for the id (incorrect length)");
@@ -105,7 +103,7 @@ public class CustomerModel {
 		this.membershipNumber = membershipNumber;
 	}
 	
-	public void addReservation(Timetable t)
+	public void addReservation(TimetableModel t)
 	{
 		if (t == null)
 			throw new IllegalArgumentException("Can't add a null reservation");
@@ -113,7 +111,7 @@ public class CustomerModel {
 		reservations.add(t);
 	}
 	
-	public boolean removeReservation(Timetable t)
+	public boolean removeReservation(TimetableModel t)
 	{
 		if (t == null)
 			throw new IllegalArgumentException("Can't remove a null reservation");
@@ -129,7 +127,7 @@ public class CustomerModel {
 		return false;
 	}
 
-	public List<Timetable> getReservations() {
+	public List<TimetableModel> getReservations() {
 		return reservations;
 	}
 }

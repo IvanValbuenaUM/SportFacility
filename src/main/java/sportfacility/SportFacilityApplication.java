@@ -13,7 +13,9 @@ import javax.management.RuntimeErrorException;
 public class SportFacilityApplication {
 	
     public static void main(String[] args) {
-        //???SpringApplication.run(SportFacilityApplication.class, args);
+    	
+        SpringApplication.run(SportFacilityApplication.class, args);
+        
         Menu m = new Menu();
         try {
             m.start();

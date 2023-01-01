@@ -113,7 +113,7 @@ public class Customer {
 	
 	private void setMembershipNumber(int membershipNumber) 
 	{
-		if (membershipNumber < 0 || membershipNumber > 9999)
+		if (Integer.toString(membershipNumber).length() != 4)
 			throw new IllegalArgumentException("Incorrect format for the membership number (incorrect lenght)");
 		
 		this.membershipNumber = membershipNumber;

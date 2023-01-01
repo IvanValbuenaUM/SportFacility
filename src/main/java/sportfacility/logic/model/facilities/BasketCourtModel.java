@@ -1,8 +1,9 @@
 package sportfacility.logic.model.facilities;
 
-import sportfacility.data.entities.Days;
 
 import java.util.HashMap;
+
+import sportfacility.logic.model.Days;
 
 public class BasketCourtModel extends FacilityModel{
 	

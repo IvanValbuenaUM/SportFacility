@@ -1,7 +1,7 @@
 package sportfacility.logic.model.facilities;
 
-import sportfacility.data.entities.Days;
-import sportfacility.data.entities.Timetable;
+import sportfacility.logic.model.Days;
+import sportfacility.logic.model.TimetableModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,15 +17,15 @@ public class FacilityModel {
 	private int numberOfFloodLights;
 	private int extraPriceForLightUse;
 	
-	private List<Timetable> reservations = new ArrayList<>();
+	private List<TimetableModel> reservations = new ArrayList<>();
 	
-	public FacilityModel(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays,
+	public FacilityModel(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays2,
 			int numberOfChangingRooms, int numberOfFloodLights, int extraPriceForLightUse) 
 	{
 		this.setFacilityCode(facilityCode);
 		this.setMaxCapacity(maxCapacity);
 		this.setPricePerHour(pricePerHour);
-		this.setClosedDays(closedDays);
+		this.setClosedDays(closedDays2);
 		this.setNumberOfChangingRooms(numberOfChangingRooms);
 		this.setNumberOfFloodLights(numberOfFloodLights);
 		this.setExtraPriceForLightUse(extraPriceForLightUse);
@@ -135,7 +135,7 @@ public class FacilityModel {
 		this.extraPriceForLightUse = extraPriceForLightUse;
 	}
 	
-	public void addReservation(Timetable t)
+	public void addReservation(TimetableModel t)
 	{
 		if (t == null)
 			throw new IllegalArgumentException("Can't add a null reservation");
@@ -143,7 +143,7 @@ public class FacilityModel {
 		reservations.add(t);
 	}
 	
-	public boolean removeReservation(Timetable t)
+	public boolean removeReservation(TimetableModel t)
 	{
 		if (t == null)
 			throw new IllegalArgumentException("Can't remove a null reservation");
@@ -159,7 +159,7 @@ public class FacilityModel {
 		return false;
 	}
 	
-	public List<Timetable> getReservations() {
+	public List<TimetableModel> getReservations() {
 		return reservations;
 	}
 
