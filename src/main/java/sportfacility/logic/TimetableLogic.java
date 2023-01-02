@@ -14,12 +14,12 @@ import sportfacility.logic.model.TimetableModel;
 import sportfacility.logic.suscriber.TimetableObserver;
 
 public class TimetableLogic {
-	
+
 	@Autowired
     private TimetableRepository repository; 
 
     @Autowired
-    private ModelMapper mapper = new ModelMapper();
+    private ModelMapper mapper;
     
     @Autowired
     private TimetableObserver observer;

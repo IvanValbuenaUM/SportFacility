@@ -101,7 +101,7 @@ class CustomerTest {
 	{
 		IllegalArgumentException thrown = assertThrows(
 				IllegalArgumentException.class,
-		           () -> new Customer("Albert", "Omen", 20, "123456V", 234)
+		           () -> new Customer("Albert", "Omen", 20, "123456V", -1)
 		    );
 
 		assertTrue(thrown.getMessage().contentEquals("Incorrect format for the membership number (incorrect lenght)"));
@@ -112,7 +112,7 @@ class CustomerTest {
 	{
 		IllegalArgumentException thrown = assertThrows(
 				IllegalArgumentException.class,
-		           () -> new Customer("Albert", "Omen", 20, "123456V", 12345)
+		           () -> new Customer("Albert", "Omen", 20, "123456V", 10000)
 		    );
 
 		assertTrue(thrown.getMessage().contentEquals("Incorrect format for the membership number (incorrect lenght)"));

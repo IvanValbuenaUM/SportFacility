@@ -1,14 +1,16 @@
 package sportfacility.logic;
 
 import sportfacility.data.entities.Customer;
+import sportfacility.data.entities.Days;
+import sportfacility.data.entities.Timetable;
+import sportfacility.data.entities.facilities.BasketCourt;
 import sportfacility.data.entities.facilities.Facility;
+import sportfacility.data.entities.facilities.FootballCourt;
+import sportfacility.data.entities.facilities.PadelCourt;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.InputMismatchException;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
     private Scanner reader = new Scanner(System.in);
@@ -18,6 +20,7 @@ public class Menu {
     public void start() {
         try {
             LoadCustomers();
+            LoadFacilities();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -25,6 +28,8 @@ public class Menu {
         System.out.println();
         MainMenu();
     }
+
+
 
     private void MainMenu() {
         char c = 0;
@@ -188,8 +193,115 @@ public class Menu {
     private void MemberMenu(Customer c) {
         System.out.println();
         System.out.println("WELCOME BACK " + c.getName() + "!");
-        System.out.print("How was your day?");
-        String id = reader.next();
+        System.out.println("What would you like to do?");
+        System.out.println();
+        int i = 0;
+        boolean exit = false;
+        while (!exit) {
+            Scanner u = new Scanner(System.in);
+            PrintOptionsMember();
+            try {
+                i =u.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please try to enter a valid option");
+                continue;
+            }
+            switch (i) {
+                case 1:
+                    SeeMyReservations(c);
+                    break;
+                case 2:
+                    MakeAReservation(c);
+                    break;
+                case 3:
+                    System.out.println();
+                    System.out.println("Going back to the main menu " + c.getName());
+                    System.out.println();
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Input " + i + " is not valid");
+            }
+        }
+    }
+
+    private void MakeAReservation(Customer c) {
+        System.out.println();
+        System.out.println("Choose what kind of facility you want");
+        System.out.println();
+        int i = 0;
+        boolean exit = false;
+        while (!exit) {
+            Scanner u = new Scanner(System.in);
+            PrintOptionsFacility();
+            try {
+                i =u.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please try to enter a valid option");
+                continue;
+            }
+            switch (i) {
+                case 1:
+                    ReserveBasketCourt(c);
+                    break;
+                case 2:
+                    ReserveFootballCourt(c);
+                    break;
+                case 3:
+                    ReservePadelCourt(c);
+                    break;
+                case 4:
+                    ReserveTennisCourt(c);
+                    break;
+                case 5:
+                    System.out.println();
+                    System.out.println("Going back to the member menu " + c.getName());
+                    System.out.println();
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Input " + i + " is not valid");
+            }
+        }
+    }
+
+    private void ReserveTennisCourt(Customer c) {
+    }
+
+    private void ReservePadelCourt(Customer c) {
+    }
+
+    private void ReserveFootballCourt(Customer c) {
+    }
+
+    private void ReserveBasketCourt(Customer c) {
+    }
+
+    private void PrintOptionsMember() {
+        System.out.println("(1) My reservations");
+        System.out.println("(2) Make a reservation");
+        System.out.println("(3) Exit");
+    }
+
+    private void SeeMyReservations(Customer c) {
+
+        if (c.getReservations().isEmpty())
+            System.out.println("Miguel, you do not have any reservations yet");
+        else {
+            System.out.println("Miguel, your reservations are:");
+            for (Timetable t: c.getReservations()) {
+                t.toString();
+            }
+        }
+        System.out.println();
+    }
+
+    private void PrintOptionsFacility() {
+        System.out.println("(1) Basket Court");
+        System.out.println("(2) Football Court");
+        System.out.println("(3) Padel Court");
+        System.out.println("(4) Tennis Court");
+        System.out.println("(5) Exit");
     }
 
     private void LoadCustomers() throws FileNotFoundException {
@@ -205,6 +317,37 @@ public class Menu {
 
             Customer newCustomer = new Customer(name, surname, age, id, membershipNumber);
             customerLinkedList.add(newCustomer);
+        }
+        input.close();
+    }
+    private void LoadFacilities() throws FileNotFoundException {
+        Scanner input = new Scanner(new File("src/main/java/sportfacility/data/files/Facilities"));
+
+        while (input.hasNext()) {
+            String[] line = input.nextLine().split("-");
+            String code = line[0];
+            int capacity = Integer.valueOf(line[1]);
+            int priceHour = Integer.valueOf(line[2]);
+            int nChangingRooms = Integer.valueOf(line[3]);
+            int nFloodLights = Integer.valueOf(line[4]);
+            int extraLightsPrice = Integer.valueOf(line[5]);
+            Facility f = null;
+            if (code.charAt(0) == 'b') {
+                int basketBallsRented = Integer.valueOf(line[6]);
+                f = new BasketCourt(code, capacity, priceHour, new HashMap<Days, Integer>(), nChangingRooms, nFloodLights, extraLightsPrice, basketBallsRented);
+            } else if (code.charAt(0) == 'f') {
+                int footBallsRented = Integer.valueOf(line[6]);
+                f = new FootballCourt(code, capacity, priceHour, new HashMap<Days, Integer>(), nChangingRooms, nFloodLights, extraLightsPrice, footBallsRented);
+            } else if (code.charAt(0) == 'p') {
+                int padelRacquetsRented = Integer.valueOf(line[6]);
+                int padelBallsRented = Integer.valueOf(line[7]);
+                f = new PadelCourt(code, capacity, priceHour, new HashMap<Days, Integer>(), nChangingRooms, nFloodLights, extraLightsPrice, padelRacquetsRented, padelBallsRented);
+            } else if (code.charAt(0) == 't') {
+                int tennisRacquetsRented = Integer.valueOf(line[6]);
+                int tennisBallsRented = Integer.valueOf(line[7]);
+                f = new PadelCourt(code, capacity, priceHour, new HashMap<Days, Integer>(), nChangingRooms, nFloodLights, extraLightsPrice, tennisRacquetsRented, tennisBallsRented);
+            }
+            facilitiesLinkedList.add(f);
         }
         input.close();
     }

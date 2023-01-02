@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
 public abstract class ControllerTest {
-
+	
     protected final WebApplicationContext webApplicationContext;
     protected MockMvc mockMvc;
 

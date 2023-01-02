@@ -5,7 +5,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 public class FacilityObserver implements Observer {
-
+	
 	@Autowired
     private RestTemplate rest;
 

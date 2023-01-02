@@ -16,7 +16,7 @@ import sportfacility.data.repositories.CustomerRepository;
 import sportfacility.logic.model.CustomerModel;
 
 public class CustomerManagementControllerTest extends ControllerTest {
-	
+
 	@SuppressWarnings("deprecation")
 	@Rule
 	public final ExpectedException exception = ExpectedException.none();

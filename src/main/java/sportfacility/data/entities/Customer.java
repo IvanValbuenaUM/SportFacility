@@ -21,7 +21,7 @@ public class Customer {
 	public  Customer() {
 		super();
 	}
-	
+
 	public Customer(String name, String surname, int age, String id, int membershipNumber) 
 	{
 		super();

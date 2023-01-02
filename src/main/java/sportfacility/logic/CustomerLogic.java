@@ -21,7 +21,7 @@ public class CustomerLogic {
 	private CustomerRepository repository;
 
     @Autowired
-    private ModelMapper mapper = new ModelMapper();
+    private ModelMapper mapper;
     
     @Autowired
     private CustomerObserver observer;

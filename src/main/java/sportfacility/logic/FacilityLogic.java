@@ -15,12 +15,12 @@ import sportfacility.logic.suscriber.FacilityObserver;
 
 
 public class FacilityLogic {
-	
+
 	@Autowired
 	private FacilityRepository repository;
 
     @Autowired
-    private ModelMapper mapper = new ModelMapper();
+    private ModelMapper mapper;
     
     @Autowired
     private FacilityObserver observer;

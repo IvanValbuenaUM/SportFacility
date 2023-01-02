@@ -36,4 +36,20 @@ public class PadelCourt extends Facility{
             throw new IllegalArgumentException("The number of rented padel balls cannot be over 4 or under 10");
         this.nPadelBallsRacquets = nPadelBallsRacquets;
     }
+
+    @Override
+    public String toString() {
+        return "PadelCourt{" +
+                "NPadelRacquets=" + getNPadelRacquets() +
+                ", NPadelBallsRacquets=" + getNPadelBallsRacquets() +
+                ", facilityCode='" + getFacilityCode() + '\'' +
+                ", maxCapacity=" + getMaxCapacity() +
+                ", pricePerHour=" + getPricePerHour() +
+                ", closedDays=" + getClosedDays() +
+                ", numberOfChangingRooms=" + getNumberOfChangingRooms() +
+                ", numberOfFloodLights=" + getNumberOfFloodLights() +
+                ", extraPriceForLightUse=" + getExtraPriceForLightUse() +
+                ", reservations=" + getReservations() +
+                '}';
+    }
 }

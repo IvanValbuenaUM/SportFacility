@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerModel {
-	
+
 	private int membershipNumber;
 	private String id;
 	private String name;

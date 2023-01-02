@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CustomerObserver implements Observer {
-
+	
 	@Autowired
     private RestTemplate rest;
 
