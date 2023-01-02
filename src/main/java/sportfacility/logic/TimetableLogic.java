@@ -37,8 +37,11 @@ public class TimetableLogic {
     {
         Optional<Timetable> tim = repository.findById(timetableId);
         
-        if(tim.isEmpty())
+        try {
+        	tim.get();
+        } catch (Exception e) {
         	return null;
+        }
 
         TimetableModel timetable = mapper.map(tim.get(), TimetableModel.class);
 

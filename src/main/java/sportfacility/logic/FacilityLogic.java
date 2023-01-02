@@ -36,8 +36,11 @@ public class FacilityLogic {
     {
         Optional<Facility> fac = repository.findById(facilityCode);
         
-        if(fac.isEmpty())
+        try {
+        	fac.get();
+        } catch (Exception e) {
         	return null;
+        }
 
         FacilityModel facility = mapper.map(fac.get(), FacilityModel.class);
 
