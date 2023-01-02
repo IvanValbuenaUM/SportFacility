@@ -12,28 +12,35 @@ import org.springframework.stereotype.Service;
 import sportfacility.data.entities.Customer;
 import sportfacility.data.repositories.CustomerRepository;
 import sportfacility.logic.model.CustomerModel;
+import sportfacility.logic.suscriber.CustomerObserver;
 
 @Service
 public class CustomerLogic {
 	
 	@Autowired
-    CustomerRepository repository;
+	private CustomerRepository repository;
 
     @Autowired
-    ModelMapper mapper;
+    private ModelMapper mapper = new ModelMapper();
     
-    public String addCustomer(CustomerModel customer) 
+    @Autowired
+    private CustomerObserver observer;
+    
+    public int addCustomer(CustomerModel customer) 
     {
-        Customer customerEntity = mapper.map(customer, Customer.class);
-        customerEntity = repository.save(customerEntity);
-        return customerEntity.getId();
+        Customer customerEntity = repository.save(mapper.map(customer, Customer.class));
+        return customerEntity.getMembershipNumber();
     }
     
-    public Optional<CustomerModel> getCustomer(String customerMembershipNumber) 
+    public CustomerModel getCustomer(int customerMembershipNumber) 
     {
-        Optional<CustomerModel> customer = Optional.empty();
 
-        customer = Optional.of(mapper.map(repository.findById(customerMembershipNumber), CustomerModel.class));
+    	Optional<Customer> c = repository.findById(customerMembershipNumber);
+    	
+    	if(c.isEmpty())
+    		return null;
+    	
+        CustomerModel customer = mapper.map(c.get(), CustomerModel.class);
 
         return customer;
     }
@@ -59,17 +66,24 @@ public class CustomerLogic {
 		return allCustomers;
     }
     
-    public boolean deleteCustomer(String customerMembershipNumber) 
+    public boolean deleteCustomer(int customerMembershipNumber) 
     {
-
-        repository.deleteById(customerMembershipNumber);
+    	try {
+    		repository.deleteById(customerMembershipNumber);
+    	} catch (Exception e) {
+    		
+    	}
+    	
+    	if (!observer.informDelete(Integer.toString(customerMembershipNumber)))
+    		return false;
+        
         return true;
     }
     
     public boolean updateCustomer(CustomerModel customerModel) 
     {
 
-        if (repository.existsById(customerModel.getId()))
+        if (repository.existsById(customerModel.getMembershipNumber()))
         {
         	repository.save(mapper.map(customerModel, Customer.class));
         	return true;

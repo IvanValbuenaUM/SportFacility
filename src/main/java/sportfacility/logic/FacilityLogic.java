@@ -11,15 +11,19 @@ import org.springframework.data.domain.Sort;
 import sportfacility.data.entities.facilities.Facility;
 import sportfacility.data.repositories.FacilityRepository;
 import sportfacility.logic.model.facilities.FacilityModel;
+import sportfacility.logic.suscriber.FacilityObserver;
 
 
 public class FacilityLogic {
 	
 	@Autowired
-	FacilityRepository repository;
+	private FacilityRepository repository;
 
     @Autowired
-    ModelMapper mapper;
+    private ModelMapper mapper = new ModelMapper();
+    
+    @Autowired
+    private FacilityObserver observer;
     
     public String addFacility(FacilityModel facility) 
     {
@@ -62,6 +66,10 @@ public class FacilityLogic {
     {
 
         repository.deleteById(facilityCode);
+        
+        if (!observer.informDelete(facilityCode))
+        	return false;
+        
         return true;
     }
     

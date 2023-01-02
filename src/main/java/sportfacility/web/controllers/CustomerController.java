@@ -2,7 +2,6 @@ package sportfacility.web.controllers;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,17 +38,17 @@ public class CustomerController {
     {
         CustomerModel customerSubmission = mapper.map(request, CustomerModel.class);
         
-        String customerId = customerLogic.addCustomer(customerSubmission);
+        int customerId = customerLogic.addCustomer(customerSubmission);
 
         return ResponseEntity.ok(new SubmitCustomerResponse(customerId));
     }
     
     @GetMapping(value = "get", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GetCustomerResponse> get(@RequestParam String customerMembershipNumber) 
+    public ResponseEntity<GetCustomerResponse> get(@RequestParam int customerMembershipNumber) 
     {
-        Optional<CustomerModel> customerModel = customerLogic.getCustomer(customerMembershipNumber);
+        CustomerModel customerModel = customerLogic.getCustomer(customerMembershipNumber);
 
-        if (!customerModel.isPresent()) {
+        if (customerModel == null) {
             return ResponseEntity.notFound().build();
         }
 
@@ -70,7 +69,7 @@ public class CustomerController {
     }
     
     @DeleteMapping(value = "delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DeleteCustomerResponse> delete(@RequestParam String customerMembershipNumber) 
+    public ResponseEntity<DeleteCustomerResponse> delete(@RequestParam int customerMembershipNumber) 
     {
         if (!customerLogic.deleteCustomer(customerMembershipNumber))
         	return ResponseEntity.notFound().build();

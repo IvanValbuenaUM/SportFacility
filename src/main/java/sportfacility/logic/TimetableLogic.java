@@ -11,14 +11,18 @@ import org.springframework.data.domain.Sort;
 import sportfacility.data.entities.Timetable;
 import sportfacility.data.repositories.TimetableRepository;
 import sportfacility.logic.model.TimetableModel;
+import sportfacility.logic.suscriber.TimetableObserver;
 
 public class TimetableLogic {
 	
 	@Autowired
-    TimetableRepository repository;
+    private TimetableRepository repository; 
 
     @Autowired
-    ModelMapper mapper;
+    private ModelMapper mapper = new ModelMapper();
+    
+    @Autowired
+    private TimetableObserver observer;
     
     public String addTimetable(TimetableModel timetable) 
     {
@@ -61,6 +65,10 @@ public class TimetableLogic {
     {
 
         repository.deleteById(timetableId);
+        
+        if(!observer.informDelete(timetableId))
+        	return false;
+        
         return true;
     }
     

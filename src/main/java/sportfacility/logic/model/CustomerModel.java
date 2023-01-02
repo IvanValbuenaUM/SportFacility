@@ -13,6 +13,11 @@ public class CustomerModel {
 	
 	private List<TimetableModel> reservations = new ArrayList<>();
 	
+	public CustomerModel() 
+	{
+		super();
+	}
+	
 	public CustomerModel(String name, String surname, int age, String id, int membershipNumber) 
 	{
 		super();
@@ -28,7 +33,7 @@ public class CustomerModel {
 		return name;
 	}
 	
-	private void setName(String name) 
+	public void setName(String name) 
 	{
 		if (name == null || name.trim().isEmpty())
 			throw new IllegalArgumentException("The Customer name is incorrect");
@@ -41,7 +46,7 @@ public class CustomerModel {
 		return surname;
 	}
 	
-	private void setSurname(String surname) 
+	public void setSurname(String surname) 
 	{
 		if (surname == null || surname.trim().isEmpty())
 			throw new IllegalArgumentException("The Customer surname is incorrect");
@@ -54,7 +59,7 @@ public class CustomerModel {
 		return age;
 	}
 	
-	private void setAge(int age) 
+	public void setAge(int age) 
 	{
 		if (age < 18)
 			throw new IllegalArgumentException("The Customer must have at least 18 years");
@@ -66,7 +71,7 @@ public class CustomerModel {
 		return id;
 	}
 	
-	private void setId(String id) 
+	public void setId(String id) 
 	{
 		if (id == null)
 			throw new IllegalArgumentException("The Customer id is null");
@@ -95,7 +100,7 @@ public class CustomerModel {
 		return membershipNumber;
 	}
 	
-	private void setMembershipNumber(int membershipNumber) 
+	public void setMembershipNumber(int membershipNumber) 
 	{
 		if (Integer.toString(membershipNumber).length() != 4)
 			throw new IllegalArgumentException("Incorrect format for the membership number (incorrect lenght)");
