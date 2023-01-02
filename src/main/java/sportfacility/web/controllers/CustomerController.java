@@ -48,7 +48,7 @@ public class CustomerController {
     {
         CustomerModel customerModel = customerLogic.getCustomer(customerMembershipNumber);
 
-        if (customerModel == null) {
+        if (customerModel.equals(null)) {
             return ResponseEntity.notFound().build();
         }
 

@@ -10,15 +10,10 @@ import sportfacility.data.entities.facilities.Facility;
 public class Timetable {
 	
 	@Id
-	@GeneratedValue
 	private String id;
-	
 	private Calendar startReservation;
-	
 	private Calendar endReservation;
-	
 	private int numberOfPeople;
-	
 	private int totalPrice;
 	
 	
@@ -30,8 +25,13 @@ public class Timetable {
 	@JoinColumn(name="facility_code", nullable=false)
 	private Facility facility;
 	
-	public Timetable(Calendar startReservation, Calendar endReservation, Customer customer, Facility facility, int numberOfPeople) {
+	public  Timetable() {
 		super();
+	}
+	
+	public Timetable(String id, Calendar startReservation, Calendar endReservation, Customer customer, Facility facility, int numberOfPeople) {
+		super();
+		this.setId(id);
 		this.setStartReservation(startReservation);
 		this.setEndReservation(endReservation);
 		this.setCustomer(customer);
@@ -60,7 +60,7 @@ public class Timetable {
 		return facility;
 	}
 
-	private void setStartReservation(Calendar startReservation) 
+	public void setStartReservation(Calendar startReservation) 
 	{
 		if (startReservation == null)
 			throw new IllegalArgumentException("Can't set a null start reservation");
@@ -68,7 +68,7 @@ public class Timetable {
 		this.startReservation = startReservation;
 	}
 
-	private void setEndReservation(Calendar endReservation) 
+	public void setEndReservation(Calendar endReservation) 
 	{
 		if (endReservation == null)
 			throw new IllegalArgumentException("Can't set a null end reservation");
@@ -76,7 +76,7 @@ public class Timetable {
 		this.endReservation = endReservation;
 	}
 
-	private void setCustomer(Customer customer) 
+	public void setCustomer(Customer customer) 
 	{
 		if (customer == null)
 			throw new IllegalArgumentException("Can't set a null customer");
@@ -84,7 +84,7 @@ public class Timetable {
 		this.customer = customer;
 	}
 
-	private void setFacility(Facility facility) 
+	public void setFacility(Facility facility) 
 	{
 		if (facility == null)
 			throw new IllegalArgumentException("Can't set a null facility");
@@ -97,7 +97,7 @@ public class Timetable {
 		return numberOfPeople;
 	}
 
-	private void setNumberOfPeople(int numberOfPeople) 
+	public void setNumberOfPeople(int numberOfPeople) 
 	{
 		if (numberOfPeople <= 0)
 			throw new IllegalArgumentException("The number of people can't be lower or equal to 0");
@@ -107,6 +107,11 @@ public class Timetable {
 
 	public String getId() {
 		return id;
+	}
+	
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getTotalPrice() 

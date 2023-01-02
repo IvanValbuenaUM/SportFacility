@@ -2,7 +2,6 @@ package sportfacility.web.controllers;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +45,9 @@ public class TimetableController {
     @GetMapping(value = "get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GetTimetableResponse> get(@RequestParam String timetableId) 
     {
-        Optional<TimetableModel> timetableModel = timetableLogic.getTimetable(timetableId);
+        TimetableModel timetableModel = timetableLogic.getTimetable(timetableId);
 
-        if (!timetableModel.isPresent()) {
+        if (timetableModel.equals(null)) {
             return ResponseEntity.notFound().build();
         }
 

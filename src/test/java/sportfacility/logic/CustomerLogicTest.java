@@ -15,7 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import sportfacility.data.repositories.CustomerRepository;
 import sportfacility.logic.model.CustomerModel;
 
-public class CustomerManagementControllerTest extends ControllerTest {
+public class CustomerLogicTest extends ControllerTest {
 
 	@SuppressWarnings("deprecation")
 	@Rule
@@ -30,7 +30,7 @@ public class CustomerManagementControllerTest extends ControllerTest {
     @MockBean
     private RestTemplate rest;
 
-    public CustomerManagementControllerTest(WebApplicationContext webApplicationContext) {
+    public CustomerLogicTest(WebApplicationContext webApplicationContext) {
         super(webApplicationContext);
     }
 
@@ -136,7 +136,6 @@ public class CustomerManagementControllerTest extends ControllerTest {
 		assertTrue(logic.deleteCustomer(1234));
 	}
 	
-//	CONFIGURE REST
 //	@Test
 //	public void deleteNullTest() 
 //	{

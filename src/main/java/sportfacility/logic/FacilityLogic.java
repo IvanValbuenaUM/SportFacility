@@ -32,11 +32,14 @@ public class FacilityLogic {
         return facilityEntity.getFacilityCode();
     }
     
-    public Optional<FacilityModel> getFacility(String facilityCode) 
+    public FacilityModel getFacility(String facilityCode) 
     {
-        Optional<FacilityModel> facility = Optional.empty();
+        Optional<Facility> f = repository.findById(facilityCode);
+        
+        if(f.isEmpty())
+        	return null;
 
-        facility = Optional.of(mapper.map(repository.findById(facilityCode), FacilityModel.class));
+        FacilityModel facility = mapper.map(f.get(), FacilityModel.class);
 
         return facility;
     }

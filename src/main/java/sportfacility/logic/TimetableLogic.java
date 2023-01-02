@@ -7,12 +7,14 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import sportfacility.data.entities.Timetable;
 import sportfacility.data.repositories.TimetableRepository;
 import sportfacility.logic.model.TimetableModel;
 import sportfacility.logic.suscriber.TimetableObserver;
 
+@Service
 public class TimetableLogic {
 
 	@Autowired
@@ -31,11 +33,14 @@ public class TimetableLogic {
         return timetableEntity.getId();
     }
     
-    public Optional<TimetableModel> getTimetable(String timetableId) 
+    public TimetableModel getTimetable(String timetableId) 
     {
-        Optional<TimetableModel> timetable = Optional.empty();
+        Optional<Timetable> t = repository.findById(timetableId);
+        
+        if(t.isEmpty())
+        	return null;
 
-        timetable = Optional.of(mapper.map(repository.findById(timetableId), TimetableModel.class));
+        TimetableModel timetable = mapper.map(t.get(), TimetableModel.class);
 
         return timetable;
     }

@@ -38,7 +38,7 @@ public class TimetableTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		new Timetable(s,e,a,f,3);
+		new Timetable("a",s,e,a,f,3);
 	}
 	
 	@Test
@@ -68,7 +68,7 @@ public class TimetableTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		assertEquals(s, t.getStartReservation());
 	}
@@ -100,7 +100,7 @@ public class TimetableTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		assertEquals(e, t.getEndReservation());
 	}
@@ -132,7 +132,7 @@ public class TimetableTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		assertEquals(a, t.getCustomer());
 	}
@@ -164,7 +164,7 @@ public class TimetableTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		assertEquals(f, t.getFacility());
 	}
@@ -196,7 +196,7 @@ public class TimetableTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		assertEquals(3, t.getNumberOfPeople());
 	}
@@ -228,7 +228,7 @@ public class TimetableTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		assertEquals(50, t.getTotalPrice());
 	}
@@ -262,7 +262,7 @@ public class TimetableTest {
 			       		Calendar e = Calendar.getInstance();
 			       		e.set(2022, 12, 20, 13, 0);
 			       		
-			       		new Timetable(s,e,a,f,3);
+			       		new Timetable("a",s,e,a,f,3);
 		           		 }
 		    );
 
@@ -298,7 +298,7 @@ public class TimetableTest {
 			       		
 			       		Calendar e = null;
 			       		
-			       		new Timetable(s,e,a,f,3);
+			       		new Timetable("a",s,e,a,f,3);
 		           		 }
 		    );
 
@@ -335,7 +335,7 @@ public class TimetableTest {
 			       		Calendar e = Calendar.getInstance();
 			       		e.set(2022, 12, 20, 13, 0);
 			       		
-			       		new Timetable(s,e,a,f,3);
+			       		new Timetable("a",s,e,a,f,3);
 		           		 }
 		    );
 
@@ -358,7 +358,7 @@ public class TimetableTest {
 			       		Calendar e = Calendar.getInstance();
 			       		e.set(2022, 12, 20, 13, 0);
 			       		
-			       		new Timetable(s,e,a,f,3);
+			       		new Timetable("a",s,e,a,f,3);
 		           		 }
 		    );
 
@@ -395,7 +395,7 @@ public class TimetableTest {
 			       		Calendar e = Calendar.getInstance();
 			       		e.set(2022, 12, 20, 13, 0);
 			       		
-			       		new Timetable(s,e,a,f,-1);
+			       		new Timetable("a",s,e,a,f,-1);
 		           		 }
 		    );
 
@@ -432,7 +432,7 @@ public class TimetableTest {
 			       		Calendar e = Calendar.getInstance();
 			       		e.set(2022, 12, 20, 13, 0);
 			       		
-			       		new Timetable(s,e,a,f,0);
+			       		new Timetable("a",s,e,a,f,0);
 		           		 }
 		    );
 

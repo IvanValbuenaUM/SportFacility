@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,33 +15,25 @@ import javax.persistence.OneToMany;
 public class Facility {
 
 	@Id
-	@Column(name="facility_code")
 	private String facilityCode;
-	
-	@Column(name="facility_maxcapacity")
 	private int maxCapacity;
-	
-	@Column(name="facility_priceperhour")
 	private int pricePerHour;
-	
-	@Column(name="facility_closeddays")
 	private HashMap<Days, Integer> closedDays;
-	
-	@Column(name="facility_nchangingrooms")
 	private int numberOfChangingRooms;
-	
-	@Column(name="facility_nfloodlights")
 	private int numberOfFloodLights;
-	
-	@Column(name="facility_lightprice")
 	private int extraPriceForLightUse;
 	
 	@OneToMany(mappedBy = "facility")
 	private List<Timetable> reservations = new ArrayList<>();
 	
+	public Facility() {
+		super();
+	}
+	
 	public Facility(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays,
 			int numberOfChangingRooms, int numberOfFloodLights, int extraPriceForLightUse) 
 	{
+		super();
 		this.setFacilityCode(facilityCode);
 		this.setMaxCapacity(maxCapacity);
 		this.setPricePerHour(pricePerHour);
@@ -87,7 +78,7 @@ public class Facility {
 		return extraPriceForLightUse;
 	}
 	
-	private void setFacilityCode(String facilityCode) 
+	public void setFacilityCode(String facilityCode) 
 	{
 		if (facilityCode == null || facilityCode.trim().isEmpty())
 			throw new IllegalArgumentException("The facility code is incorrect");
@@ -107,7 +98,7 @@ public class Facility {
 		this.facilityCode = facilityCode;
 	}
 
-	private void setMaxCapacity(int maxCapacity) 
+	public void setMaxCapacity(int maxCapacity) 
 	{
 		if (maxCapacity <= 0)
 			throw new IllegalArgumentException("The capacity must be higher than 0");
@@ -115,7 +106,7 @@ public class Facility {
 		this.maxCapacity = maxCapacity;
 	}
 
-	private void setPricePerHour(int pricePerHour) 
+	public void setPricePerHour(int pricePerHour) 
 	{
 		if (pricePerHour < 0)
 			throw new IllegalArgumentException("The price per hour can't be lower than 0");
@@ -123,7 +114,7 @@ public class Facility {
 		this.pricePerHour = pricePerHour;
 	}
 
-	private void setClosedDays(HashMap<Days, Integer> closedDays) 
+	public void setClosedDays(HashMap<Days, Integer> closedDays) 
 	{
 		if (closedDays == null)
 			throw new IllegalArgumentException("The closed days hash map is null");
@@ -131,7 +122,7 @@ public class Facility {
 		this.closedDays = closedDays;
 	}
 
-	private void setNumberOfChangingRooms(int numberOfChangingRooms) 
+	public void setNumberOfChangingRooms(int numberOfChangingRooms) 
 	{
 		if (numberOfChangingRooms < 0)
 			throw new IllegalArgumentException("The number of changing rooms can't be lower than 0");
@@ -139,7 +130,7 @@ public class Facility {
 		this.numberOfChangingRooms = numberOfChangingRooms;
 	}
 
-	private void setNumberOfFloodLights(int numberOfFloodLights) 
+	public void setNumberOfFloodLights(int numberOfFloodLights) 
 	{
 		
 		if (numberOfFloodLights < 0)
@@ -148,7 +139,7 @@ public class Facility {
 		this.numberOfFloodLights = numberOfFloodLights;
 	}
 
-	private void setExtraPriceForLightUse(int extraPriceForLightUse) 
+	public void setExtraPriceForLightUse(int extraPriceForLightUse) 
 	{
 		if (extraPriceForLightUse < 0)
 			throw new IllegalArgumentException("The extra price for flood light use can't be lower than 0");

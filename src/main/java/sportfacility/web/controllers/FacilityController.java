@@ -2,7 +2,6 @@ package sportfacility.web.controllers;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +44,9 @@ public class FacilityController {
     @GetMapping(value = "get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GetFacilityResponse> get(@RequestParam String facilityId) 
     {
-        Optional<FacilityModel> facilityModel = facilityLogic.getFacility(facilityId);
+        FacilityModel facilityModel = facilityLogic.getFacility(facilityId);
 
-        if (!facilityModel.isPresent()) {
+        if (facilityModel.equals(null)) {
             return ResponseEntity.notFound().build();
         }
 

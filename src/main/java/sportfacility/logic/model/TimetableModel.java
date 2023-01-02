@@ -17,8 +17,14 @@ public class TimetableModel {
 
 	private FacilityModel facility;
 	
-	public TimetableModel(Calendar startReservation, Calendar endReservation, CustomerModel a, FacilityModel f, int numberOfPeople) {
+	public TimetableModel() 
+	{
 		super();
+	}
+	
+	public TimetableModel(String id, Calendar startReservation, Calendar endReservation, CustomerModel a, FacilityModel f, int numberOfPeople) {
+		super();
+		this.setId(id);
 		this.setStartReservation(startReservation);
 		this.setEndReservation(endReservation);
 		this.setCustomer(a);
@@ -47,7 +53,7 @@ public class TimetableModel {
 		return facility;
 	}
 
-	private void setStartReservation(Calendar startReservation) 
+	public void setStartReservation(Calendar startReservation) 
 	{
 		if (startReservation == null)
 			throw new IllegalArgumentException("Can't set a null start reservation");
@@ -55,7 +61,7 @@ public class TimetableModel {
 		this.startReservation = startReservation;
 	}
 
-	private void setEndReservation(Calendar endReservation) 
+	public void setEndReservation(Calendar endReservation) 
 	{
 		if (endReservation == null)
 			throw new IllegalArgumentException("Can't set a null end reservation");
@@ -63,7 +69,7 @@ public class TimetableModel {
 		this.endReservation = endReservation;
 	}
 
-	private void setCustomer(CustomerModel a) 
+	public void setCustomer(CustomerModel a) 
 	{
 		if (a == null)
 			throw new IllegalArgumentException("Can't set a null customer");
@@ -71,7 +77,7 @@ public class TimetableModel {
 		this.customer = a;
 	}
 
-	private void setFacility(FacilityModel facility) 
+	public void setFacility(FacilityModel facility) 
 	{
 		if (facility == null)
 			throw new IllegalArgumentException("Can't set a null facility");
@@ -84,7 +90,7 @@ public class TimetableModel {
 		return numberOfPeople;
 	}
 
-	private void setNumberOfPeople(int numberOfPeople) 
+	public void setNumberOfPeople(int numberOfPeople) 
 	{
 		if (numberOfPeople <= 0)
 			throw new IllegalArgumentException("The number of people can't be lower or equal to 0");

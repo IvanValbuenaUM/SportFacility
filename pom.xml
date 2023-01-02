@@ -14,8 +14,8 @@
         <version>2.3.4.RELEASE</version>
     </parent>
 
-    <dependencies>
-        
+	<dependencies>
+
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>

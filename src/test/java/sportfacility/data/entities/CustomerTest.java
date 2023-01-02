@@ -251,7 +251,7 @@ class CustomerTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		a.addReservation(t);
 
@@ -314,7 +314,7 @@ class CustomerTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		a.addReservation(t);
 
@@ -349,9 +349,9 @@ class CustomerTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
-		Timetable t2 = new Timetable(s,e,a,f,4);
+		Timetable t2 = new Timetable("b",s,e,a,f,4);
 		
 		a.addReservation(t);
 
@@ -386,7 +386,7 @@ class CustomerTest {
 		Calendar e = Calendar.getInstance();
 		e.set(2022, 12, 20, 13, 0);
 		
-		Timetable t = new Timetable(s,e,a,f,3);
+		Timetable t = new Timetable("a",s,e,a,f,3);
 		
 		List<Timetable> reservations = new ArrayList<>();
 		reservations.add(t);
