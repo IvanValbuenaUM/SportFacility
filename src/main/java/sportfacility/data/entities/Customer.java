@@ -26,9 +26,7 @@ public class Customer {
 	
 	@OneToMany(mappedBy = "customer")
 	private List<Timetable> reservations = new ArrayList<>();
-	public  Customer() {
 
-	}
 	public Customer(String name, String surname, int age, String id, int membershipNumber) 
 	{
 		super();
@@ -113,8 +111,8 @@ public class Customer {
 	
 	private void setMembershipNumber(int membershipNumber) 
 	{
-		if (Integer.toString(membershipNumber).length() != 4)
-			throw new IllegalArgumentException("Incorrect format for the membership number (incorrect lenght)");
+		if (membershipNumber < 0 || membershipNumber > 9999)
+			throw new IllegalArgumentException("Incorrect format for the membership number (incorrect length)");
 		
 		this.membershipNumber = membershipNumber;
 	}

@@ -37,4 +37,20 @@ public class TennisCourt extends Facility{
             throw new IllegalArgumentException("The number of rented tennis balls cannot be over 10 or under 0");
         this.nTennisBallsRented = nTennisBallsRented;
     }
+
+    @Override
+    public String toString() {
+        return "TennisCourt{" +
+                "NTennisRacquetsRented=" + getNTennisRacquetsRented() +
+                ", NTennisBallsRented=" + getNTennisBallsRented() +
+                ", facilityCode='" + getFacilityCode() + '\'' +
+                ", maxCapacity=" + getMaxCapacity() +
+                ", pricePerHour=" + getPricePerHour() +
+                ", closedDays=" + getClosedDays() +
+                ", numberOfChangingRooms=" + getNumberOfChangingRooms() +
+                ", numberOfFloodLights=" + getNumberOfFloodLights() +
+                ", extraPriceForLightUse=" + getExtraPriceForLightUse() +
+                ", reservations=" + getReservations() +
+                '}';
+    }
 }

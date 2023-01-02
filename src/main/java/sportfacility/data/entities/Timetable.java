@@ -40,10 +40,6 @@ public class Timetable {
 		this.totalPrice = (this.getEndReservation().get(Calendar.HOUR_OF_DAY) - this.getStartReservation().get(Calendar.HOUR_OF_DAY)) * this.getFacility().getPricePerHour();
 	}
 
-	public Timetable() {
-
-	}
-
 	public Calendar getStartReservation() 
 	{
 		return startReservation;
@@ -117,5 +113,15 @@ public class Timetable {
 	{
 		return totalPrice;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Reservation for " +
+				customer.getName() + " (id: " +  customer.getId() + "): " +
+				"Start -> " + startReservation +
+				"    End -> " + endReservation +
+				"    Number of People -> " + numberOfPeople +
+				"    Total price -> " + totalPrice +
+				"    Facility code -> " + facility;
+	}
 }

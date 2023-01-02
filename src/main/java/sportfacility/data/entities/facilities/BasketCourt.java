@@ -24,4 +24,19 @@ public class BasketCourt extends Facility{
             throw new IllegalArgumentException("The number of rented basketballs cannot be over 1 or under 0");
         this.nBasketballsRented = nBasketballsRented;
     }
+
+    @Override
+    public String toString() {
+        return "BasketCourt{" +
+                "NBasketballsRented=" + getNBasketballsRented() +
+                ", facilityCode='" + getFacilityCode() + '\'' +
+                ", maxCapacity=" + getMaxCapacity() +
+                ", pricePerHour=" + getPricePerHour() +
+                ", closedDays=" + getClosedDays() +
+                ", numberOfChangingRooms=" + getNumberOfChangingRooms() +
+                ", numberOfFloodLights=" + getNumberOfFloodLights() +
+                ", extraPriceForLightUse=" + getExtraPriceForLightUse() +
+                ", reservations=" + getReservations() +
+                '}';
+    }
 }
