@@ -37,7 +37,9 @@ public class CustomerLogic {
 
     	Optional<Customer> cust = repository.findById(customerMembershipNumber);
     	
-    	if(cust.isEmpty())
+    	boolean isPresent = cust.isEmpty();
+    	
+    	if(isPresent)
     		return null;
     	
         CustomerModel customer = mapper.map(cust.get(), CustomerModel.class);
