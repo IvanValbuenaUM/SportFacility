@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -232,21 +231,7 @@ public class CustomerModelTest {
 	{
 		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s = Calendar.getInstance();
 		s.set(2022, 12, 20, 12, 0);
@@ -295,21 +280,7 @@ public class CustomerModelTest {
 	{
 		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s = Calendar.getInstance();
 		s.set(2022, 12, 20, 12, 0);
@@ -330,21 +301,7 @@ public class CustomerModelTest {
 	{
 		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s = Calendar.getInstance();
 		s.set(2022, 12, 20, 12, 0);
@@ -367,21 +324,7 @@ public class CustomerModelTest {
 	{
 		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s = Calendar.getInstance();
 		s.set(2022, 12, 20, 12, 0);

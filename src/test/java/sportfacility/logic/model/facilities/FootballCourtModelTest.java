@@ -2,10 +2,6 @@ package sportfacility.logic.model.facilities;
 
 import org.junit.jupiter.api.Test;
 
-import sportfacility.logic.model.Days;
-
-import java.util.HashMap;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FootballCourtModelTest {
@@ -13,32 +9,16 @@ class FootballCourtModelTest {
     @Test
     void constructorTest()
     {
-        HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
 
-        closedDays.put(Days.MONDAY, 0);
-        closedDays.put(Days.MONDAY, 6);
-        closedDays.put(Days.TUESDAY, 0);
-        closedDays.put(Days.TUESDAY, 6);
-        closedDays.put(Days.WEDNESDAY, 0);
-        closedDays.put(Days.WEDNESDAY, 6);
-        closedDays.put(Days.THURSDAY, 0);
-        closedDays.put(Days.THURSDAY, 6);
-        closedDays.put(Days.FRIDAY, 0);
-        closedDays.put(Days.FRIDAY, 6);
-        closedDays.put(Days.SATURDAY, 0);
-        closedDays.put(Days.SATURDAY, 6);
-        closedDays.put(Days.SUNDAY, -1);
-
-        new FootballCourtModel("AB12", 10, 50, closedDays, 3, 20, 13, 0);
+        new FootballCourtModel("AB12", 10, 50, 3, 20, 13, 0);
     }
     @Test
     void nFootBallsMoreTest()
     {
-        HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
 
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
-                () -> new FootballCourtModel("AB12", 10, 50, closedDays, 3, 20, 13, -1)
+                () -> new FootballCourtModel("AB12", 10, 50, 3, 20, 13, -1)
         );
 
         assertTrue(thrown.getMessage().contentEquals("The number of rented footballs cannot be over 1 or under 0"));
@@ -46,11 +26,10 @@ class FootballCourtModelTest {
     @Test
     void nFootBallsLessTest()
     {
-        HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
 
         IllegalArgumentException thrown = assertThrows(
                 IllegalArgumentException.class,
-                () -> new FootballCourtModel("AB12", 10, 50, closedDays, 3, 20, 13, 2)
+                () -> new FootballCourtModel("AB12", 10, 50, 3, 20, 13, 2)
         );
 
         assertTrue(thrown.getMessage().contentEquals("The number of rented footballs cannot be over 1 or under 0"));
@@ -59,23 +38,8 @@ class FootballCourtModelTest {
     @Test
     void getNFootballsRentedTest()
     {
-    	HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
 
-        closedDays.put(Days.MONDAY, 0);
-        closedDays.put(Days.MONDAY, 6);
-        closedDays.put(Days.TUESDAY, 0);
-        closedDays.put(Days.TUESDAY, 6);
-        closedDays.put(Days.WEDNESDAY, 0);
-        closedDays.put(Days.WEDNESDAY, 6);
-        closedDays.put(Days.THURSDAY, 0);
-        closedDays.put(Days.THURSDAY, 6);
-        closedDays.put(Days.FRIDAY, 0);
-        closedDays.put(Days.FRIDAY, 6);
-        closedDays.put(Days.SATURDAY, 0);
-        closedDays.put(Days.SATURDAY, 6);
-        closedDays.put(Days.SUNDAY, -1);
-
-        FootballCourtModel fc = new FootballCourtModel("AB12", 10, 50, closedDays, 3, 20, 13, 1);
+        FootballCourtModel fc = new FootballCourtModel("AB12", 10, 50, 3, 20, 13, 1);
 
         assertEquals(1, fc.getNFootballsRented());
     }

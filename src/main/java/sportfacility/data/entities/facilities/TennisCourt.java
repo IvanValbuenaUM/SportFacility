@@ -1,8 +1,5 @@
 package sportfacility.data.entities.facilities;
 
-import sportfacility.data.entities.Days;
-
-import java.util.HashMap;
 
 import javax.persistence.Entity;
 
@@ -11,9 +8,9 @@ public class TennisCourt extends Facility{
     private int nTennisRacquetsRented;
     private int nTennisBallsRented;
 
-    public TennisCourt(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays, int numberOfChangingRooms, int numberOfFloodLights,
+    public TennisCourt(String facilityCode, int maxCapacity, int pricePerHour, int numberOfChangingRooms, int numberOfFloodLights,
                        int extraPriceForLightUse, int nRacquetsRented, int nTennisBallsRented) {
-        super(facilityCode, maxCapacity, pricePerHour, closedDays, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
+        super(facilityCode, maxCapacity, pricePerHour, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
         setNTennisRacquetsRented(nRacquetsRented);
         setNTennisBallsRented(nTennisBallsRented);
     }
@@ -46,7 +43,6 @@ public class TennisCourt extends Facility{
                 ", facilityCode='" + getFacilityCode() + '\'' +
                 ", maxCapacity=" + getMaxCapacity() +
                 ", pricePerHour=" + getPricePerHour() +
-                ", closedDays=" + getClosedDays() +
                 ", numberOfChangingRooms=" + getNumberOfChangingRooms() +
                 ", numberOfFloodLights=" + getNumberOfFloodLights() +
                 ", extraPriceForLightUse=" + getExtraPriceForLightUse() +

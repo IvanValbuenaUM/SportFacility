@@ -1,7 +1,6 @@
 package sportfacility.logic;
 
 import sportfacility.data.entities.Customer;
-import sportfacility.data.entities.Days;
 import sportfacility.data.entities.Timetable;
 import sportfacility.data.entities.facilities.BasketCourt;
 import sportfacility.data.entities.facilities.Facility;
@@ -360,18 +359,18 @@ public class Menu {
             Facility f = null;
             if (code.charAt(0) == 'b') {
                 int basketBallsRented = Integer.valueOf(line[6]);
-                f = new BasketCourt(code, capacity, priceHour, new HashMap<Days, Integer>(), nChangingRooms, nFloodLights, extraLightsPrice, basketBallsRented);
+                f = new BasketCourt(code, capacity, priceHour, nChangingRooms, nFloodLights, extraLightsPrice, basketBallsRented);
             } else if (code.charAt(0) == 'f') {
                 int footBallsRented = Integer.valueOf(line[6]);
-                f = new FootballCourt(code, capacity, priceHour, new HashMap<Days, Integer>(), nChangingRooms, nFloodLights, extraLightsPrice, footBallsRented);
+                f = new FootballCourt(code, capacity, priceHour, nChangingRooms, nFloodLights, extraLightsPrice, footBallsRented);
             } else if (code.charAt(0) == 'p') {
                 int padelRacquetsRented = Integer.valueOf(line[6]);
                 int padelBallsRented = Integer.valueOf(line[7]);
-                f = new PadelCourt(code, capacity, priceHour, new HashMap<Days, Integer>(), nChangingRooms, nFloodLights, extraLightsPrice, padelRacquetsRented, padelBallsRented);
+                f = new PadelCourt(code, capacity, priceHour, nChangingRooms, nFloodLights, extraLightsPrice, padelRacquetsRented, padelBallsRented);
             } else if (code.charAt(0) == 't') {
                 int tennisRacquetsRented = Integer.valueOf(line[6]);
                 int tennisBallsRented = Integer.valueOf(line[7]);
-                f = new PadelCourt(code, capacity, priceHour, new HashMap<Days, Integer>(), nChangingRooms, nFloodLights, extraLightsPrice, tennisRacquetsRented, tennisBallsRented);
+                f = new PadelCourt(code, capacity, priceHour, nChangingRooms, nFloodLights, extraLightsPrice, tennisRacquetsRented, tennisBallsRented);
             }
             facilitiesLinkedList.add(f);
         }

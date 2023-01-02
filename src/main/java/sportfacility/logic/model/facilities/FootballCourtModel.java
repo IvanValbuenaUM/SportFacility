@@ -1,15 +1,11 @@
 package sportfacility.logic.model.facilities;
 
-import sportfacility.logic.model.Days;
-
-import java.util.HashMap;
-
 public class FootballCourtModel extends FacilityModel{
 	
     private int nFootballsRented;
-    public FootballCourtModel(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays, int numberOfChangingRooms, int numberOfFloodLights,
+    public FootballCourtModel(String facilityCode, int maxCapacity, int pricePerHour, int numberOfChangingRooms, int numberOfFloodLights,
                          int extraPriceForLightUse, int nFootballsRented) {
-        super(facilityCode, maxCapacity, pricePerHour, closedDays, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
+        super(facilityCode, maxCapacity, pricePerHour, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
         setNFootballsRented(nFootballsRented);
     }
 
