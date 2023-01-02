@@ -175,4 +175,7 @@ public class Facility {
 		return reservations;
 	}
 
+	public String AvailableString() {
+		return null;
+	}
 }

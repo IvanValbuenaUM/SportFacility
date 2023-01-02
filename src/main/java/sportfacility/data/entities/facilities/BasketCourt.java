@@ -39,4 +39,16 @@ public class BasketCourt extends Facility{
                 ", reservations=" + getReservations() +
                 '}';
     }
+
+    @Override
+    public String AvailableString() {
+        return "Basketball Court Nº1 (code: " + getFacilityCode() +
+                "    Capacity-> " + getMaxCapacity() +
+                "    Price per hour-> " + getPricePerHour() +
+                "$    Number changing rooms-> " + getNumberOfChangingRooms() +
+                "    Number of flood lights-> " + getNumberOfFloodLights() +
+                "    Extra price for lights-> " + getExtraPriceForLightUse() +
+                "$    Basketballs available-> " + getNBasketballsRented() + "\n" +
+                "Timetable....";
+    }
 }

@@ -13,9 +13,8 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Menu {
-    private Scanner reader = new Scanner(System.in);
-    private LinkedList<Customer> customerLinkedList = new LinkedList<>();
-    private LinkedList<Facility> facilitiesLinkedList = new LinkedList<>();
+    private List<Customer> customerLinkedList = new LinkedList<>();
+    private List<Facility> facilitiesLinkedList = new LinkedList<>();
 
     public void start() {
         try {
@@ -32,19 +31,25 @@ public class Menu {
 
 
     private void MainMenu() {
-        char c = 0;
+        int c = 1;
         boolean exit = false;
         while (!exit) {
-            System.out.println("DO YOU WANT TO SIGN UP(s) OR REGISTER(r) OR EXIT(e)?");
-            c = reader.next().charAt(0);
+            Scanner u = new Scanner(System.in);
+            System.out.println("What do you want to do?"+"\n"+"(1) Sign up"+"\n"+ "(2) Register"+"\n"+"(3) Exit?");
+            try {
+                c = u.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please try to introduce a valid input");
+                continue;
+            }
             switch (c) {
-                case 's':
+                case 1:
                     SignUp();
                     break;
-                case 'r':
+                case 2:
                     Register();
                     break;
-                case 'e':
+                case 3:
                     Exit();
                     exit = true;
                     break;
@@ -55,16 +60,17 @@ public class Menu {
     }
 
     private void Exit() {
-        System.out.println("THE APPLICATION WILL SHUT DOWN");
-        System.out.println("SEE YOU OTHER TIME!");
+        System.out.println();
+        System.out.println("The application will shutdown");
+        System.out.println("See you another day!");
     }
 
     private void Register() {
-        System.out.println("THANK YOU FOR CHOOSING US!");
-        System.out.println("LETS CREATE YOUR ACCOUNT!");
+        System.out.println("Thank you for choosing us!");
+        System.out.println("Lets create your account!");
         Customer cus = NewCustomerInfo();
-        System.out.println("NEW ACCOUNT CREATED!!");
-        System.out.println("THANK YOU " + cus.getName() + " YOUR MEMBERSHIP NUMBER IS " + cus.getMembershipNumber());
+        System.out.println("New account created!!");
+        System.out.println("Thank you " + cus.getName() + " your membership number is " + cus.getMembershipNumber());
         //See if the new customer was added
         /*
         for (Customer c : customerLinkedList) {
@@ -102,7 +108,7 @@ public class Menu {
             try {
                 Customer c = new Customer("A", "A", 18, id, 0001);
             } catch (IllegalArgumentException e) {
-                System.out.println("Please try to enter a ID (6 numbers followed by 1 letter)");
+                System.out.println("Please try to introduce a ID (6 numbers followed by 1 letter)");
                 System.out.print("ID: ");
                 continue;
             }
@@ -118,12 +124,12 @@ public class Menu {
             try {
                 age = u.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Please try to enter a valid age");
+                System.out.println("Please try to introduce a valid age");
                 System.out.print("Age: ");
                 continue;
             }
             if (age < 18) {
-                System.out.println("Please try to enter an age over 18");
+                System.out.println("Please try to introduce an age over 18");
                 System.out.print("Age: ");
                 continue;
             }
@@ -138,14 +144,14 @@ public class Menu {
             try {
                 mem = u.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Please try to enter a valid membership number");
+                System.out.println("Please try to introduce a valid membership number");
                 System.out.print("Membership nº: ");
                 continue;
             }
             try {
                 Customer c = new Customer("A", "A", 18, "111111A", mem);
             } catch (IllegalArgumentException e) {
-                System.out.println("Please try to enter a membership number (number between 0 and 9999)");
+                System.out.println("Please try to introduce a membership number (number between 0 and 9999)");
                 System.out.print("Membership nº: ");
                 continue;
             }
@@ -171,7 +177,7 @@ public class Menu {
 
     private void SignUp() {
         System.out.println();
-        System.out.println("PLEASE ENTER YOUR CUSTOMER INFORMATION");
+        System.out.println("Please introduce your customer information");
         System.out.print("ID: ");
         String id = AskForValidID();
         System.out.print("Membership nº: ");
@@ -187,12 +193,12 @@ public class Menu {
         if (existed)
             MemberMenu(found);
         else
-            System.out.println("NO CUSTOMER WITH THAT INFORMATION FOUND!");
+            System.out.println("No customer with that information found!");
     }
 
     private void MemberMenu(Customer c) {
         System.out.println();
-        System.out.println("WELCOME BACK " + c.getName() + "!");
+        System.out.println("Welcome back " + c.getName() + "!");
         System.out.println("What would you like to do?");
         System.out.println();
         int i = 0;
@@ -203,7 +209,7 @@ public class Menu {
             try {
                 i =u.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Please try to enter a valid option");
+                System.out.println("Please try to introduce a valid option");
                 continue;
             }
             switch (i) {
@@ -237,7 +243,7 @@ public class Menu {
             try {
                 i =u.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Please try to enter a valid option");
+                System.out.println("Please try to introduce a valid option");
                 continue;
             }
             switch (i) {
@@ -275,6 +281,19 @@ public class Menu {
     }
 
     private void ReserveBasketCourt(Customer c) {
+        ShowAvailableBasketCourts();
+    }
+
+    private void ShowAvailableBasketCourts() {
+        System.out.println("Basketball Courts:");
+        List<Facility> basketCourts = new LinkedList<>();
+        for (Facility f: facilitiesLinkedList) {
+            if (f.getFacilityCode().charAt(0) == 'b')
+                basketCourts.add(f);
+        }
+        for (Facility f: basketCourts) {
+            System.out.println(f.AvailableString());
+        }
     }
 
     private void PrintOptionsMember() {
@@ -285,8 +304,10 @@ public class Menu {
 
     private void SeeMyReservations(Customer c) {
 
-        if (c.getReservations().isEmpty())
+        if (c.getReservations().isEmpty()) {
+            System.out.println();
             System.out.println("Miguel, you do not have any reservations yet");
+        }
         else {
             System.out.println("Miguel, your reservations are:");
             for (Timetable t: c.getReservations()) {
@@ -318,6 +339,11 @@ public class Menu {
             Customer newCustomer = new Customer(name, surname, age, id, membershipNumber);
             customerLinkedList.add(newCustomer);
         }
+        /*
+        for (Customer c: customerLinkedList) {
+            System.out.println(c.toString());
+        }
+        */
         input.close();
     }
     private void LoadFacilities() throws FileNotFoundException {
