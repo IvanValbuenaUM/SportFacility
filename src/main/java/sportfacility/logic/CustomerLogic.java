@@ -37,8 +37,11 @@ public class CustomerLogic {
 
     	Optional<Customer> cust = repository.findById(customerMembershipNumber);
     	
-    	if(cust.isEmpty())
-    		return null;
+    	try {
+        	cust.get();
+        } catch (Exception e) {
+        	return null;
+        }
     	
         CustomerModel customer = mapper.map(cust.get(), CustomerModel.class);
 

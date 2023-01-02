@@ -1,17 +1,13 @@
 package sportfacility.logic.model.facilities;
 
-import sportfacility.logic.model.Days;
-
-import java.util.HashMap;
-
 public class PadelCourtModel extends FacilityModel{
 	
 	
     private int nPadelRacquets;
     private int nPadelBallsRacquets;
-    public PadelCourtModel(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays, int numberOfChangingRooms, int numberOfFloodLights,
+    public PadelCourtModel(String facilityCode, int maxCapacity, int pricePerHour, int numberOfChangingRooms, int numberOfFloodLights,
                       int extraPriceForLightUse, int nPadelRacquets, int nPadelBallsRacquets) {
-        super(facilityCode, maxCapacity, pricePerHour, closedDays, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
+        super(facilityCode, maxCapacity, pricePerHour, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
         setNPadelRacquets(nPadelRacquets);
         setNPadelBallsRacquets(nPadelBallsRacquets);
     }

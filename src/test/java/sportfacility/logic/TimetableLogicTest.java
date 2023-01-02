@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Rule;
@@ -19,7 +18,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import sportfacility.data.repositories.TimetableRepository;
 import sportfacility.logic.model.CustomerModel;
-import sportfacility.logic.model.Days;
 import sportfacility.logic.model.TimetableModel;
 import sportfacility.logic.model.facilities.FacilityModel;
 
@@ -31,6 +29,12 @@ public class TimetableLogicTest extends ControllerTest {
 
     @Autowired
     private TimetableLogic logic;
+    
+    @Autowired
+    private CustomerLogic logicC;
+    
+    @Autowired
+    private FacilityLogic logicF;
 
     @Autowired
     private TimetableRepository repository;
@@ -52,21 +56,7 @@ public class TimetableLogicTest extends ControllerTest {
 	{
     	CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+    	FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s = Calendar.getInstance();
 		s.set(2022, 12, 20, 12, 0);
@@ -75,6 +65,9 @@ public class TimetableLogicTest extends ControllerTest {
 		e.set(2022, 12, 20, 13, 0);
 		
 		TimetableModel t = new TimetableModel("a",s,e,a,f,3);
+		
+		logicC.addCustomer(a);
+		logicF.addFacility(f);
 		
 		assertEquals("a", logic.addTimetable(t));
 	}
@@ -98,21 +91,7 @@ public class TimetableLogicTest extends ControllerTest {
 	{
 		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s = Calendar.getInstance();
 		s.set(2022, 12, 20, 12, 0);
@@ -126,8 +105,8 @@ public class TimetableLogicTest extends ControllerTest {
 		assertEquals(t.getId(), logic.getTimetable(t.getId()).getId());
 		assertEquals(s, logic.getTimetable(t.getId()).getStartReservation());
 		assertEquals(e, logic.getTimetable(t.getId()).getEndReservation());
-		assertEquals(a, logic.getTimetable(t.getId()).getCustomer());
-		assertEquals(f, logic.getTimetable(t.getId()).getFacility());
+		assertEquals(1234, logic.getTimetable(t.getId()).getCustomer().getMembershipNumber());
+		assertEquals("AB12", logic.getTimetable(t.getId()).getFacility().getFacilityCode());
 		assertEquals(3, logic.getTimetable(t.getId()).getNumberOfPeople());
 	}
 	
@@ -142,21 +121,7 @@ public class TimetableLogicTest extends ControllerTest {
 	{
 		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s1 = Calendar.getInstance();
 		s1.set(2022, 12, 20, 12, 0);
@@ -182,15 +147,15 @@ public class TimetableLogicTest extends ControllerTest {
 		assertEquals(t1.getId(), allTimetables.get(0).getId());
 		assertEquals(s1, allTimetables.get(0).getStartReservation());
 		assertEquals(e1, allTimetables.get(0).getEndReservation());
-		assertEquals(a, allTimetables.get(0).getCustomer());
-		assertEquals(f, allTimetables.get(0).getFacility());
+		assertEquals(1234, allTimetables.get(0).getCustomer().getMembershipNumber());
+		assertEquals("AB12", allTimetables.get(0).getFacility().getFacilityCode());
 		assertEquals(3, allTimetables.get(0).getNumberOfPeople());
 		
 		assertEquals(t2.getId(), allTimetables.get(1).getId());
 		assertEquals(s2, allTimetables.get(1).getStartReservation());
 		assertEquals(e2, allTimetables.get(1).getEndReservation());
-		assertEquals(a, allTimetables.get(1).getCustomer());
-		assertEquals(f, allTimetables.get(1).getFacility());
+		assertEquals(1234, allTimetables.get(1).getCustomer().getMembershipNumber());
+		assertEquals("AB12", allTimetables.get(1).getFacility().getFacilityCode());
 		assertEquals(5, allTimetables.get(1).getNumberOfPeople());
 	}
 	
@@ -199,21 +164,7 @@ public class TimetableLogicTest extends ControllerTest {
 	{
 		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s1 = Calendar.getInstance();
 		s1.set(2022, 12, 20, 12, 0);
@@ -239,38 +190,24 @@ public class TimetableLogicTest extends ControllerTest {
 		assertEquals(t2.getId(), allTimetables.get(0).getId());
 		assertEquals(s2, allTimetables.get(0).getStartReservation());
 		assertEquals(e2, allTimetables.get(0).getEndReservation());
-		assertEquals(a, allTimetables.get(0).getCustomer());
-		assertEquals(f, allTimetables.get(0).getFacility());
+		assertEquals(1234, allTimetables.get(0).getCustomer().getMembershipNumber());
+		assertEquals("AB12", allTimetables.get(0).getFacility().getFacilityCode());
 		assertEquals(3, allTimetables.get(0).getNumberOfPeople());
 		
 		assertEquals(t1.getId(), allTimetables.get(1).getId());
 		assertEquals(s1, allTimetables.get(1).getStartReservation());
 		assertEquals(e1, allTimetables.get(1).getEndReservation());
-		assertEquals(a, allTimetables.get(1).getCustomer());
-		assertEquals(f, allTimetables.get(1).getFacility());
+		assertEquals(1234, allTimetables.get(1).getCustomer().getMembershipNumber());
+		assertEquals("AB12", allTimetables.get(1).getFacility().getFacilityCode());
 		assertEquals(5, allTimetables.get(1).getNumberOfPeople());
 	}
 	
 	@Test
 	public void deleteTimetablesTest() 
 	{
-CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
+		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s = Calendar.getInstance();
 		s.set(2022, 12, 20, 12, 0);
@@ -293,23 +230,9 @@ CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 	@Test
 	public void updateTimetablesTest() 
 	{
-CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
-		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
+				
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s1 = Calendar.getInstance();
 		s1.set(2022, 12, 20, 12, 0);
@@ -327,9 +250,9 @@ CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		assertEquals("a", logic.getTimetable(t2.getId()).getId());
 		assertEquals(s1, logic.getTimetable(t2.getId()).getStartReservation());
 		assertEquals(e1, logic.getTimetable(t2.getId()).getEndReservation());
-		assertEquals(a, logic.getTimetable(t2.getId()).getCustomer());
-		assertEquals(f, logic.getTimetable(t2.getId()).getFacility());
-		assertEquals(3, logic.getTimetable(t2.getId()).getNumberOfPeople());
+		assertEquals(1234, logic.getTimetable(t2.getId()).getCustomer().getMembershipNumber());
+		assertEquals("AB12", logic.getTimetable(t2.getId()).getFacility().getFacilityCode());
+		assertEquals(5, logic.getTimetable(t2.getId()).getNumberOfPeople());
 	}
 	
 	@Test
@@ -337,21 +260,7 @@ CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 	{
 		CustomerModel a = new CustomerModel("Albert", "Omen", 20, "123456V", 1234);
 		
-		HashMap<Days,Integer> closedDays = new HashMap<Days, Integer>();
-		closedDays.put(Days.MONDAY, 0);
-		closedDays.put(Days.MONDAY, 6);
-		closedDays.put(Days.TUESDAY, 0);
-		closedDays.put(Days.TUESDAY, 6);
-		closedDays.put(Days.WEDNESDAY, 0);
-		closedDays.put(Days.WEDNESDAY, 6);
-		closedDays.put(Days.THURSDAY, 0);
-		closedDays.put(Days.THURSDAY, 6);
-		closedDays.put(Days.FRIDAY, 0);
-		closedDays.put(Days.FRIDAY, 6);
-		closedDays.put(Days.SATURDAY, 0);
-		closedDays.put(Days.SATURDAY, 6);
-		closedDays.put(Days.SUNDAY, -1);
-		FacilityModel f = new FacilityModel("AB12", 10, 50, closedDays, 3, 20, 13);
+		FacilityModel f = new FacilityModel("AB12", 10, 50, 3, 20, 13);
 		
 		Calendar s = Calendar.getInstance();
 		s.set(2022, 12, 20, 12, 0);

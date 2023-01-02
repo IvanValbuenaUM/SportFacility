@@ -1,8 +1,5 @@
 package sportfacility.data.entities.facilities;
 
-import sportfacility.data.entities.Days;
-
-import java.util.HashMap;
 
 import javax.persistence.Entity;
 
@@ -10,9 +7,9 @@ import javax.persistence.Entity;
 public class FootballCourt extends Facility{
 
     private int nFootballsRented;
-    public FootballCourt(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays, int numberOfChangingRooms, int numberOfFloodLights,
+    public FootballCourt(String facilityCode, int maxCapacity, int pricePerHour, int numberOfChangingRooms, int numberOfFloodLights,
                          int extraPriceForLightUse, int nFootballsRented) {
-        super(facilityCode, maxCapacity, pricePerHour, closedDays, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
+        super(facilityCode, maxCapacity, pricePerHour, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
         setNFootballsRented(nFootballsRented);
     }
 
@@ -33,7 +30,6 @@ public class FootballCourt extends Facility{
                 ", facilityCode='" + getFacilityCode() + '\'' +
                 ", maxCapacity=" + getMaxCapacity() +
                 ", pricePerHour=" + getPricePerHour() +
-                ", closedDays=" + getClosedDays() +
                 ", numberOfChangingRooms=" + getNumberOfChangingRooms() +
                 ", numberOfFloodLights=" + getNumberOfFloodLights() +
                 ", extraPriceForLightUse=" + getExtraPriceForLightUse() +

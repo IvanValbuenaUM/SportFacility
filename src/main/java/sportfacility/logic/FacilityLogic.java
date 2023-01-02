@@ -7,13 +7,14 @@ import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import sportfacility.data.entities.facilities.Facility;
 import sportfacility.data.repositories.FacilityRepository;
 import sportfacility.logic.model.facilities.FacilityModel;
 import sportfacility.logic.suscriber.FacilityObserver;
 
-
+@Service
 public class FacilityLogic {
 
 	@Autowired
@@ -36,8 +37,11 @@ public class FacilityLogic {
     {
         Optional<Facility> fac = repository.findById(facilityCode);
         
-        if(fac.isEmpty())
+        try {
+        	fac.get();
+        } catch (Exception e) {
         	return null;
+        }
 
         FacilityModel facility = mapper.map(fac.get(), FacilityModel.class);
 

@@ -1,10 +1,8 @@
 package sportfacility.data.entities.facilities;
 
-import sportfacility.data.entities.Days;
 import sportfacility.data.entities.Timetable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,7 +16,7 @@ public class Facility {
 	private String facilityCode;
 	private int maxCapacity;
 	private int pricePerHour;
-	private HashMap<Days, Integer> closedDays;
+//	private HashMap<Days, Integer> closedDays;
 	private int numberOfChangingRooms;
 	private int numberOfFloodLights;
 	private int extraPriceForLightUse;
@@ -30,14 +28,14 @@ public class Facility {
 		super();
 	}
 	
-	public Facility(String facilityCode, int maxCapacity, int pricePerHour, HashMap<Days, Integer> closedDays,
+	public Facility(String facilityCode, int maxCapacity, int pricePerHour,
 			int numberOfChangingRooms, int numberOfFloodLights, int extraPriceForLightUse) 
 	{
 		super();
 		this.setFacilityCode(facilityCode);
 		this.setMaxCapacity(maxCapacity);
 		this.setPricePerHour(pricePerHour);
-		this.setClosedDays(closedDays);
+//		this.setClosedDays(closedDays);
 		this.setNumberOfChangingRooms(numberOfChangingRooms);
 		this.setNumberOfFloodLights(numberOfFloodLights);
 		this.setExtraPriceForLightUse(extraPriceForLightUse);
@@ -58,10 +56,10 @@ public class Facility {
 		return pricePerHour;
 	}
 	
-	public HashMap<Days, Integer> getClosedDays() 
-	{
-		return closedDays;
-	}
+//	public HashMap<Days, Integer> getClosedDays() 
+//	{
+//		return closedDays;
+//	}
 	
 	public int getNumberOfChangingRooms() {
 		
@@ -114,13 +112,13 @@ public class Facility {
 		this.pricePerHour = pricePerHour;
 	}
 
-	public void setClosedDays(HashMap<Days, Integer> closedDays) 
-	{
-		if (closedDays == null)
-			throw new IllegalArgumentException("The closed days hash map is null");
-		
-		this.closedDays = closedDays;
-	}
+//	public void setClosedDays(HashMap<Days, Integer> closedDays) 
+//	{
+//		if (closedDays == null)
+//			throw new IllegalArgumentException("The closed days hash map is null");
+//		
+//		this.closedDays = closedDays;
+//	}
 
 	public void setNumberOfChangingRooms(int numberOfChangingRooms) 
 	{
