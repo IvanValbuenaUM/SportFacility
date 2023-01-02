@@ -35,12 +35,12 @@ public class TimetableLogic {
     
     public TimetableModel getTimetable(String timetableId) 
     {
-        Optional<Timetable> t = repository.findById(timetableId);
+        Optional<Timetable> tim = repository.findById(timetableId);
         
-        if(t.isEmpty())
+        if(tim.isEmpty())
         	return null;
 
-        TimetableModel timetable = mapper.map(t.get(), TimetableModel.class);
+        TimetableModel timetable = mapper.map(tim.get(), TimetableModel.class);
 
         return timetable;
     }

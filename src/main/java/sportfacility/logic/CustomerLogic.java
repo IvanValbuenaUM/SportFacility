@@ -35,12 +35,12 @@ public class CustomerLogic {
     public CustomerModel getCustomer(int customerMembershipNumber) 
     {
 
-    	Optional<Customer> c = repository.findById(customerMembershipNumber);
+    	Optional<Customer> cust = repository.findById(customerMembershipNumber);
     	
-    	if(c.isEmpty())
+    	if(cust.isEmpty())
     		return null;
     	
-        CustomerModel customer = mapper.map(c.get(), CustomerModel.class);
+        CustomerModel customer = mapper.map(cust.get(), CustomerModel.class);
 
         return customer;
     }
