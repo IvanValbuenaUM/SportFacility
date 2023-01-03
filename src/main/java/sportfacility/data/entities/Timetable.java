@@ -123,10 +123,10 @@ public class Timetable {
 	public String toString() {
 		return "Reservation for " +
 				customer.getName() + " (id: " +  customer.getId() + "): " +
-				"Start -> " + startReservation +
-				"    End -> " + endReservation +
+				"Start -> " + startReservation.getTime() +
+				"    End -> " + endReservation.getTime() +
 				"    Number of People -> " + numberOfPeople +
 				"    Total price -> " + totalPrice +
-				"    Facility code -> " + facility;
+				"    Facility code -> " + facility.getFacilityCode();
 	}
 }

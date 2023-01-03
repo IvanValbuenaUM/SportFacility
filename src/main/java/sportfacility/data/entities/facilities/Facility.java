@@ -176,4 +176,8 @@ public class Facility {
 	public String AvailableString() {
 		return null;
 	}
+
+	public String serialize() {
+		return null;
+	}
 }

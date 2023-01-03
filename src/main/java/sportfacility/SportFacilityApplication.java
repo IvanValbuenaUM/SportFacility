@@ -1,6 +1,5 @@
 package sportfacility;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import sportfacility.logic.Menu;
@@ -15,7 +14,6 @@ public class SportFacilityApplication {
     public static void main(String[] args) {
     	
         //SpringApplication.run(SportFacilityApplication.class, args);
-        
         Menu m = new Menu();
         try {
             m.start();

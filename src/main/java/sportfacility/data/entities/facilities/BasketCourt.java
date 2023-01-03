@@ -37,13 +37,20 @@ public class BasketCourt extends Facility{
 
     @Override
     public String AvailableString() {
-        return "Basketball Court Nº1 (code: " + getFacilityCode() +
-                "    Capacity-> " + getMaxCapacity() +
+        return "Basketball Court (code: " + getFacilityCode() +
+                ")    Capacity-> " + getMaxCapacity() +
                 "    Price per hour-> " + getPricePerHour() +
                 "$    Number changing rooms-> " + getNumberOfChangingRooms() +
                 "    Number of flood lights-> " + getNumberOfFloodLights() +
                 "    Extra price for lights-> " + getExtraPriceForLightUse() +
                 "$    Basketballs available-> " + getNBasketballsRented() + "\n" +
-                "Timetable....";
+                "Available hours: " ;
+    }
+
+    @Override
+    public String serialize() {
+        return getFacilityCode() + "-" + getMaxCapacity() + "-" + getPricePerHour() + "-" + getNumberOfChangingRooms() + "-" + getNumberOfFloodLights() +
+                "-" + getExtraPriceForLightUse() + "-" + getNBasketballsRented() + "\n";
+
     }
 }
