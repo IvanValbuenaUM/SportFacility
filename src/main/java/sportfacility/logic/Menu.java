@@ -10,6 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Menu {
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private final int todayH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    private final int todayD = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    private final int todayM = Calendar.getInstance().get(Calendar.MONTH);
+    private final int todayY = Calendar.getInstance().get(Calendar.YEAR);
     private List<Customer> customerLinkedList;
     private List<Facility> facilitiesLinkedList;
     private List<Timetable> timetableLinkedList;
@@ -31,13 +36,12 @@ public class Menu {
     }
 
 
-
     private void MainMenu() {
         int c;
         boolean exit = false;
         while (!exit) {
             Scanner u = new Scanner(System.in);
-            System.out.println("What do you want to do?"+"\n"+"(1) Sign up"+"\n"+ "(2) Register"+"\n"+"(3) Exit");
+            System.out.println("What do you want to do?" + "\n" + "(1) Sign up" + "\n" + "(2) Register" + "\n" + "(3) Exit");
             try {
                 c = u.nextInt();
             } catch (InputMismatchException e) {
@@ -60,6 +64,7 @@ public class Menu {
             }
         }
     }
+
     private void SignUp() {
         System.out.println();
         System.out.println("Please introduce your customer information");
@@ -69,7 +74,7 @@ public class Menu {
         int mem = AskForValidMembershipNumber();
         boolean existed = false;
         Customer found = null;
-        for (Customer c: customerLinkedList) {
+        for (Customer c : customerLinkedList) {
             if (c.getId().equals(id) && c.getMembershipNumber() == mem) {
                 found = c;
                 existed = true;
@@ -80,6 +85,7 @@ public class Menu {
         else
             System.out.println("No customer with that information found!");
     }
+
     private void Register() {
         System.out.println("Thank you for choosing us!");
         System.out.println("Lets create your account!");
@@ -88,6 +94,7 @@ public class Menu {
         System.out.println("Thank you " + cus.getName() + " your membership number is " + cus.getMembershipNumber());
         System.out.println();
     }
+
     private void Exit() {
         try {
             SaveCustomers();
@@ -157,6 +164,7 @@ public class Menu {
         }
         return age;
     }
+
     private int AskForValidMembershipNumber() {
         int mem;
         while (true) {
@@ -197,6 +205,7 @@ public class Menu {
         }
         return n;
     }
+
     private void MemberMenu(Customer c) {
         System.out.println();
         System.out.println("Welcome back " + c.getName() + "!");
@@ -208,7 +217,7 @@ public class Menu {
             Scanner u = new Scanner(System.in);
             PrintOptionsMember();
             try {
-                i =u.nextInt();
+                i = u.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Please try to introduce a valid option");
                 continue;
@@ -231,24 +240,26 @@ public class Menu {
             }
         }
     }
+
     private void PrintOptionsMember() {
         System.out.println("(1) My reservations");
         System.out.println("(2) Make a reservation");
         System.out.println("(3) Exit");
     }
+
     private void SeeMyReservations(Customer c) {
         if (c.getReservations().isEmpty()) {
             System.out.println();
             System.out.println(c.getName() + ", you do not have any reservations yet");
-        }
-        else {
+        } else {
             System.out.println(c.getName() + ", your reservations are:");
-            for (Timetable t: c.getReservations()) {
+            for (Timetable t : c.getReservations()) {
                 System.out.println(t.toString());
             }
         }
         System.out.println();
     }
+
     private void MakeAReservation(Customer c) {
         System.out.println();
         System.out.println("Choose what kind of facility you want");
@@ -259,7 +270,7 @@ public class Menu {
             Scanner u = new Scanner(System.in);
             PrintOptionsFacility();
             try {
-                i =u.nextInt();
+                i = u.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Please try to introduce a valid option");
                 continue;
@@ -288,6 +299,7 @@ public class Menu {
             }
         }
     }
+
     private void PrintOptionsFacility() {
         System.out.println("(1) Basket Court");
         System.out.println("(2) Football Court");
@@ -295,26 +307,24 @@ public class Menu {
         System.out.println("(4) Tennis Court");
         System.out.println("(5) Exit");
     }
+
     private void ReserveBasketCourt(Customer c) {
         MakeTheReservationBasketCourts(c);
     }
+
     private void ReserveFootballCourt(Customer c) {
         MakeTheReservationFootballCourts(c);
     }
+
     private void MakeTheReservationBasketCourts(Customer theCustomer) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        int todayH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        int todayD = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int todayM = Calendar.getInstance().get(Calendar.MONTH);
-        int todayY = Calendar.getInstance().get(Calendar.YEAR);
-        System.out.println("Basketball Courts (" + todayD + "/" + (todayM+1) + "/" + todayY + "): ");
+        System.out.println("Basketball Courts (" + todayD + "/" + (todayM + 1) + "/" + todayY + "): ");
         System.out.println();
         List<BasketCourt> basketCourts = new LinkedList<>();
-        for (Facility f: facilitiesLinkedList) {
+        for (Facility f : facilitiesLinkedList) {
             if (f.getFacilityCode().charAt(0) == 'b')
                 basketCourts.add((BasketCourt) f);
         }
-        for (Facility f: basketCourts) {
+        for (Facility f : basketCourts) {
             System.out.print(f.AvailableString());
             ShowTimeTableGiven(f);
             System.out.println();
@@ -331,7 +341,7 @@ public class Menu {
                 }
             }
             Facility theFacility = null;
-            for (Facility f: facilitiesLinkedList) {
+            for (Facility f : facilitiesLinkedList) {
                 if (f.getFacilityCode().equals(code))
                     theFacility = f;
             }
@@ -354,14 +364,13 @@ public class Menu {
             } else if (hour % 2 != 0) {
                 System.out.println("Remember to introduce a even hour");
                 continue;
-            }
-            else if (hour < todayH) {
+            } else if (hour < todayH) {
                 System.out.println("This hour has already passed");
                 continue;
             }
             System.out.println();
             List<Integer> listHours = new LinkedList<>();
-            for (BasketCourt bc: basketCourts) {
+            for (BasketCourt bc : basketCourts) {
                 if (bc.getFacilityCode().equals(code)) {
                     for (Timetable tt : bc.getReservations()) {
                         listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
@@ -369,7 +378,7 @@ public class Menu {
                 }
             }
             boolean error = false;
-            for (Integer integer: listHours) {
+            for (Integer integer : listHours) {
                 if (integer == hour) {
                     error = true;
                     break;
@@ -381,66 +390,30 @@ public class Menu {
             }
             facilitiesLinkedList.removeIf(value -> value.getFacilityCode().charAt(0) == 'b');
             facilitiesLinkedList.addAll(basketCourts);
-            String todayStart;
-            String todayEnd;
-            if (todayD < 10) {
-                if (todayM < 9) {
-                    todayStart = "0" + todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = "0" + todayD + "/0" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-                else {
-                    todayStart = "0" + todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = "0" + todayD + "/" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-            } else {
-                if (todayM < 9) {
-                    todayStart = todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = todayD + "/0" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-                else {
-                    todayStart = todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = todayD + "/" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-            }
-            todayStart += ":00:00";
-            todayEnd += ":00:00";
-
-            Calendar calS = Calendar.getInstance();
-            Calendar calE = Calendar.getInstance();
-            try {
-                calS.setTime(dateFormat.parse(todayStart));
-                calE.setTime(dateFormat.parse(todayEnd));
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-
+            Calendar[] calendars = GetCalendars(hour);
             Timetable event;
             assert theFacility != null;
-            event = new Timetable(GetNonExistingTimetableNumber(), calS , calE, theCustomer, theFacility, theFacility.getMaxCapacity());
+            event = new Timetable(GetNonExistingTimetableNumber(), calendars[0], calendars[1], theCustomer, theFacility, theFacility.getMaxCapacity());
             timetableLinkedList.add(event);
-            for (Customer c: customerLinkedList) {
+            for (Customer c : customerLinkedList) {
                 c.addReservation(event);
                 break;
             }
-            System.out.println("The basketball court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + todayStart + " until " + todayEnd + "!");
+            System.out.println("The basketball court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
             break;
         }
     }
+
     private void MakeTheReservationFootballCourts(Customer theCustomer) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        int todayH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        int todayD = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int todayM = Calendar.getInstance().get(Calendar.MONTH);
-        int todayY = Calendar.getInstance().get(Calendar.YEAR);
-        System.out.println("Football Courts (" + todayD + "/" + (todayM+1) + "/" + todayY + "): ");
+        System.out.println("Football Courts (" + todayD + "/" + (todayM + 1) + "/" + todayY + "): ");
         System.out.println();
         List<FootballCourt> footballCourts = new LinkedList<>();
-        for (Facility f: facilitiesLinkedList) {
+        for (Facility f : facilitiesLinkedList) {
             if (f.getFacilityCode().charAt(0) == 'f')
                 footballCourts.add((FootballCourt) f);
         }
-        for (Facility f: footballCourts) {
+        for (Facility f : footballCourts) {
             System.out.print(f.AvailableString());
             ShowTimeTableGiven(f);
             System.out.println();
@@ -457,7 +430,7 @@ public class Menu {
                 }
             }
             Facility theFacility = null;
-            for (Facility f: facilitiesLinkedList) {
+            for (Facility f : facilitiesLinkedList) {
                 if (f.getFacilityCode().equals(code))
                     theFacility = f;
             }
@@ -480,14 +453,13 @@ public class Menu {
             } else if (hour % 2 != 0) {
                 System.out.println("Remember to introduce a even hour");
                 continue;
-            }
-            else if (hour < todayH) {
+            } else if (hour < todayH) {
                 System.out.println("This hour has already passed");
                 continue;
             }
             System.out.println();
             List<Integer> listHours = new LinkedList<>();
-            for (FootballCourt bc: footballCourts) {
+            for (FootballCourt bc : footballCourts) {
                 if (bc.getFacilityCode().equals(code)) {
                     for (Timetable tt : bc.getReservations()) {
                         listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
@@ -495,7 +467,7 @@ public class Menu {
                 }
             }
             boolean error = false;
-            for (Integer integer: listHours) {
+            for (Integer integer : listHours) {
                 if (integer == hour) {
                     error = true;
                     break;
@@ -507,66 +479,30 @@ public class Menu {
             }
             facilitiesLinkedList.removeIf(value -> value.getFacilityCode().charAt(0) == 'f');
             facilitiesLinkedList.addAll(footballCourts);
-            String todayStart;
-            String todayEnd;
-            if (todayD < 10) {
-                if (todayM < 9) {
-                    todayStart = "0" + todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = "0" + todayD + "/0" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-                else {
-                    todayStart = "0" + todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = "0" + todayD + "/" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-            } else {
-                if (todayM < 9) {
-                    todayStart = todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = todayD + "/0" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-                else {
-                    todayStart = todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = todayD + "/" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-            }
-            todayStart += ":00:00";
-            todayEnd += ":00:00";
-
-            Calendar calS = Calendar.getInstance();
-            Calendar calE = Calendar.getInstance();
-            try {
-                calS.setTime(dateFormat.parse(todayStart));
-                calE.setTime(dateFormat.parse(todayEnd));
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-
+            Calendar[] calendars = GetCalendars(hour);
             Timetable event;
             assert theFacility != null;
-            event = new Timetable(GetNonExistingTimetableNumber(), calS , calE, theCustomer, theFacility, theFacility.getMaxCapacity());
+            event = new Timetable(GetNonExistingTimetableNumber(), calendars[0], calendars[1], theCustomer, theFacility, theFacility.getMaxCapacity());
             timetableLinkedList.add(event);
-            for (Customer c: customerLinkedList) {
+            for (Customer c : customerLinkedList) {
                 c.addReservation(event);
                 break;
             }
-            System.out.println("The football court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + todayStart + " until " + todayEnd + "!");
+            System.out.println("The football court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
             break;
         }
     }
+
     private void ReservePadelCourt(Customer theCustomer) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        int todayH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        int todayD = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int todayM = Calendar.getInstance().get(Calendar.MONTH);
-        int todayY = Calendar.getInstance().get(Calendar.YEAR);
-        System.out.println("Padel Courts (" + todayD + "/" + (todayM+1) + "/" + todayY + "): ");
+        System.out.println("Padel Courts (" + todayD + "/" + (todayM + 1) + "/" + todayY + "): ");
         System.out.println();
         List<PadelCourt> padelCourts = new LinkedList<>();
-        for (Facility f: facilitiesLinkedList) {
+        for (Facility f : facilitiesLinkedList) {
             if (f.getFacilityCode().charAt(0) == 'p')
                 padelCourts.add((PadelCourt) f);
         }
-        for (Facility f: padelCourts) {
+        for (Facility f : padelCourts) {
             System.out.print(f.AvailableString());
             ShowTimeTableGiven(f);
             System.out.println();
@@ -583,7 +519,7 @@ public class Menu {
                 }
             }
             Facility theFacility = null;
-            for (Facility f: facilitiesLinkedList) {
+            for (Facility f : facilitiesLinkedList) {
                 if (f.getFacilityCode().equals(code))
                     theFacility = f;
             }
@@ -606,14 +542,13 @@ public class Menu {
             } else if (hour % 2 != 0) {
                 System.out.println("Remember to introduce a even hour");
                 continue;
-            }
-            else if (hour < todayH) {
+            } else if (hour < todayH) {
                 System.out.println("This hour has already passed");
                 continue;
             }
             System.out.println();
             List<Integer> listHours = new LinkedList<>();
-            for (PadelCourt bc: padelCourts) {
+            for (PadelCourt bc : padelCourts) {
                 if (bc.getFacilityCode().equals(code)) {
                     for (Timetable tt : bc.getReservations()) {
                         listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
@@ -621,7 +556,7 @@ public class Menu {
                 }
             }
             boolean error = false;
-            for (Integer integer: listHours) {
+            for (Integer integer : listHours) {
                 if (integer == hour) {
                     error = true;
                     break;
@@ -633,66 +568,30 @@ public class Menu {
             }
             facilitiesLinkedList.removeIf(value -> value.getFacilityCode().charAt(0) == 'p');
             facilitiesLinkedList.addAll(padelCourts);
-            String todayStart;
-            String todayEnd;
-            if (todayD < 10) {
-                if (todayM < 9) {
-                    todayStart = "0" + todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = "0" + todayD + "/0" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-                else {
-                    todayStart = "0" + todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = "0" + todayD + "/" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-            } else {
-                if (todayM < 9) {
-                    todayStart = todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = todayD + "/0" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-                else {
-                    todayStart = todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = todayD + "/" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-            }
-            todayStart += ":00:00";
-            todayEnd += ":00:00";
-
-            Calendar calS = Calendar.getInstance();
-            Calendar calE = Calendar.getInstance();
-            try {
-                calS.setTime(dateFormat.parse(todayStart));
-                calE.setTime(dateFormat.parse(todayEnd));
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-
+            Calendar[] calendars = GetCalendars(hour);
             Timetable event;
             assert theFacility != null;
-            event = new Timetable(GetNonExistingTimetableNumber(), calS , calE, theCustomer, theFacility, theFacility.getMaxCapacity());
+            event = new Timetable(GetNonExistingTimetableNumber(), calendars[0], calendars[1], theCustomer, theFacility, theFacility.getMaxCapacity());
             timetableLinkedList.add(event);
-            for (Customer c: customerLinkedList) {
+            for (Customer c : customerLinkedList) {
                 c.addReservation(event);
                 break;
             }
-            System.out.println("The padel court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + todayStart + " until " + todayEnd + "!");
+            System.out.println("The padel court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
             break;
         }
     }
+
     private void ReserveTennisCourt(Customer theCustomer) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        int todayH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        int todayD = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int todayM = Calendar.getInstance().get(Calendar.MONTH);
-        int todayY = Calendar.getInstance().get(Calendar.YEAR);
-        System.out.println("Tennis Courts (" + todayD + "/" + (todayM+1) + "/" + todayY + "): ");
+        System.out.println("Tennis Courts (" + todayD + "/" + (todayM + 1) + "/" + todayY + "): ");
         System.out.println();
         List<TennisCourt> TennisCourts = new LinkedList<>();
-        for (Facility f: facilitiesLinkedList) {
+        for (Facility f : facilitiesLinkedList) {
             if (f.getFacilityCode().charAt(0) == 't')
                 TennisCourts.add((TennisCourt) f);
         }
-        for (Facility f: TennisCourts) {
+        for (Facility f : TennisCourts) {
             System.out.print(f.AvailableString());
             ShowTimeTableGiven(f);
             System.out.println();
@@ -709,7 +608,7 @@ public class Menu {
                 }
             }
             Facility theFacility = null;
-            for (Facility f: facilitiesLinkedList) {
+            for (Facility f : facilitiesLinkedList) {
                 if (f.getFacilityCode().equals(code))
                     theFacility = f;
             }
@@ -732,14 +631,13 @@ public class Menu {
             } else if (hour % 2 != 0) {
                 System.out.println("Remember to introduce a even hour");
                 continue;
-            }
-            else if (hour < todayH) {
+            } else if (hour < todayH) {
                 System.out.println("This hour has already passed");
                 continue;
             }
             System.out.println();
             List<Integer> listHours = new LinkedList<>();
-            for (TennisCourt bc: TennisCourts) {
+            for (TennisCourt bc : TennisCourts) {
                 if (bc.getFacilityCode().equals(code)) {
                     for (Timetable tt : bc.getReservations()) {
                         listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
@@ -747,7 +645,7 @@ public class Menu {
                 }
             }
             boolean error = false;
-            for (Integer integer: listHours) {
+            for (Integer integer : listHours) {
                 if (integer == hour) {
                     error = true;
                     break;
@@ -759,52 +657,58 @@ public class Menu {
             }
             facilitiesLinkedList.removeIf(value -> value.getFacilityCode().charAt(0) == 'p');
             facilitiesLinkedList.addAll(TennisCourts);
-            String todayStart;
-            String todayEnd;
-            if (todayD < 10) {
-                if (todayM < 9) {
-                    todayStart = "0" + todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = "0" + todayD + "/0" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-                else {
-                    todayStart = "0" + todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = "0" + todayD + "/" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-            } else {
-                if (todayM < 9) {
-                    todayStart = todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = todayD + "/0" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-                else {
-                    todayStart = todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
-                    todayEnd = todayD + "/" + (todayM+1) + "/" + todayY + " " + (hour+2);
-                }
-            }
-            todayStart += ":00:00";
-            todayEnd += ":00:00";
-
-            Calendar calS = Calendar.getInstance();
-            Calendar calE = Calendar.getInstance();
-            try {
-                calS.setTime(dateFormat.parse(todayStart));
-                calE.setTime(dateFormat.parse(todayEnd));
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-
+            Calendar[] calendars = GetCalendars(hour);
             Timetable event;
             assert theFacility != null;
-            event = new Timetable(GetNonExistingTimetableNumber(), calS , calE, theCustomer, theFacility, theFacility.getMaxCapacity());
+            event = new Timetable(GetNonExistingTimetableNumber(), calendars[0], calendars[1], theCustomer, theFacility, theFacility.getMaxCapacity());
             timetableLinkedList.add(event);
-            for (Customer c: customerLinkedList) {
+            for (Customer c : customerLinkedList) {
                 c.addReservation(event);
                 break;
             }
-            System.out.println("The tennis court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + todayStart + " until " + todayEnd + "!");
+            System.out.println("The tennis court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
             break;
         }
     }
+
+    private Calendar[] GetCalendars(int hour) {
+        Calendar[] aux = new Calendar[2];
+        String todayStart;
+        String todayEnd;
+        if (todayD < 10) {
+            if (todayM < 9) {
+                todayStart = "0" + todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
+                todayEnd = "0" + todayD + "/0" + (todayM + 1) + "/" + todayY + " " + (hour + 2);
+            } else {
+                todayStart = "0" + todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
+                todayEnd = "0" + todayD + "/" + (todayM + 1) + "/" + todayY + " " + (hour + 2);
+            }
+        } else {
+            if (todayM < 9) {
+                todayStart = todayD + "/0" + (todayM + 1) + "/" + todayY + " " + hour;
+                todayEnd = todayD + "/0" + (todayM + 1) + "/" + todayY + " " + (hour + 2);
+            } else {
+                todayStart = todayD + "/" + (todayM + 1) + "/" + todayY + " " + hour;
+                todayEnd = todayD + "/" + (todayM + 1) + "/" + todayY + " " + (hour + 2);
+            }
+        }
+        todayStart += ":00:00";
+        todayEnd += ":00:00";
+
+        Calendar calS = Calendar.getInstance();
+        Calendar calE = Calendar.getInstance();
+        try {
+            calS.setTime(dateFormat.parse(todayStart));
+            calE.setTime(dateFormat.parse(todayEnd));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        aux[0] = calS;
+        aux[1] = calE;
+        return aux;
+    }
+
     private String GetNonExistingTimetableNumber() {
         Random r;
         boolean found = false;
@@ -814,7 +718,7 @@ public class Menu {
             r = new Random();
             n = r.nextInt(100);
             for (Timetable t : timetableLinkedList) {
-                if (Integer.parseInt(t.getId().substring(2,4)) == n) {
+                if (Integer.parseInt(t.getId().substring(2, 4)) == n) {
                     found = false;
                     break;
                 }
@@ -822,22 +726,24 @@ public class Menu {
         }
         return "tt" + n;
     }
+
     private void ShowTimeTableGiven(Facility f) {
         List<Integer> listHours = new LinkedList<>();
         for (int i = 8; i < 19; i = i + 2) {
             listHours.add(i);
         }
-        for (Timetable t: timetableLinkedList) {
+        for (Timetable t : timetableLinkedList) {
             if (f.getFacilityCode().equals(t.getFacility().getFacilityCode()))
-                listHours.remove((Object)t.getStartReservation().get(Calendar.HOUR_OF_DAY));
+                listHours.remove((Object) t.getStartReservation().get(Calendar.HOUR_OF_DAY));
         }
-        for (Integer i: listHours) {
+        for (Integer i : listHours) {
             System.out.print("   ");
             System.out.print(i + ":" + "00"
-                    + " -> " + (i+2) + ":" + "00");
+                    + " -> " + (i + 2) + ":" + "00");
         }
         System.out.println();
     }
+
     private void LoadCustomers() throws FileNotFoundException {
         Scanner input = new Scanner(new File("src/main/java/sportfacility/data/files/Customers"));
 
@@ -854,6 +760,7 @@ public class Menu {
         }
         input.close();
     }
+
     private void LoadFacilities() throws FileNotFoundException {
         Scanner input = new Scanner(new File("src/main/java/sportfacility/data/files/Facilities"));
 
@@ -885,6 +792,7 @@ public class Menu {
         }
         input.close();
     }
+
     private void LoadTimetables() throws FileNotFoundException, ParseException {
         Scanner input = new Scanner(new File("src/main/java/sportfacility/data/files/Timetables"));
 
@@ -898,13 +806,13 @@ public class Menu {
             calEnd.setTime(sdf.parse(line[2]));
             String codeC = line[3];
             Customer customer = null;
-            for (Customer c: customerLinkedList) {
+            for (Customer c : customerLinkedList) {
                 if (c.getMembershipNumber() == Integer.parseInt(codeC))
                     customer = c;
             }
             String codeF = line[4];
             Facility facility = null;
-            for (Facility f: facilitiesLinkedList) {
+            for (Facility f : facilitiesLinkedList) {
                 if (f.getFacilityCode().equals(codeF))
                     facility = f;
             }
@@ -912,7 +820,7 @@ public class Menu {
 
             Timetable timetable = new Timetable(codeT, calStart, calEnd, customer, facility, nPeople);
             timetableLinkedList.add(timetable);
-            for (Customer c: customerLinkedList) {
+            for (Customer c : customerLinkedList) {
                 assert customer != null;
                 if (c.getMembershipNumber() == customer.getMembershipNumber())
                     c.addReservation(timetable);
@@ -920,11 +828,12 @@ public class Menu {
         }
         input.close();
     }
+
     private void SaveCustomers() throws IOException {
         File myObj = new File("src/main/java/sportfacility/data/files/Customers");
 
         StringBuilder str = new StringBuilder();
-        for (Customer c: customerLinkedList) {
+        for (Customer c : customerLinkedList) {
             str.append(c.getName()).append("-").append(c.getSurname()).append("-").append(c.getAge()).append("-").append(c.getId()).append("-").append(c.getMembershipNumber()).append("\n");
         }
         BufferedWriter writer = new BufferedWriter(new FileWriter(myObj));
@@ -932,12 +841,13 @@ public class Menu {
 
         writer.close();
     }
+
     private void SaveTimetables() throws IOException {
         File myObj = new File("src/main/java/sportfacility/data/files/Timetables");
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
         StringBuilder str = new StringBuilder();
-        for (Timetable t: timetableLinkedList) {
+        for (Timetable t : timetableLinkedList) {
             String start = dateFormat.format(t.getStartReservation().getTime());
             String end = dateFormat.format(t.getEndReservation().getTime());
             str.append(t.getId()).append("-").append(start).append("-").append(end).append("-").append(t.getCustomer().getMembershipNumber()).append("-").append(t.getFacility().getFacilityCode()).append("-").append(t.getFacility().getMaxCapacity()).append("\n");
@@ -947,11 +857,12 @@ public class Menu {
 
         writer.close();
     }
+
     private void SaveFacilities() throws IOException {
         File myObj = new File("src/main/java/sportfacility/data/files/Facilities");
 
         StringBuilder str = new StringBuilder();
-        for (Facility f: facilitiesLinkedList) {
+        for (Facility f : facilitiesLinkedList) {
             str.append(f.serialize());
         }
         BufferedWriter writer = new BufferedWriter(new FileWriter(myObj));

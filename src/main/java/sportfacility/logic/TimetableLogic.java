@@ -17,76 +17,67 @@ import sportfacility.logic.suscriber.TimetableObserver;
 @Service
 public class TimetableLogic {
 
-	@Autowired
-    private TimetableRepository repository; 
+    @Autowired
+    private TimetableRepository repository;
 
     @Autowired
     private ModelMapper mapper;
-    
+
     @Autowired
     private TimetableObserver observer;
-    
-    public String addTimetable(TimetableModel timetable) 
-    {
+
+    public String addTimetable(TimetableModel timetable) {
         Timetable timetableEntity = mapper.map(timetable, Timetable.class);
         timetableEntity = repository.save(timetableEntity);
         return timetableEntity.getId();
     }
-    
-    public TimetableModel getTimetable(String timetableId) 
-    {
+
+    public TimetableModel getTimetable(String timetableId) {
         Optional<Timetable> tim = repository.findById(timetableId);
-        
+
         try {
-        	tim.get();
+            tim.get();
         } catch (Exception e) {
-        	return null;
+            return null;
         }
 
         TimetableModel timetable = mapper.map(tim.get(), TimetableModel.class);
 
         return timetable;
     }
-    
-    public List<TimetableModel> getAllTimetables(String parameterToSort) 
-    {
-    	List<TimetableModel> allTimetables = new LinkedList<>();
-    	
-    	if (parameterToSort == null)
-    	{
-    		for (Timetable t : repository.findAll())
-    		{
-    			allTimetables.add(mapper.map(t, TimetableModel.class));
-    		}
-    		
-    		return allTimetables;
-    	}
-    	for (Timetable t : repository.findAll(Sort.by(Sort.Direction.ASC, parameterToSort)))
-    	{
-    		allTimetables.add(mapper.map(t, TimetableModel.class));
-		}
-		
-		return allTimetables;
+
+    public List<TimetableModel> getAllTimetables(String parameterToSort) {
+        List<TimetableModel> allTimetables = new LinkedList<>();
+
+        if (parameterToSort == null) {
+            for (Timetable t : repository.findAll()) {
+                allTimetables.add(mapper.map(t, TimetableModel.class));
+            }
+
+            return allTimetables;
+        }
+        for (Timetable t : repository.findAll(Sort.by(Sort.Direction.ASC, parameterToSort))) {
+            allTimetables.add(mapper.map(t, TimetableModel.class));
+        }
+
+        return allTimetables;
     }
-    
-    public boolean deleteTimetable(String timetableId) 
-    {
+
+    public boolean deleteTimetable(String timetableId) {
 
         repository.deleteById(timetableId);
-        
-        if(!observer.informDelete(timetableId))
-        	return false;
-        
+
+        if (!observer.informDelete(timetableId))
+            return false;
+
         return true;
     }
-    
-    public boolean updateTimetable(TimetableModel timetableModel) 
-    {
 
-        if (repository.existsById(timetableModel.getId()))
-        {
-        	repository.save(mapper.map(timetableModel, Timetable.class));
-        	return true;
+    public boolean updateTimetable(TimetableModel timetableModel) {
+
+        if (repository.existsById(timetableModel.getId())) {
+            repository.save(mapper.map(timetableModel, Timetable.class));
+            return true;
         }
         return false;
     }
