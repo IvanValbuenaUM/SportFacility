@@ -38,7 +38,7 @@ public class FootballCourt extends Facility{
     }
     @Override
     public String AvailableString() {
-        return "Basketball Court (code: " + getFacilityCode() +
+        return "Football Court (code: " + getFacilityCode() +
                 ")    Capacity-> " + getMaxCapacity() +
                 "    Price per hour-> " + getPricePerHour() +
                 "$    Number changing rooms-> " + getNumberOfChangingRooms() +

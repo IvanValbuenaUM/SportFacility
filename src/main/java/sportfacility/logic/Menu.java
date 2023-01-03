@@ -242,7 +242,7 @@ public class Menu {
             System.out.println(c.getName() + ", you do not have any reservations yet");
         }
         else {
-            System.out.println("Miguel, your reservations are:");
+            System.out.println(c.getName() + ", your reservations are:");
             for (Timetable t: c.getReservations()) {
                 System.out.println(t.toString());
             }
