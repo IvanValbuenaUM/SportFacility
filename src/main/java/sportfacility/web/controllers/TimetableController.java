@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +19,10 @@ import sportfacility.logic.TimetableLogic;
 import sportfacility.logic.model.TimetableModel;
 import sportfacility.web.controllers.requests.timetable.SubmitTimetableRequest;
 import sportfacility.web.controllers.requests.timetable.UpdateTimetableRequest;
-import sportfacility.web.controllers.responses.timetable.DeleteTimetableResponse;
 import sportfacility.web.controllers.responses.timetable.GetTimetableResponse;
 import sportfacility.web.controllers.responses.timetable.SubmitTimetableResponse;
-import sportfacility.web.controllers.responses.timetable.UpdateTimetableResponse;
 
-
+@Service
 public class TimetableController {
 
 	@Autowired
@@ -68,7 +67,7 @@ public class TimetableController {
     }
     
     @DeleteMapping(value = "delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DeleteTimetableResponse> delete(@RequestParam String timetableId) 
+    public ResponseEntity<?> delete(@RequestParam String timetableId) 
     {
         if (!timetableLogic.deleteTimetable(timetableId))
         	return ResponseEntity.notFound().build();
@@ -77,7 +76,7 @@ public class TimetableController {
     }
 
     @PutMapping(value = "update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UpdateTimetableResponse> update(@RequestBody UpdateTimetableRequest request) 
+    public ResponseEntity<?> update(@RequestBody UpdateTimetableRequest request) 
     {
         if (!timetableLogic.updateTimetable(mapper.map(request, TimetableModel.class))) {
             return ResponseEntity.notFound().build();

@@ -9,34 +9,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @ExtendWith(SpringExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
-public abstract class ControllerTest {
+public abstract class LogicTest {
 	
     protected final WebApplicationContext webApplicationContext;
     protected MockMvc mockMvc;
 
-    public ControllerTest(WebApplicationContext webApplicationContext) {
+    public LogicTest(WebApplicationContext webApplicationContext) {
         this.webApplicationContext = webApplicationContext;
-    }
-
-    public static String toJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public static <T> T fromJsonString(final String content, Class<T> valueType) {
-        try {
-            return new ObjectMapper().readValue(content, valueType);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @BeforeAll

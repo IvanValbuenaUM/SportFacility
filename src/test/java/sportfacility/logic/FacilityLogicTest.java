@@ -18,7 +18,7 @@ import org.springframework.web.context.WebApplicationContext;
 import sportfacility.data.repositories.FacilityRepository;
 import sportfacility.logic.model.facilities.FacilityModel;
 
-public class FacilityLogicTest extends ControllerTest{
+public class FacilityLogicTest extends LogicTest{
 
 	@SuppressWarnings("deprecation")
 	@Rule

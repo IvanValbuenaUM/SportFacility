@@ -21,7 +21,7 @@ import sportfacility.logic.model.CustomerModel;
 import sportfacility.logic.model.TimetableModel;
 import sportfacility.logic.model.facilities.FacilityModel;
 
-public class TimetableLogicTest extends ControllerTest {
+public class TimetableLogicTest extends LogicTest {
 
 	@SuppressWarnings("deprecation")
 	@Rule

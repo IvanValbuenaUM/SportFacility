@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +19,10 @@ import sportfacility.logic.FacilityLogic;
 import sportfacility.logic.model.facilities.FacilityModel;
 import sportfacility.web.controllers.requests.facility.SubmitFacilityRequest;
 import sportfacility.web.controllers.requests.facility.UpdateFacilityRequest;
-import sportfacility.web.controllers.responses.facility.DeleteFacilityResponse;
 import sportfacility.web.controllers.responses.facility.GetFacilityResponse;
 import sportfacility.web.controllers.responses.facility.SubmitFacilityResponse;
-import sportfacility.web.controllers.responses.facility.UpdateFacilityResponse;
 
+@Service
 public class FacilityController {
 
 	@Autowired
@@ -36,9 +36,9 @@ public class FacilityController {
     {
     	FacilityModel facilitySubmission = mapper.map(request, FacilityModel.class);
         
-        String facilityId = facilityLogic.addFacility(facilitySubmission);
+        String facilityCode = facilityLogic.addFacility(facilitySubmission);
 
-        return ResponseEntity.ok(new SubmitFacilityResponse(facilityId));
+        return ResponseEntity.ok(new SubmitFacilityResponse(facilityCode));
     }
     
     @GetMapping(value = "get", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -67,7 +67,7 @@ public class FacilityController {
     }
     
     @DeleteMapping(value = "delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DeleteFacilityResponse> delete(@RequestParam String facilityId) 
+    public ResponseEntity<?> delete(@RequestParam String facilityId) 
     {
         if (!facilityLogic.deleteFacility(facilityId))
         	return ResponseEntity.notFound().build();
@@ -76,7 +76,7 @@ public class FacilityController {
     }
 
     @PutMapping(value = "update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UpdateFacilityResponse> update(@RequestBody UpdateFacilityRequest request) 
+    public ResponseEntity<?> update(@RequestBody UpdateFacilityRequest request) 
     {
         if (!facilityLogic.updateFacility(mapper.map(request, FacilityModel.class))) {
             return ResponseEntity.notFound().build();

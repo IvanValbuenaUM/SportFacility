@@ -7,24 +7,22 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import sportfacility.logic.CustomerLogic;
 import sportfacility.logic.model.CustomerModel;
 import sportfacility.web.controllers.requests.customer.SubmitCustomerRequest;
 import sportfacility.web.controllers.requests.customer.UpdateCustomerRequest;
-import sportfacility.web.controllers.responses.customer.DeleteCustomerResponse;
 import sportfacility.web.controllers.responses.customer.GetCustomerResponse;
 import sportfacility.web.controllers.responses.customer.SubmitCustomerResponse;
-import sportfacility.web.controllers.responses.customer.UpdateCustomerResponse;
 
-@RestController
+@Service
 public class CustomerController {
 	
 	@Autowired
@@ -38,9 +36,9 @@ public class CustomerController {
     {
         CustomerModel customerSubmission = mapper.map(request, CustomerModel.class);
         
-        int customerId = customerLogic.addCustomer(customerSubmission);
+        int membershipNumber = customerLogic.addCustomer(customerSubmission);
 
-        return ResponseEntity.ok(new SubmitCustomerResponse(customerId));
+        return ResponseEntity.ok(new SubmitCustomerResponse(membershipNumber));
     }
     
     @GetMapping(value = "get", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -69,7 +67,7 @@ public class CustomerController {
     }
     
     @DeleteMapping(value = "delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<DeleteCustomerResponse> delete(@RequestParam int customerMembershipNumber) 
+    public ResponseEntity<?> delete(@RequestParam int customerMembershipNumber) 
     {
         if (!customerLogic.deleteCustomer(customerMembershipNumber))
         	return ResponseEntity.notFound().build();
@@ -78,7 +76,7 @@ public class CustomerController {
     }
 
     @PutMapping(value = "update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UpdateCustomerResponse> update(@RequestBody UpdateCustomerRequest request) 
+    public ResponseEntity<?> update(@RequestBody UpdateCustomerRequest request) 
     {
         if (!customerLogic.updateCustomer(mapper.map(request, CustomerModel.class))) {
             return ResponseEntity.notFound().build();
