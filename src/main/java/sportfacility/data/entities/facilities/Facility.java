@@ -10,13 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Facility {
+public class Facility implements FacilityFacade{
 
 	@Id
 	private String facilityCode;
 	private int maxCapacity;
 	private int pricePerHour;
-//	private HashMap<Days, Integer> closedDays;
 	private int numberOfChangingRooms;
 	private int numberOfFloodLights;
 	private int extraPriceForLightUse;
@@ -35,47 +34,48 @@ public class Facility {
 		this.setFacilityCode(facilityCode);
 		this.setMaxCapacity(maxCapacity);
 		this.setPricePerHour(pricePerHour);
-//		this.setClosedDays(closedDays);
 		this.setNumberOfChangingRooms(numberOfChangingRooms);
 		this.setNumberOfFloodLights(numberOfFloodLights);
 		this.setExtraPriceForLightUse(extraPriceForLightUse);
 	}
 	
+	@Override
 	public String getFacilityCode() 
 	{
 		return facilityCode;
 	}
 	
+	@Override
 	public int getMaxCapacity() 
 	{
 		return maxCapacity;
 	}
 	
+	@Override
 	public int getPricePerHour() 
 	{
 		return pricePerHour;
 	}
 	
-//	public HashMap<Days, Integer> getClosedDays() 
-//	{
-//		return closedDays;
-//	}
-	
+	@Override
 	public int getNumberOfChangingRooms() {
 		
 		return numberOfChangingRooms;
 	}
 	
+	@Override
 	public int getNumberOfFloodLights() 
 	{
 		return numberOfFloodLights;
 	}
 	
+	@Override
 	public int getExtraPriceForLightUse() 
 	{
 		return extraPriceForLightUse;
 	}
 	
+	@Override
 	public void setFacilityCode(String facilityCode) 
 	{
 		if (facilityCode == null || facilityCode.trim().isEmpty())
@@ -96,6 +96,7 @@ public class Facility {
 		this.facilityCode = facilityCode;
 	}
 
+	@Override
 	public void setMaxCapacity(int maxCapacity) 
 	{
 		if (maxCapacity <= 0)
@@ -104,6 +105,7 @@ public class Facility {
 		this.maxCapacity = maxCapacity;
 	}
 
+	@Override
 	public void setPricePerHour(int pricePerHour) 
 	{
 		if (pricePerHour < 0)
@@ -112,14 +114,7 @@ public class Facility {
 		this.pricePerHour = pricePerHour;
 	}
 
-//	public void setClosedDays(HashMap<Days, Integer> closedDays) 
-//	{
-//		if (closedDays == null)
-//			throw new IllegalArgumentException("The closed days hash map is null");
-//		
-//		this.closedDays = closedDays;
-//	}
-
+	@Override
 	public void setNumberOfChangingRooms(int numberOfChangingRooms) 
 	{
 		if (numberOfChangingRooms < 0)
@@ -128,6 +123,7 @@ public class Facility {
 		this.numberOfChangingRooms = numberOfChangingRooms;
 	}
 
+	@Override
 	public void setNumberOfFloodLights(int numberOfFloodLights) 
 	{
 		
@@ -137,6 +133,7 @@ public class Facility {
 		this.numberOfFloodLights = numberOfFloodLights;
 	}
 
+	@Override
 	public void setExtraPriceForLightUse(int extraPriceForLightUse) 
 	{
 		if (extraPriceForLightUse < 0)
@@ -145,6 +142,7 @@ public class Facility {
 		this.extraPriceForLightUse = extraPriceForLightUse;
 	}
 	
+	@Override
 	public void addReservation(Timetable t)
 	{
 		if (t == null)
@@ -169,6 +167,7 @@ public class Facility {
 		return false;
 	}
 	
+	@Override
 	public List<Timetable> getReservations() {
 		return reservations;
 	}

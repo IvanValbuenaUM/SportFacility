@@ -4,32 +4,32 @@ package sportfacility.data.entities.facilities;
 import javax.persistence.Entity;
 
 @Entity
-public class TennisCourt extends Facility{
+public class TennisCourt extends Facility implements FacilityRacketFacade{
     private int nTennisRacquetsRented;
     private int nTennisBallsRented;
 
     public TennisCourt(String facilityCode, int maxCapacity, int pricePerHour, int numberOfChangingRooms, int numberOfFloodLights,
                        int extraPriceForLightUse, int nRacquetsRented, int nTennisBallsRented) {
         super(facilityCode, maxCapacity, pricePerHour, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
-        setNTennisRacquetsRented(nRacquetsRented);
-        setNTennisBallsRented(nTennisBallsRented);
+        setNRacketsRented(nRacquetsRented);
+        setNBallsRented(nTennisBallsRented);
     }
 
-    public int getNTennisRacquetsRented() {
+    public int getNRacketsRented() {
         return nTennisRacquetsRented;
     }
 
-    public void setNTennisRacquetsRented(int nRacquetsRented) {
+    public void setNRacketsRented(int nRacquetsRented) {
         if(nRacquetsRented < 0 || nRacquetsRented > 4)
             throw new IllegalArgumentException("The number of rented racquets cannot be over 4 or under 0");
         this.nTennisRacquetsRented = nRacquetsRented;
     }
 
-    public int getNTennisBallsRented() {
+    public int getNBallsRented() {
         return nTennisBallsRented;
     }
 
-    public void setNTennisBallsRented(int nTennisBallsRented) {
+    public void setNBallsRented(int nTennisBallsRented) {
         if(nTennisBallsRented < 0 || nTennisBallsRented > 10)
             throw new IllegalArgumentException("The number of rented tennis balls cannot be over 10 or under 0");
         this.nTennisBallsRented = nTennisBallsRented;
@@ -38,8 +38,8 @@ public class TennisCourt extends Facility{
     @Override
     public String toString() {
         return "TennisCourt{" +
-                "NTennisRacquetsRented=" + getNTennisRacquetsRented() +
-                ", NTennisBallsRented=" + getNTennisBallsRented() +
+                "NTennisRacquetsRented=" + getNRacketsRented() +
+                ", NTennisBallsRented=" + getNBallsRented() +
                 ", facilityCode='" + getFacilityCode() + '\'' +
                 ", maxCapacity=" + getMaxCapacity() +
                 ", pricePerHour=" + getPricePerHour() +
@@ -57,14 +57,14 @@ public class TennisCourt extends Facility{
                 "$    Number changing rooms-> " + getNumberOfChangingRooms() +
                 "    Number of flood lights-> " + getNumberOfFloodLights() +
                 "    Extra price for lights-> " + getExtraPriceForLightUse() +
-                "$    Tennis racquets available-> " + getNTennisRacquetsRented() +
-                "    Tennis available available-> " + getNTennisBallsRented() +"\n" +
+                "$    Tennis racquets available-> " + getNRacketsRented() +
+                "    Tennis balls available-> " + getNBallsRented() +"\n" +
                 "Available hours: " ;
     }
     @Override
     public String serialize() {
         return getFacilityCode() + "-" + getMaxCapacity() + "-" + getPricePerHour() + "-" + getNumberOfChangingRooms() + "-" + getNumberOfFloodLights() +
-                "-" + getExtraPriceForLightUse() + "-" + getNTennisRacquetsRented() + "-" + getNTennisBallsRented() + "\n";
+                "-" + getExtraPriceForLightUse() + "-" + getNRacketsRented() + "-" + getNBallsRented() + "\n";
 
     }
 }

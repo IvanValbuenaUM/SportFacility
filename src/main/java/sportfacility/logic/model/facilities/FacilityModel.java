@@ -10,7 +10,6 @@ public class FacilityModel {
 	private String facilityCode;
 	private int maxCapacity;
 	private int pricePerHour;
-//	private HashMap<Days, Integer> closedDays;
 	private int numberOfChangingRooms;
 	private int numberOfFloodLights;
 	private int extraPriceForLightUse;
@@ -28,7 +27,6 @@ public class FacilityModel {
 		this.setFacilityCode(facilityCode);
 		this.setMaxCapacity(maxCapacity);
 		this.setPricePerHour(pricePerHour);
-//		this.setClosedDays(closedDays2);
 		this.setNumberOfChangingRooms(numberOfChangingRooms);
 		this.setNumberOfFloodLights(numberOfFloodLights);
 		this.setExtraPriceForLightUse(extraPriceForLightUse);
@@ -48,11 +46,6 @@ public class FacilityModel {
 	{
 		return pricePerHour;
 	}
-	
-//	public HashMap<Days, Integer> getClosedDays() 
-//	{
-//		return closedDays;
-//	}
 	
 	public int getNumberOfChangingRooms() {
 		
@@ -104,14 +97,6 @@ public class FacilityModel {
 		
 		this.pricePerHour = pricePerHour;
 	}
-
-//	public void setClosedDays(HashMap<Days, Integer> closedDays) 
-//	{
-//		if (closedDays == null)
-//			throw new IllegalArgumentException("The closed days hash map is null");
-//		
-//		this.closedDays = closedDays;
-//	}
 
 	public void setNumberOfChangingRooms(int numberOfChangingRooms) 
 	{

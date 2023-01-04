@@ -4,20 +4,22 @@ package sportfacility.data.entities.facilities;
 import javax.persistence.Entity;
 
 @Entity
-public class FootballCourt extends Facility{
+public class FootballCourt extends Facility implements FacilityBallFacade{
 
     private int nFootballsRented;
     public FootballCourt(String facilityCode, int maxCapacity, int pricePerHour, int numberOfChangingRooms, int numberOfFloodLights,
                          int extraPriceForLightUse, int nFootballsRented) {
         super(facilityCode, maxCapacity, pricePerHour, numberOfChangingRooms, numberOfFloodLights, extraPriceForLightUse);
-        setNFootballsRented(nFootballsRented);
+        setNBallsRented(nFootballsRented);
     }
 
-    public int getNFootballsRented() {
+    @Override
+    public int getNBallsRented() {
         return nFootballsRented;
     }
 
-    public void setNFootballsRented(int nFootballsRented) {
+    @Override
+    public void setNBallsRented(int nFootballsRented) {
         if(nFootballsRented != 1 && nFootballsRented != 0)
             throw new IllegalArgumentException("The number of rented footballs cannot be over 1 or under 0");
         this.nFootballsRented = nFootballsRented;
@@ -26,7 +28,7 @@ public class FootballCourt extends Facility{
     @Override
     public String toString() {
         return "FootballCourt{" +
-                "NFootballsRented=" + getNFootballsRented() +
+                "NFootballsRented=" + getNBallsRented() +
                 ", facilityCode='" + getFacilityCode() + '\'' +
                 ", maxCapacity=" + getMaxCapacity() +
                 ", pricePerHour=" + getPricePerHour() +
@@ -44,13 +46,13 @@ public class FootballCourt extends Facility{
                 "$    Number changing rooms-> " + getNumberOfChangingRooms() +
                 "    Number of flood lights-> " + getNumberOfFloodLights() +
                 "    Extra price for lights-> " + getExtraPriceForLightUse() +
-                "$    Footballs available-> " + getNFootballsRented() + "\n" +
+                "$    Footballs available-> " + getNBallsRented() + "\n" +
                 "Available hours: " ;
     }
     @Override
     public String serialize() {
         return getFacilityCode() + "-" + getMaxCapacity() + "-" + getPricePerHour() + "-" + getNumberOfChangingRooms() + "-" + getNumberOfFloodLights() +
-                "-" + getExtraPriceForLightUse() + "-" + getNFootballsRented() + "\n";
+                "-" + getExtraPriceForLightUse() + "-" + getNBallsRented() + "\n";
 
     }
 }
