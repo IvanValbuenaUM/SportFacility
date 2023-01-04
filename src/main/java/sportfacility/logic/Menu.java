@@ -59,6 +59,7 @@ public class Menu {
                 System.out.println("Please try to introduce a valid input");
                 continue;
             }
+            u.close();
             switch (c) {
                 case 1:
                     SignUp();
@@ -134,6 +135,8 @@ public class Menu {
 
         Customer newCustomer = new Customer(name, surname, age, id, membershipNumber);
         customerLinkedList.add(newCustomer);
+        
+        reader.close();
 
         return newCustomer;
     }
@@ -150,6 +153,7 @@ public class Menu {
                 System.out.print("ID: ");
                 continue;
             }
+            u.close();
             break;
         }
         return id;
@@ -171,6 +175,7 @@ public class Menu {
                 System.out.print("Age: ");
                 continue;
             }
+            u.close();
             break;
         }
         return age;
@@ -194,6 +199,7 @@ public class Menu {
                 System.out.print("Membership nº: ");
                 continue;
             }
+            u.close();
             break;
         }
         return mem;
@@ -233,6 +239,7 @@ public class Menu {
                 System.out.println("Please try to introduce a valid option");
                 continue;
             }
+            u.close();
             switch (i) {
                 case 1:
                     SeeMyReservations(c);
@@ -286,6 +293,7 @@ public class Menu {
                 System.out.println("Please try to introduce a valid option");
                 continue;
             }
+            u.close();
             switch (i) {
                 case 1:
                     ReserveBasketCourt(c);
@@ -412,6 +420,7 @@ public class Menu {
             }
             System.out.println("The basketball court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
+            u.close();
             break;
         }
     }
@@ -501,6 +510,7 @@ public class Menu {
             }
             System.out.println("The football court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
+            u.close();
             break;
         }
     }
@@ -590,6 +600,7 @@ public class Menu {
             }
             System.out.println("The padel court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
+            u.close();
             break;
         }
     }
@@ -679,6 +690,7 @@ public class Menu {
             }
             System.out.println("The tennis court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
+            u.close();
             break;
         }
     }

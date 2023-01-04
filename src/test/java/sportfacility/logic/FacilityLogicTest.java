@@ -145,11 +145,11 @@ public class FacilityLogicTest extends LogicTest{
 		assertTrue(logic.deleteFacility("AB12"));
 	}
 	
-//	@Test
-//	public void deleteNullTest() 
-//	{
-//		assertFalse(logic.deleteFacility("AB12"));
-//	}
+	@Test
+	public void deleteNullTest() 
+	{
+		assertFalse(logic.deleteFacility("AB12"));
+	}
 	
 	@Test
 	public void updateFacilityTest() 

@@ -221,11 +221,11 @@ public class TimetableLogicTest extends LogicTest {
 		assertTrue(logic.deleteTimetable(t.getId()));
 	}
 	
-//	@Test
-//	public void deleteNullTest() 
-//	{
-//		assertFalse(logic.deleteTimetable(1234));
-//	}
+	@Test
+	public void deleteNullTest() 
+	{
+		assertFalse(logic.deleteTimetable("a"));
+	}
 	
 	@Test
 	public void updateTimetablesTest() 

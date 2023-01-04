@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import sportfacility.data.entities.facilities.Facility;
 import sportfacility.data.repositories.FacilityRepository;
 import sportfacility.logic.model.facilities.FacilityModel;
+import sportfacility.logic.suscriber.EventManager;
 import sportfacility.logic.suscriber.FacilityObserver;
 
 @Service
@@ -24,7 +25,7 @@ public class FacilityLogic {
     private ModelMapper mapper;
     
     @Autowired
-    private FacilityObserver observer;
+    private EventManager eventManager;
     
     public String addFacility(FacilityModel facility) 
     {
@@ -71,12 +72,17 @@ public class FacilityLogic {
     
     public boolean deleteFacility(String facilityCode) 
     {
-
-        repository.deleteById(facilityCode);
+    	eventManager = new EventManager();
+    	eventManager.subscribe(new FacilityObserver(facilityCode, repository));
         
-        if (!observer.informDelete(facilityCode))
-        	return false;
-        
+    	try {
+    		repository.deleteById(facilityCode);
+    	} catch (Exception e){
+    		return false;
+    	}
+    	
+    	if (eventManager.update())
+    		return false;
         return true;
     }
     

@@ -136,11 +136,11 @@ public class CustomerLogicTest extends LogicTest {
 		assertTrue(logic.deleteCustomer(1234));
 	}
 	
-//	@Test
-//	public void deleteNullTest() 
-//	{
-//		assertFalse(logic.deleteCustomer(1234));
-//	}
+	@Test
+	public void deleteNullTest() 
+	{
+		assertFalse(logic.deleteCustomer(1234));
+	}
 	
 	@Test
 	public void updateCustomersTest() 

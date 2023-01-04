@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import sportfacility.data.entities.Timetable;
 import sportfacility.data.repositories.TimetableRepository;
 import sportfacility.logic.model.TimetableModel;
+import sportfacility.logic.suscriber.EventManager;
 import sportfacility.logic.suscriber.TimetableObserver;
 
 @Service
@@ -24,7 +25,7 @@ public class TimetableLogic {
     private ModelMapper mapper;
 
     @Autowired
-    private TimetableObserver observer;
+    private EventManager eventManager;
 
     public String addTimetable(TimetableModel timetable) {
         Timetable timetableEntity = mapper.map(timetable, Timetable.class);
@@ -65,11 +66,17 @@ public class TimetableLogic {
 
     public boolean deleteTimetable(String timetableId) {
 
-        repository.deleteById(timetableId);
-
-        if (!observer.informDelete(timetableId))
-            return false;
-
+    	eventManager = new EventManager();
+    	eventManager.subscribe(new TimetableObserver(timetableId, repository));
+        
+    	try {
+    		repository.deleteById(timetableId);
+    	} catch (Exception e){
+    		return false;
+    	}
+    	
+    	if (eventManager.update())
+    		return false;
         return true;
     }
 
