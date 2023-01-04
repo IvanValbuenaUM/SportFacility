@@ -67,7 +67,7 @@ class TennisCourtTest {
 
         TennisCourt tc = new TennisCourt("AB12", 10, 50, 3, 20, 13, 2, 5);
 
-        assertEquals(2, tc.getNTennisRacquetsRented());
+        assertEquals(2, tc.getNRacketsRented());
     }
     
     @Test
@@ -76,6 +76,6 @@ class TennisCourtTest {
 
         TennisCourt tc = new TennisCourt("AB12", 10, 50, 3, 20, 13, 2, 5);
 
-        assertEquals(5, tc.getNTennisBallsRented());
+        assertEquals(5, tc.getNBallsRented());
     }
 }

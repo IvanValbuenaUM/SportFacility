@@ -42,6 +42,6 @@ class BasketCourtTest {
     {
         BasketCourt bc = new BasketCourt("AB12", 10, 50, 3, 20, 13, 1);
 
-        assertEquals(1, bc.getNBasketballsRented());
+        assertEquals(1, bc.getNBallsRented());
     }
 }

@@ -39,6 +39,6 @@ class FootballCourtTest {
     {
         FootballCourt fc = new FootballCourt("AB12", 10, 50, 3, 20, 13, 1);
 
-        assertEquals(1, fc.getNFootballsRented());
+        assertEquals(1, fc.getNBallsRented());
     }
 }

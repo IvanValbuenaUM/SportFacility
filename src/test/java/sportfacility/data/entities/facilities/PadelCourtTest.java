@@ -65,7 +65,7 @@ class PadelCourtTest {
 
         PadelCourt pc = new PadelCourt("AB12", 10, 50, 3, 20, 13, 2, 5);
 
-        assertEquals(2, pc.getNPadelRacquets());
+        assertEquals(2, pc.getNRacketsRented());
     }
     
     @Test
@@ -74,6 +74,6 @@ class PadelCourtTest {
 
         PadelCourt pc = new PadelCourt("AB12", 10, 50, 3, 20, 13, 2, 5);
 
-        assertEquals(5, pc.getNPadelBallsRacquets());
+        assertEquals(5, pc.getNBallsRented());
     }
 }
