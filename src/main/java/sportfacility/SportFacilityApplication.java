@@ -14,9 +14,9 @@ public class SportFacilityApplication {
     public static void main(String[] args) {
     	
         //SpringApplication.run(SportFacilityApplication.class, args);
-        Menu m = new Menu();
+        Menu menu;
         try {
-            m.start();
+            menu = Menu.getInstance();
         } catch (Error e) {
             throw new RuntimeErrorException(e);
         }

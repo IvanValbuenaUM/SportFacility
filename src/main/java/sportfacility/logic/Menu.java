@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Menu {
+    private static Menu instance = null;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private final int todayH = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
     private final int todayD = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
@@ -18,6 +19,16 @@ public class Menu {
     private List<Customer> customerLinkedList;
     private List<Facility> facilitiesLinkedList;
     private List<Timetable> timetableLinkedList;
+
+    private Menu() {
+        start();
+    }
+
+    public static Menu getInstance() {
+        if (instance == null)
+            instance = new Menu();
+        return instance;
+    }
 
     public void start() {
         customerLinkedList = new LinkedList<>();
