@@ -1,24 +1,26 @@
 package sportfacility.logic.suscriber;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
-@Service
+import sportfacility.data.repositories.TimetableRepository;
+
 public class TimetableObserver implements Observer {
 	
 	@Autowired
-    private RestTemplate rest;
+	private TimetableRepository repository;
+	
+	private String timetableId;
+
+	public TimetableObserver(String timetableId, TimetableRepository repository) {
+		this.repository = repository;
+		this.timetableId = timetableId;
+	}
 
 	@Override
-	public Boolean informDelete(String id) {
-		try {
-			rest.put("http://SportFacilityApplication/null-timetableModel/?id=" + id, null);
-        } catch (HttpClientErrorException exception) {
-            return false;
-        }
-        return true;
+	public Boolean update() {
+		if(repository.existsById(timetableId))
+			return true;
+        return false;
 	}
     
 }

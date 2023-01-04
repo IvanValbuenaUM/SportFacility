@@ -13,6 +13,7 @@ import sportfacility.data.entities.Customer;
 import sportfacility.data.repositories.CustomerRepository;
 import sportfacility.logic.model.CustomerModel;
 import sportfacility.logic.suscriber.CustomerObserver;
+import sportfacility.logic.suscriber.EventManager;
 
 @Service
 public class CustomerLogic {
@@ -24,7 +25,7 @@ public class CustomerLogic {
     private ModelMapper mapper;
     
     @Autowired
-    private CustomerObserver observer;
+    private EventManager eventManager;
     
     public int addCustomer(CustomerModel customer) 
     {
@@ -71,15 +72,17 @@ public class CustomerLogic {
     
     public boolean deleteCustomer(int customerMembershipNumber) 
     {
+    	eventManager = new EventManager();
+    	eventManager.subscribe(new CustomerObserver(customerMembershipNumber, repository));
+    	
     	try {
     		repository.deleteById(customerMembershipNumber);
-    	} catch (Exception e) {
-    		
+    	} catch (Exception e){
+    		return false;
     	}
     	
-    	if (!observer.informDelete(Integer.toString(customerMembershipNumber)))
+    	if (eventManager.update())
     		return false;
-        
         return true;
     }
     
