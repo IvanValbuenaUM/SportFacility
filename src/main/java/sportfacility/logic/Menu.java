@@ -50,7 +50,8 @@ public class Menu {
         int c;
         boolean exit = false;
         while (!exit) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             System.out.println("What do you want to do?" + "\n" + "(1) Sign up" + "\n" + "(2) Register" + "\n" + "(3) Exit");
             try {
                 c = u.nextInt();
@@ -120,7 +121,8 @@ public class Menu {
 
     private Customer NewCustomerInfo() {
         System.out.println("Introduce the required information");
-        Scanner reader = new Scanner(System.in);
+        @SuppressWarnings("resource")
+		Scanner reader = new Scanner(System.in);
         System.out.print("Name: ");
         String name = reader.next();
         System.out.print("Surname: ");
@@ -133,8 +135,6 @@ public class Menu {
 
         Customer newCustomer = new Customer(name, surname, age, id, membershipNumber);
         customerLinkedList.add(newCustomer);
-        
-        reader.close();
 
         return newCustomer;
     }
@@ -142,7 +142,8 @@ public class Menu {
     private String AskForValidID() {
         String id;
         while (true) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             id = u.next();
             try {
                 new Customer("A", "A", 18, id, 1);
@@ -159,7 +160,8 @@ public class Menu {
     private int AskForValidAge() {
         int age;
         while (true) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             try {
                 age = u.nextInt();
             } catch (InputMismatchException e) {
@@ -180,7 +182,8 @@ public class Menu {
     private int AskForValidMembershipNumber() {
         int mem;
         while (true) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             try {
                 mem = u.nextInt();
             } catch (InputMismatchException e) {
@@ -226,7 +229,8 @@ public class Menu {
         int i;
         boolean exit = false;
         while (!exit) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             PrintOptionsMember();
             try {
                 i = u.nextInt();
@@ -279,7 +283,8 @@ public class Menu {
         int i;
         boolean exit = false;
         while (!exit) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             PrintOptionsFacility();
             try {
                 i = u.nextInt();
@@ -342,7 +347,8 @@ public class Menu {
             System.out.println();
         }
         while (true) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             System.out.print("Select the code of the court you want to reserve: ");
             String code = u.next();
             boolean isFound = false;
@@ -431,7 +437,8 @@ public class Menu {
             System.out.println();
         }
         while (true) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             System.out.print("Select the code of the court you want to reserve: ");
             String code = u.next();
             boolean isFound = false;
@@ -520,7 +527,8 @@ public class Menu {
             System.out.println();
         }
         while (true) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             System.out.print("Select the code of the court you want to reserve: ");
             String code = u.next();
             boolean isFound = false;
@@ -609,7 +617,8 @@ public class Menu {
             System.out.println();
         }
         while (true) {
-            Scanner u = new Scanner(System.in);
+            @SuppressWarnings("resource")
+			Scanner u = new Scanner(System.in);
             System.out.print("Select the code of the court you want to reserve: ");
             String code = u.next();
             boolean isFound = false;
