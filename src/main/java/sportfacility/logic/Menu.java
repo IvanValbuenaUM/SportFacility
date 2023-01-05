@@ -352,6 +352,7 @@ public class Menu {
     }
 
 
+
     private void PrintOptionsFacility() {
         System.out.println("(1) Basket Court");
         System.out.println("(2) Football Court");
@@ -361,12 +362,60 @@ public class Menu {
     }
 
     private void ReserveBasketCourt(Customer c) {
-        MakeTheReservationBasketCourts(c);
+        boolean alreadyRerserved = false;
+        for (Timetable t : timetableLinkedList) {
+            if (t.getCustomer().getMembershipNumber() == c.getMembershipNumber() &&
+                    t.getFacility().getFacilityCode().charAt(0) == 'b' &&
+                    t.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
+                alreadyRerserved = true;
+        }
+        if (alreadyRerserved)
+            System.out.println("We are sorry " + c.getName() + " but you already have one reservation in a basketball court");
+        else
+            MakeTheReservationBasketCourts(c);
     }
 
     private void ReserveFootballCourt(Customer c) {
-        MakeTheReservationFootballCourts(c);
+        boolean alreadyRerserved = false;
+        for (Timetable t : timetableLinkedList) {
+            if (t.getCustomer().getMembershipNumber() == c.getMembershipNumber() &&
+                    t.getFacility().getFacilityCode().charAt(0) == 'f' &&
+                    t.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
+                alreadyRerserved = true;
+        }
+        if (alreadyRerserved)
+            System.out.println("We are sorry " + c.getName() + " but you already have one reservation in a football court");
+        else
+            MakeTheReservationFootballCourts(c);
     }
+    private void ReserveTennisCourt(Customer c) {
+        boolean alreadyRerserved = false;
+        for (Timetable t : timetableLinkedList) {
+            if (t.getCustomer().getMembershipNumber() == c.getMembershipNumber() &&
+                    t.getFacility().getFacilityCode().charAt(0) == 't' &&
+                    t.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
+                alreadyRerserved = true;
+        }
+        if (alreadyRerserved)
+            System.out.println("We are sorry " + c.getName() + " but you already have one reservation in a tennis court");
+        else
+            MakeReservationTennisCourt(c);
+    }
+
+    private void ReservePadelCourt(Customer c) {
+        boolean alreadyRerserved = false;
+        for (Timetable t : timetableLinkedList) {
+            if (t.getCustomer().getMembershipNumber() == c.getMembershipNumber() &&
+                    t.getFacility().getFacilityCode().charAt(0) == 'p' &&
+                    t.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
+                alreadyRerserved = true;
+        }
+        if (alreadyRerserved)
+            System.out.println("We are sorry " + c.getName() + " but you already have one reservation in a padel court");
+        else
+            MakeReservationPadelCourt(c);
+    }
+
 
     private void MakeTheReservationBasketCourts(Customer theCustomer) {
         System.out.println("Basketball Courts (" + todayD + "/" + (todayM + 1) + "/" + todayY + "): ");
@@ -450,8 +499,10 @@ public class Menu {
             event = new Timetable(GetNonExistingTimetableNumber(), calendars[0], calendars[1], theCustomer, theFacility, theFacility.getMaxCapacity());
             timetableLinkedList.add(event);
             for (Customer c : customerLinkedList) {
-                c.addReservation(event);
-                break;
+                if (c.getMembershipNumber() == theCustomer.getMembershipNumber()) {
+                    c.addReservation(event);
+                    break;
+                }
             }
             System.out.println("The basketball court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
@@ -541,8 +592,10 @@ public class Menu {
             event = new Timetable(GetNonExistingTimetableNumber(), calendars[0], calendars[1], theCustomer, theFacility, theFacility.getMaxCapacity());
             timetableLinkedList.add(event);
             for (Customer c : customerLinkedList) {
-                c.addReservation(event);
-                break;
+                if (c.getMembershipNumber() == theCustomer.getMembershipNumber()) {
+                    c.addReservation(event);
+                    break;
+                }
             }
             System.out.println("The football court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
@@ -550,7 +603,7 @@ public class Menu {
         }
     }
 
-    private void ReservePadelCourt(Customer theCustomer) {
+    private void MakeReservationPadelCourt(Customer theCustomer) {
         System.out.println("Padel Courts (" + todayD + "/" + (todayM + 1) + "/" + todayY + "): ");
         System.out.println();
         List<PadelCourt> padelCourts = new LinkedList<>();
@@ -632,8 +685,10 @@ public class Menu {
             event = new Timetable(GetNonExistingTimetableNumber(), calendars[0], calendars[1], theCustomer, theFacility, theFacility.getMaxCapacity());
             timetableLinkedList.add(event);
             for (Customer c : customerLinkedList) {
-                c.addReservation(event);
-                break;
+                if (c.getMembershipNumber() == theCustomer.getMembershipNumber()) {
+                    c.addReservation(event);
+                    break;
+                }
             }
             System.out.println("The padel court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
@@ -641,7 +696,7 @@ public class Menu {
         }
     }
 
-    private void ReserveTennisCourt(Customer theCustomer) {
+    private void MakeReservationTennisCourt(Customer theCustomer) {
         System.out.println("Tennis Courts (" + todayD + "/" + (todayM + 1) + "/" + todayY + "): ");
         System.out.println();
         List<TennisCourt> TennisCourts = new LinkedList<>();
@@ -723,8 +778,10 @@ public class Menu {
             event = new Timetable(GetNonExistingTimetableNumber(), calendars[0], calendars[1], theCustomer, theFacility, theFacility.getMaxCapacity());
             timetableLinkedList.add(event);
             for (Customer c : customerLinkedList) {
-                c.addReservation(event);
-                break;
+                if (c.getMembershipNumber() == theCustomer.getMembershipNumber()) {
+                    c.addReservation(event);
+                    break;
+                }
             }
             System.out.println("The tennis court " + theFacility.getFacilityCode() + " has been reserved by " + theCustomer.getName() + " at " + hour + ":00 until " + (hour + 2) + ":00!");
             System.out.println();
