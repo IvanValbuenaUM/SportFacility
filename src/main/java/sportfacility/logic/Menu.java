@@ -52,6 +52,7 @@ public class Menu {
         while (!exit) {
             @SuppressWarnings("resource")
 			Scanner u = new Scanner(System.in);
+            System.out.println();
             System.out.println("What do you want to do?" + "\n" + "(1) Sign up" + "\n" + "(2) Register" + "\n" + "(3) Exit");
             try {
                 c = u.nextInt();
@@ -246,6 +247,9 @@ public class Menu {
                     MakeAReservation(c);
                     break;
                 case 3:
+                    exit = DeleteCustomer(c);
+                    break;
+                case 4:
                     System.out.println();
                     System.out.println("Going back to the main menu " + c.getName());
                     System.out.println();
@@ -257,22 +261,52 @@ public class Menu {
         }
     }
 
+    private boolean DeleteCustomer(Customer c) {
+        System.out.println();
+        System.out.println("Are you sure you want to delete your account (Write \"yes\" or \"no\")?");
+        String code;
+        while (true) {
+            @SuppressWarnings("resource")
+            Scanner u = new Scanner(System.in);
+            code = u.next();
+            if (!code.equals("yes") && !code.equals("no")) {
+                System.out.println("Please introduce a valid input");
+                continue;
+            }
+            if (code.equals("yes")) {
+                customerLinkedList.removeIf(value -> value.getMembershipNumber() == c.getMembershipNumber());
+                timetableLinkedList.removeIf(value -> value.getCustomer().getMembershipNumber() == c.getMembershipNumber());
+                System.out.println("Customer " + c.getName() + " deleted!");
+                System.out.println();
+            } else {
+                System.out.println("Going back to customer menu");
+            }
+            break;
+        }
+        return code.equals("yes");
+    }
+
     private void PrintOptionsMember() {
         System.out.println("(1) My reservations");
         System.out.println("(2) Make a reservation");
-        System.out.println("(3) Exit");
+        System.out.println("(3) Delete account");
+        System.out.println("(4) Exit");
     }
-
-    private void SeeMyReservations(Customer c) {
-        if (c.getReservations().isEmpty()) {
-            System.out.println();
-            System.out.println(c.getName() + ", you do not have any reservations yet");
-        } else {
-            System.out.println(c.getName() + ", your reservations are:");
-            for (Timetable t : c.getReservations()) {
-                System.out.println(t.toString());
+    private void SeeMyReservations(Customer cus) {
+        for (Customer c: customerLinkedList) {
+            if (c.getMembershipNumber() == cus.getMembershipNumber()) {
+                if (c.getReservations().isEmpty()) {
+                    System.out.println();
+                    System.out.println(c.getName() + ", you do not have any reservations yet");
+                } else {
+                    System.out.println(c.getName() + ", your reservations are:");
+                    for (Timetable t : c.getReservations()) {
+                        System.out.println(t.toString());
+                    }
+                }
             }
         }
+
         System.out.println();
     }
 
@@ -316,6 +350,7 @@ public class Menu {
             }
         }
     }
+
 
     private void PrintOptionsFacility() {
         System.out.println("(1) Basket Court");
@@ -391,7 +426,8 @@ public class Menu {
             for (BasketCourt bc : basketCourts) {
                 if (bc.getFacilityCode().equals(code)) {
                     for (Timetable tt : bc.getReservations()) {
-                        listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
+                        if (tt.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
+                            listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
                     }
                 }
             }
@@ -481,7 +517,8 @@ public class Menu {
             for (FootballCourt bc : footballCourts) {
                 if (bc.getFacilityCode().equals(code)) {
                     for (Timetable tt : bc.getReservations()) {
-                        listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
+                        if (tt.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
+                            listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
                     }
                 }
             }
@@ -571,7 +608,8 @@ public class Menu {
             for (PadelCourt bc : padelCourts) {
                 if (bc.getFacilityCode().equals(code)) {
                     for (Timetable tt : bc.getReservations()) {
-                        listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
+                        if (tt.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
+                            listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
                     }
                 }
             }
@@ -661,7 +699,8 @@ public class Menu {
             for (TennisCourt bc : TennisCourts) {
                 if (bc.getFacilityCode().equals(code)) {
                     for (Timetable tt : bc.getReservations()) {
-                        listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
+                        if (tt.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
+                            listHours.add(tt.getStartReservation().get(Calendar.HOUR_OF_DAY));
                     }
                 }
             }
@@ -676,7 +715,7 @@ public class Menu {
                 System.out.println("Please try to introduce an available hour");
                 continue;
             }
-            facilitiesLinkedList.removeIf(value -> value.getFacilityCode().charAt(0) == 'p');
+            facilitiesLinkedList.removeIf(value -> value.getFacilityCode().charAt(0) == 't');
             facilitiesLinkedList.addAll(TennisCourts);
             Calendar[] calendars = GetCalendars(hour);
             Timetable event;
@@ -745,6 +784,8 @@ public class Menu {
                 }
             }
         }
+        if (n<10)
+            return "tt0" + n;
         return "tt" + n;
     }
 
@@ -754,7 +795,7 @@ public class Menu {
             listHours.add(i);
         }
         for (Timetable t : timetableLinkedList) {
-            if (f.getFacilityCode().equals(t.getFacility().getFacilityCode()))
+            if (f.getFacilityCode().equals(t.getFacility().getFacilityCode()) && t.getStartReservation().getTime().compareTo(Calendar.getInstance().getTime()) > 0)
                 listHours.remove((Object) t.getStartReservation().get(Calendar.HOUR_OF_DAY));
         }
         for (Integer i : listHours) {
