@@ -40,6 +40,7 @@ public class Menu {
         } catch (FileNotFoundException | ParseException e) {
             throw new RuntimeException(e);
         }
+        System.out.println();
         System.out.println("WELCOME TO OUR SPORT FACILITY");
         System.out.println();
         MainMenu();
