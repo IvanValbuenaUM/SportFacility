@@ -6,10 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="06db478a-ba9e-4c9b-8ecc-57f21f9ff4a7" name="Changes" comment="05">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sportfacility/data/files/Customers" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sportfacility/data/files/Customers" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sportfacility/data/files/Facilities" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sportfacility/data/files/Facilities" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sportfacility/data/files/Timetables" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sportfacility/data/files/Timetables" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sportfacility/logic/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sportfacility/logic/Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +59,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2JMT1Cn8iIoZwwNlQRW9N4oHhDd" />
   <component name="ProjectLevelVcsManager">
@@ -118,7 +114,7 @@
       <command value="mvn site" />
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SportFacilityApplication">
+  <component name="RunManager" selected="Unknown.SportFacilityApplication757118865">
     <configuration name="CustomerModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="sportfacility" />
       <extension name="coverage">
@@ -164,7 +160,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.SportFacilityApplication" />
         <item itemvalue="JUnit.CustomerModelTest" />
         <item itemvalue="JUnit.CustomerTest" />
       </list>
